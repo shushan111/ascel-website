@@ -96,7 +96,7 @@ export function MobileNav() {
                 ))}
               </ul>
             </nav>
-            <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-4">
               <LanguageSwitcher compact />
               <Link href="/donate" className={buttonClassName("donate")} onClick={() => setOpen(false)}>
                 {headerT("donate")}

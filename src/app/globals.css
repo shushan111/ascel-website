@@ -23,7 +23,7 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
-  --font-sans: var(--font-plus-jakarta), var(--font-noto-armenian), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plus-jakarta), var(--font-noto-armenian), var(--font-noto-cyrillic), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

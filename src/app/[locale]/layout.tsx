@@ -1,8 +1,8 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
-import { Plus_Jakarta_Sans, Noto_Sans_Armenian } from "next/font/google";
+import { Plus_Jakarta_Sans, Noto_Sans, Noto_Sans_Armenian } from "next/font/google";
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { siteConfig } from "@/lib/config";
@@ -20,6 +20,13 @@ const plusJakarta = Plus_Jakarta_Sans({
 const notoArmenian = Noto_Sans_Armenian({
   subsets: ["armenian"],
   variable: "--font-noto-armenian",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoCyrillic = Noto_Sans({
+  subsets: ["cyrillic", "cyrillic-ext"],
+  variable: "--font-noto-cyrillic",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -52,6 +59,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const navT = await getTranslations("Nav");
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
@@ -69,7 +77,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${plusJakarta.variable} ${notoArmenian.variable} h-full antialiased`}
+      className={`${plusJakarta.variable} ${notoArmenian.variable} ${notoCyrillic.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-white font-sans text-ink">
         <script
@@ -81,7 +89,7 @@ export default async function LocaleLayout({
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-100 focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-navy"
           >
-            {locale === "hy" ? "Անցնել բովանդակությանը" : "Skip to content"}
+            {navT("skip")}
           </Link>
           <Header />
           <main id="main" className="flex-1">

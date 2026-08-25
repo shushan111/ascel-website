@@ -6,6 +6,7 @@ const metrics: Metric[] = [
     label: {
       en: "Professionals Trained",
       hy: "Վերապատրաստված մասնագետներ",
+      ru: "Подготовленные специалисты",
     },
     display: "XX+",
     numericValue: null,
@@ -15,6 +16,7 @@ const metrics: Metric[] = [
     label: {
       en: "Educational Programs",
       hy: "Կրթական ծրագրեր",
+      ru: "Образовательные программы",
     },
     display: "XX+",
     numericValue: null,
@@ -24,6 +26,7 @@ const metrics: Metric[] = [
     label: {
       en: "International Faculty",
       hy: "Միջազգային դասախոսներ",
+      ru: "Международные преподаватели",
     },
     display: "XX+",
     numericValue: null,
@@ -33,6 +36,7 @@ const metrics: Metric[] = [
     label: {
       en: "Training Sessions",
       hy: "Ուսուցման պարապմունքներ",
+      ru: "Учебные занятия",
     },
     display: "XX+",
     numericValue: null,
@@ -42,6 +46,7 @@ const metrics: Metric[] = [
     label: {
       en: "Courses Delivered",
       hy: "Անցկացված դասընթացներ",
+      ru: "Проведённые курсы",
     },
     display: "XX+",
     numericValue: null,
@@ -51,6 +56,7 @@ const metrics: Metric[] = [
     label: {
       en: "Partner Institutions",
       hy: "Գործընկեր հաստատություններ",
+      ru: "Партнёрские учреждения",
     },
     display: "XX+",
     numericValue: null,

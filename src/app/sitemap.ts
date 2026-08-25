@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/config";
 import { getNewsArticles } from "@/data/news";
 import { getPrograms } from "@/data/programs";
+import { localePrefixedPath, routing } from "@/i18n/routing";
+import { alternateLanguageUrls } from "@/lib/seo";
 
 const staticPaths = [
   "/",
@@ -20,11 +22,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [...staticPaths, ...programPaths, ...newsPaths];
 
   return paths.flatMap((path) => {
-    const en = new URL(path, siteConfig.url).toString();
-    const hy = new URL(path === "/" ? "/hy" : `/hy${path}`, siteConfig.url).toString();
-    return [
-      { url: en, lastModified: new Date(), alternates: { languages: { en, hy } } },
-      { url: hy, lastModified: new Date(), alternates: { languages: { en, hy } } },
-    ];
+    const languages = alternateLanguageUrls(path);
+    return routing.locales.map((locale) => ({
+      url: new URL(localePrefixedPath(path, locale), siteConfig.url).toString(),
+      lastModified: new Date(),
+      alternates: { languages },
+    }));
   });
 }

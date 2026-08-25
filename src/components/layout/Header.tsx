@@ -21,8 +21,8 @@ export function Header() {
         <Link href="/" className="min-w-0 shrink-0" aria-label="ASCEL">
           <Logo />
         </Link>
-        <nav aria-label={t("mainNav")} className="hidden xl:block">
-          <ul className="flex items-center gap-0.5">
+        <nav aria-label={t("mainNav")} className="hidden min-w-0 xl:block">
+          <ul className="flex items-center justify-end gap-0.5">
             {navItems.map((item) => {
               const active =
                 item.href === "/"
@@ -33,7 +33,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "inline-flex min-h-11 items-center whitespace-nowrap px-2.5 text-[13px] text-muted transition-colors hover:text-navy",
+                      "inline-flex min-h-11 items-center whitespace-nowrap px-2 text-[13px] text-muted transition-colors hover:text-navy xl:px-2.5",
                       active && "text-navy",
                     )}
                     aria-current={active ? "page" : undefined}
@@ -46,7 +46,9 @@ export function Header() {
           </ul>
         </nav>
         <div className="flex items-center gap-3">
-          <LanguageSwitcher />
+          <div className="hidden xl:block">
+            <LanguageSwitcher />
+          </div>
           <Link
             href="/donate"
             className={cn(buttonClassName("donate"), "hidden sm:inline-flex")}

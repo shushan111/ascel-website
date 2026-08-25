@@ -1,8 +1,9 @@
-export type LocaleCode = "en" | "hy";
+export type LocaleCode = "en" | "hy" | "ru";
 
 export interface LocalizedString {
   en: string;
   hy: string;
+  ru: string;
 }
 
 export interface Program {

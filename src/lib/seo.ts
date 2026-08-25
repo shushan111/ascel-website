@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "./config";
+import { localePrefixedPath, routing } from "@/i18n/routing";
 
 type BuildMetadataInput = {
   title: string;
@@ -10,6 +11,25 @@ type BuildMetadataInput = {
   noIndex?: boolean;
 };
 
+const ogLocaleByCode: Record<string, string> = {
+  en: "en_US",
+  hy: "hy_AM",
+  ru: "ru_RU",
+};
+
+export function absoluteUrl(path: string, locale: string): string {
+  return new URL(localePrefixedPath(path, locale), siteConfig.url).toString();
+}
+
+export function alternateLanguageUrls(path: string): Record<string, string> {
+  const languages: Record<string, string> = {};
+  for (const locale of routing.locales) {
+    languages[locale] = absoluteUrl(path, locale);
+  }
+  languages["x-default"] = absoluteUrl(path, routing.defaultLocale);
+  return languages;
+}
+
 export function buildMetadata({
   title,
   description,
@@ -18,8 +38,12 @@ export function buildMetadata({
   image = "/images/hero-simulation.jpg",
   noIndex = false,
 }: BuildMetadataInput): Metadata {
-  const url = new URL(path, siteConfig.url).toString();
+  const url = absoluteUrl(path, locale);
   const ogImage = new URL(image, siteConfig.url).toString();
+  const languages = alternateLanguageUrls(path);
+  const alternateLocales = routing.locales
+    .filter((code) => code !== locale)
+    .map((code) => ogLocaleByCode[code] ?? code);
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -27,14 +51,12 @@ export function buildMetadata({
     description,
     alternates: {
       canonical: url,
-      languages: {
-        en: new URL(path, siteConfig.url).toString(),
-        hy: new URL(`/hy${path === "/" ? "" : path}`, siteConfig.url).toString(),
-      },
+      languages,
     },
     openGraph: {
       type: "website",
-      locale: locale === "hy" ? "hy_AM" : "en_US",
+      locale: ogLocaleByCode[locale] ?? "en_US",
+      alternateLocale: alternateLocales,
       url,
       siteName: siteConfig.legalName,
       title,

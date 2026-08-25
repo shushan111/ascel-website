@@ -18,7 +18,7 @@ export function buttonClassName(
   className?: string,
 ) {
   return cn(
-    "inline-flex min-h-11 items-center justify-center gap-2 px-5 text-sm font-medium tracking-wide transition-colors duration-200",
+    "inline-flex min-h-11 items-center justify-center gap-2 px-5 text-center text-sm font-medium tracking-wide transition-colors duration-200",
     variants[variant],
     className,
   );
