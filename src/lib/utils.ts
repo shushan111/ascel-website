@@ -22,6 +22,11 @@ export function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
+export function isActiveNavPath(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function formatNewsDate(isoDate: string, locale: string) {
   const date = new Date(`${isoDate}T00:00:00`);
   if (Number.isNaN(date.getTime())) return isoDate;

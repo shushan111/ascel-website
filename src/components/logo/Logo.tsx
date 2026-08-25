@@ -53,7 +53,7 @@ export function Logo({
         {compact ? null : (
           <span
             className={cn(
-              "mt-1 hidden max-w-[11rem] text-[10px] leading-snug tracking-[0.04em] sm:block xl:hidden 2xl:block",
+              "mt-1 hidden max-w-[11rem] text-[10px] leading-snug tracking-[0.04em] sm:block lg:hidden 2xl:block",
               invert ? "text-white/60" : "text-muted",
             )}
           >

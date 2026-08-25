@@ -43,6 +43,10 @@ export const navItems = [
   { href: "/contact", key: "contact" },
 ] as const;
 
+// Donate is surfaced as a dedicated CTA in the mobile menu, so it is dropped
+// from the link list to avoid showing it twice.
+export const mobileNavItems = navItems.filter((item) => item.href !== "/donate");
+
 export const footerNav = [
   { href: "/about", key: "about" },
   { href: "/programs", key: "programs" },

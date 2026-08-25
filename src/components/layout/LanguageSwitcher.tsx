@@ -43,7 +43,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
             locale === code
               ? "bg-navy text-white"
               : "text-muted hover:text-navy",
-            compact && "min-h-10",
+            compact && "min-h-11 min-w-14 px-3 text-[12px]",
           )}
           aria-pressed={locale === code}
           aria-label={names[code]}
