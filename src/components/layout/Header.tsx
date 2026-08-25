@@ -16,12 +16,12 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-white/90 backdrop-blur-md">
       <Container className="flex h-[72px] items-center justify-between gap-4">
-        <Link href="/" className="min-w-0 shrink-0" aria-label="ASCEL">
-          <Logo />
+        <Link href="/" className="shrink-0" aria-label="ASCEL">
+          <Logo compact />
         </Link>
         <DesktopNav />
         <div className="flex items-center gap-3">
-          <div className="hidden lg:block">
+          <div className="hidden min-[1200px]:block">
             <LanguageSwitcher />
           </div>
           <Link

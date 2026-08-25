@@ -12,7 +12,9 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const MENU_ID = "mobile-navigation";
 const EXIT_DURATION_MS = 240;
-const DESKTOP_MEDIA_QUERY = "(min-width: 1024px)";
+// The desktop row only fits every locale's labels once the 1200px container is
+// fully available, so the full-screen menu covers everything below that.
+const DESKTOP_MEDIA_QUERY = "(min-width: 1200px)";
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -132,7 +134,7 @@ export function MobileMenu() {
       aria-modal="true"
       aria-label={t("mainNav")}
       className={cn(
-        "fixed inset-0 z-100 h-[100vh] w-full bg-white transition-opacity duration-300 ease-out supports-[height:100dvh]:h-[100dvh] lg:hidden",
+        "fixed inset-0 z-100 h-[100vh] w-full bg-white transition-opacity duration-300 ease-out supports-[height:100dvh]:h-[100dvh] min-[1200px]:hidden",
         entered ? "opacity-100" : "opacity-0",
       )}
     >
@@ -256,7 +258,7 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center border border-line text-navy transition-colors hover:border-navy lg:hidden"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center border border-line text-navy transition-colors hover:border-navy min-[1200px]:hidden"
         aria-label={t("openMenu")}
         aria-expanded={mounted}
         aria-controls={MENU_ID}

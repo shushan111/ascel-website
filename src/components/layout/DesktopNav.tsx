@@ -10,18 +10,26 @@ export function DesktopNav() {
   const pathname = usePathname();
 
   return (
-    <nav aria-label={t("mainNav")} className="hidden min-w-0 lg:block">
-      <ul className="flex items-center justify-end gap-0.5">
+    // Armenian and Russian labels fill the 1200px header almost exactly, so the
+    // nav absorbs the remaining space and clips rather than overlapping the logo
+    // if a font swap or page zoom pushes it past the available width.
+    <nav
+      aria-label={t("mainNav")}
+      className="hidden min-w-0 flex-1 overflow-hidden min-[1200px]:block"
+    >
+      <ul className="flex items-center justify-end">
         {navItems.map((item) => {
           const active = isActiveNavPath(pathname, item.href);
           return (
-            // Between lg and xl the row is too narrow for every label, and the
-            // donate link duplicates the adjacent CTA button.
-            <li key={item.key} className={cn(item.key === "donate" && "hidden xl:block")}>
+            // The donate link duplicates the adjacent Donate CTA, and dropping it
+            // is what buys the row enough headroom for the longer locales.
+            <li key={item.key} className={cn(item.key === "donate" && "hidden")}>
               <Link
                 href={item.href}
                 className={cn(
-                  "inline-flex min-h-11 items-center whitespace-nowrap px-1.5 text-[12px] text-muted transition-colors hover:text-navy xl:px-2.5 xl:text-[13px]",
+                  // Sizing stays uniform across desktop widths: the container is
+                  // capped at 1200px, so a larger xl step would only overflow.
+                  "inline-flex min-h-11 items-center whitespace-nowrap px-2 text-[12.5px] text-muted transition-colors hover:text-navy",
                   active && "text-navy",
                 )}
                 aria-current={active ? "page" : undefined}
