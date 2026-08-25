@@ -3,7 +3,7 @@ export const siteConfig = {
   legalName: "Armenian Simulation Center for Experimental Learning",
   shortDescription:
     "Medical education, simulation-based training, and experimental learning in Armenia.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   localeDefault: "en" as const,
   contact: {
     email: "[Content to be provided]",
