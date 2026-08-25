@@ -1,0 +1,226 @@
+{
+  "Meta": {
+    "siteName": "ASCEL",
+    "homeTitle": "Armenian Simulation Center for Experimental Learning | ASCEL",
+    "homeDescription": "Armenian Simulation Center for Experimental Learning provides simulation-based medical education, professional training, experimental learning, and collaborative healthcare initiatives in Armenia.",
+    "aboutTitle": "About ASCEL | Armenian Simulation Center for Experimental Learning",
+    "aboutDescription": "Learn about ASCEL’s mission to advance medical education through simulation, experimental learning, and professional development in Gyumri, Armenia.",
+    "programsTitle": "Programs | ASCEL",
+    "programsDescription": "Explore ASCEL’s active programs: Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation.",
+    "coursesTitle": "Courses & Training | ASCEL",
+    "coursesDescription": "Upcoming and current medical education courses from the Armenian Simulation Center for Experimental Learning.",
+    "simulationTitle": "Simulation Center | ASCEL",
+    "simulationDescription": "Learn about ASCEL’s simulation-based learning environment for medical professionals in Gyumri, Armenia.",
+    "newsTitle": "News & Updates | ASCEL",
+    "newsDescription": "News and updates from the Armenian Simulation Center for Experimental Learning.",
+    "donateTitle": "Support & Donate | ASCEL",
+    "donateDescription": "Support medical education, simulation-based training, and healthcare initiatives in Armenia.",
+    "contactTitle": "Contact | ASCEL",
+    "contactDescription": "Contact the Armenian Simulation Center for Experimental Learning.",
+    "privacyTitle": "Privacy Policy | ASCEL",
+    "termsTitle": "Terms of Use | ASCEL",
+    "notFoundTitle": "Page not found | ASCEL"
+  },
+  "Nav": {
+    "home": "Home",
+    "about": "About ASCEL",
+    "programs": "Programs",
+    "courses": "Courses",
+    "simulation": "Simulation Center",
+    "news": "News",
+    "donate": "Support / Donate",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main",
+    "skip": "Skip to content",
+    "language": "Language"
+  },
+  "Header": {
+    "donate": "Donate"
+  },
+  "Footer": {
+    "description": "Armenian Simulation Center for Experimental Learning brings together medical education, simulation-based training, and experimental learning in Armenia.",
+    "navigation": "Navigation",
+    "programs": "Programs",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms",
+    "copyright": "Armenian Simulation Center for Experimental Learning (ASCEL). All rights reserved.",
+    "social": "Social"
+  },
+  "Common": {
+    "sample": "Sample",
+    "contentPending": "[Content to be provided]",
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "visitWebsite": "Visit Website",
+    "exploreCourses": "Explore Courses",
+    "officialWebsite": "Visit the Official Website",
+    "externalLink": "Opens in a new tab",
+    "backToNews": "Back to news",
+    "backToPrograms": "All programs",
+    "register": "Register",
+    "registrationPending": "Registration details to be provided",
+    "viewEvent": "View Event",
+    "placeholderMetricsNote": "Figures shown as XX+ are placeholders until verified statistics are available."
+  },
+  "Hero": {
+    "eyebrow": "Medical education · Simulation · Armenia",
+    "headline": "Advancing Medical Education Through Simulation and Experimental Learning",
+    "supporting": "Armenian Simulation Center for Experimental Learning brings together medical education, simulation-based training, practical learning, and international expertise to help develop the next generation of healthcare professionals.",
+    "primaryCta": "Explore Our Programs",
+    "secondaryCta": "Support Our Mission",
+    "imageAlt": "Healthcare professionals training with a medical simulation mannequin in a skills laboratory"
+  },
+  "Intro": {
+    "title": "Building the Future of Medical Education",
+    "body": "ASCEL provides an environment where medical professionals and learners can develop practical skills through simulation, experimental learning, education, and collaboration. The center is being established in Gyumri to address gaps in hands-on training and to support a regional culture of professional medical education.",
+    "imageAlt": "Medical professionals in conversation in an academic setting"
+  },
+  "ProgramsHome": {
+    "title": "Active Programs",
+    "subtitle": "Education, training, collaboration, and impact through specialized medical initiatives."
+  },
+  "SimulationHome": {
+    "title": "Learn by Doing",
+    "body": "ASCEL’s simulation environment is designed for practical medical education: controlled scenarios, team communication, procedural rehearsal, and experimental learning methods. The aim is not spectacle, but competence — a professional setting where skills can be practiced before they are needed in clinical care.",
+    "cta": "Explore the Simulation Center",
+    "imageAlt": "Interior of a medical simulation laboratory",
+    "medicalSimulation": "Medical simulation",
+    "surgicalTraining": "Surgical training",
+    "emergencyScenarios": "Emergency scenarios",
+    "teamTraining": "Team-based training",
+    "proceduralSkills": "Procedural skills",
+    "experimentalLearning": "Experimental learning"
+  },
+  "CoursesHome": {
+    "title": "Courses & Training",
+    "subtitle": "Structured professional education for physicians and medical teams. Confirmed dates will replace sample listings.",
+    "viewAll": "View all courses"
+  },
+  "EventsHome": {
+    "title": "Upcoming Events",
+    "subtitle": "Workshops, forums, and open sessions will appear here as dates are confirmed."
+  },
+  "NewsHome": {
+    "title": "News & Updates",
+    "subtitle": "Institutional updates from ASCEL. Sample articles are marked until real announcements are published.",
+    "viewAll": "All news"
+  },
+  "DonateHome": {
+    "title": "Support the Future of Medical Education",
+    "body": "Your support helps expand access to medical education, simulation-based training, professional development, and healthcare initiatives in Armenia.",
+    "donateNow": "Donate Now",
+    "supportPrograms": "Support Our Programs",
+    "providerPending": "A donation provider has not been connected yet. This page describes how support will be directed; no payment is processed on this website.",
+    "categoriesTitle": "Ways to support"
+  },
+  "PartnersHome": {
+    "title": "Our Partners & Collaborators",
+    "subtitle": "Partner organizations will be listed as collaborations are confirmed.",
+    "slotLabel": "Logo to be provided"
+  },
+  "ImpactHome": {
+    "title": "Impact",
+    "subtitle": "Measurable outcomes will be published here when verified data is available. Placeholder values are used until then."
+  },
+  "AboutPage": {
+    "eyebrow": "About ASCEL",
+    "title": "A center for simulation, education, and professional practice",
+    "whoTitle": "Who We Are",
+    "whoBody": "The Armenian Simulation Center for Experimental Learning (ASCEL) is being established in Gyumri as a medical simulation center for experimental learning. It is intended to address critical gaps in practical skills training for healthcare professionals and to serve as a regional hub for medical education.",
+    "missionTitle": "Mission",
+    "missionBody": "To provide a professional environment where physicians and medical learners can develop practical skills through simulation-based education, experimental learning, and international collaboration.",
+    "visionTitle": "Vision",
+    "visionBody": "To help Armenia become a regional center for advanced medical education and simulation-based professional training — serious, international in standard, and grounded in practical competence.",
+    "whatTitle": "What We Do",
+    "whatBody": "ASCEL brings together medical education, simulation-based training, practical learning, and related programs. Active directions currently include Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation — each distinct, presented under one institutional platform.",
+    "simulationTitle": "Simulation-Based Education",
+    "simulationBody": "Simulation allows teams to rehearse procedures, communication, and decision-making in a controlled setting. Intended methods include high-fidelity mannequins, virtual reality, robotics, and other experimental learning approaches described in public project materials.",
+    "experimentalTitle": "Experimental Learning",
+    "experimentalBody": "Experimental learning at ASCEL refers to structured, hands-on methods that go beyond lecture: skills laboratories, scenario-based teaching, and, where appropriate and ethically governed, advanced simulation techniques used in medical education internationally.",
+    "developmentTitle": "Medical Professional Development",
+    "developmentBody": "The center is conceived as a setting for continuing education — courses, workshops, and collaborative teaching that help physicians and related professionals strengthen practical competence.",
+    "collaborationTitle": "International Collaboration",
+    "collaborationBody": "ASCEL is designed to work with faculty and partners from Armenia and abroad. Confirmed institutional partnerships will be listed when they are authorized for publication.",
+    "approachTitle": "Our Approach",
+    "approachBody": "The design of the center is educational first: clear programs, practical training, and a calm professional environment. Programs remain distinguishable. Independent partner organizations are not presented as the same legal entity as ASCEL.",
+    "timelineTitle": "Public timeline",
+    "timelineItem1Date": "2025",
+    "timelineItem1Title": "Public project presentation",
+    "timelineItem1Body": "ASCEL was presented as a healthcare education project focused on establishing a medical simulation center in Gyumri, including as a featured project at AMWC 2025.",
+    "imageAlt": "Academic conversation in a medical education setting"
+  },
+  "ProgramsPage": {
+    "eyebrow": "Programs",
+    "title": "Active programs and related initiatives",
+    "intro": "ASCEL is the institutional platform. The programs below are active educational, training, or partner directions — related, but not interchangeable.",
+    "overview": "Overview",
+    "objectives": "Objectives",
+    "activities": "Activities",
+    "impact": "Impact",
+    "gallery": "Gallery"
+  },
+  "CoursesPage": {
+    "eyebrow": "Education",
+    "title": "Courses & Training",
+    "intro": "Course cards are driven by structured data so listings can later come from a CMS or API. Sample courses are clearly marked.",
+    "date": "Date",
+    "location": "Location",
+    "type": "Type",
+    "instructor": "Instructor"
+  },
+  "SimulationPage": {
+    "eyebrow": "Simulation Center",
+    "title": "A professional environment for practical medical learning",
+    "intro": "ASCEL’s simulation center is being developed in Gyumri to give healthcare professionals a setting for hands-on training. Public descriptions of the project include high-fidelity mannequins, virtual reality, robotics, and experimental learning methods.",
+    "areasTitle": "Learning areas",
+    "note": "Facility photographs, equipment lists, and operating hours will be published when confirmed. The images on this page are editorial visuals created for the website, not documentary photographs of a finished building."
+  },
+  "NewsPage": {
+    "eyebrow": "News",
+    "title": "News & Updates",
+    "intro": "Articles are stored as structured records (`slug`, date, category, body) so this section can later connect to a CMS, database, or API."
+  },
+  "DonatePage": {
+    "eyebrow": "Support",
+    "title": "Support the Future of Medical Education",
+    "intro": "Your support helps expand access to medical education, simulation-based training, professional development, and healthcare initiatives in Armenia.",
+    "trust": "Donations are not processed on this page. When a payment provider is selected, it will be connected through the site configuration. Until then, please use the contact form if you wish to discuss support.",
+    "contactCta": "Contact us about support"
+  },
+  "ContactPage": {
+    "eyebrow": "Contact",
+    "title": "Get in touch",
+    "intro": "Use the form to reach ASCEL. Direct email, phone, and a detailed street address will replace placeholders when they are provided.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "organization": "Organization",
+    "message": "Message",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "locationLabel": "Location",
+    "mapTitle": "Map",
+    "mapPending": "An interactive map will be embedded here when a confirmed address is available.",
+    "success": "Thank you. Your message was validated. A form endpoint has not been connected yet, so the message was not forwarded. Please use the published email address when it is provided.",
+    "forwarded": "Thank you. Your message has been sent.",
+    "error": "Please correct the highlighted fields and try again.",
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address."
+  },
+  "Legal": {
+    "privacyTitle": "Privacy Policy",
+    "privacyBody": "This is a placeholder privacy policy. ASCEL will publish a complete statement covering data collected through this website, cookies, and contact forms when legal review is complete. Until then, do not submit sensitive personal information through the contact form.",
+    "termsTitle": "Terms of Use",
+    "termsBody": "This is a placeholder terms of use page. The website is provided for informational purposes about ASCEL and its programs. External program websites remain governed by their own terms. Full legal terms will replace this placeholder after review."
+  },
+  "NotFound": {
+    "title": "This page is not available",
+    "body": "The address may have changed, or the page does not exist.",
+    "cta": "Return home"
+  }
+}
