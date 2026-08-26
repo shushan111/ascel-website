@@ -30,9 +30,9 @@ const courses: Course[] = [
       ru: "[Содержание будет предоставлено]",
     },
     description: {
-      en: "An introductory course on simulation-based learning for physicians and medical professionals. Faculty, dates, and registration will be published when confirmed.",
-      hy: "Ներածական դասընթաց սիմուլյացիայի վրա հիմնված ուսուցման վերաբերյալ՝ բժիշկների և բժշկական մասնագետների համար։ Դասախոսները, ամսաթվերը և գրանցումը կհրապարակվեն հաստատվելուց հետո։",
-      ru: "Вводный курс по симуляционному обучению для врачей и медицинских специалистов. Состав преподавателей, даты и регистрация будут опубликованы после подтверждения.",
+      en: "An introductory course on simulation-based learning for doctors and students. Faculty, dates, and registration will be published when confirmed.",
+      hy: "Ներածական դասընթաց սիմուլյացիայի վրա հիմնված ուսուցման վերաբերյալ՝ բժիշկների և ուսանողների համար։ Դասախոսները, ամսաթվերը և գրանցումը կհրապարակվեն հաստատվելուց հետո։",
+      ru: "Вводный курс по симуляционному обучению для врачей и студентов. Состав преподавателей, даты и регистрация будут опубликованы после подтверждения.",
     },
     image: "/images/capability-simulation.webp",
     registrationUrl: "",

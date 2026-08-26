@@ -5,9 +5,9 @@ export const donationOptions: DonationOption[] = [
     id: "education",
     title: { en: "Medical Education", hy: "Բժշկական կրթություն", ru: "Медицинское образование" },
     description: {
-      en: "Help expand structured learning for physicians and medical professionals.",
-      hy: "Օգնեք ընդլայնել կառուցվածքային ուսուցումը բժիշկների և բժշկական մասնագետների համար։",
-      ru: "Помогите расширить структурированное обучение для врачей и медицинских специалистов.",
+      en: "Help expand structured learning for doctors and students.",
+      hy: "Օգնեք ընդլայնել կառուցվածքային ուսուցումը բժիշկների և ուսանողների համար։",
+      ru: "Помогите расширить структурированное обучение для врачей и студентов.",
     },
   },
   {

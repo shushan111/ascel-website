@@ -63,9 +63,9 @@ const events: EventItem[] = [
       ru: "Гюмри, Армения",
     },
     description: {
-      en: "A sample listing for a future open session introducing the simulation environment to medical professionals.",
-      hy: "Օրինակելի գրառում ապագա բաց պարապմունքի համար, որի նպատակն է բժշկական մասնագետներին ծանոթացնել սիմուլյացիոն միջավայրին։",
-      ru: "Примерная запись о будущем открытом занятии, цель которого — познакомить медицинских специалистов с симуляционной средой.",
+      en: "A sample listing for a future open session introducing the simulation environment to doctors.",
+      hy: "Օրինակելի գրառում ապագա բաց պարապմունքի համար, որի նպատակն է բժիշկներին ծանոթացնել սիմուլյացիոն միջավայրին։",
+      ru: "Примерная запись о будущем открытом занятии, цель которого — познакомить врачей с симуляционной средой.",
     },
     href: "/simulation-center",
     isPlaceholder: true,

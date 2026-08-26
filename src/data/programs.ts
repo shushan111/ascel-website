@@ -223,9 +223,9 @@ const programs: Program[] = [
         ru: "Инициативы в области восстановительной медицины и реабилитации — согласно описанию Фонда.",
       },
       {
-        en: "Educational seminars for physicians and medical professionals.",
-        hy: "Կրթական սեմինարներ բժիշկների և բժշկական մասնագետների համար։",
-        ru: "Образовательные семинары для врачей и медицинских специалистов.",
+        en: "Educational seminars for doctors and students.",
+        hy: "Կրթական սեմինարներ բժիշկների և ուսանողների համար։",
+        ru: "Образовательные семинары для врачей и студентов.",
       },
       {
         en: "Work connected to medical education, equipment support, and advanced surgical care.",

@@ -10,7 +10,7 @@
     "coursesTitle": "Courses & Training | ASCEL",
     "coursesDescription": "Upcoming and current medical education courses from the Armenian Simulation Center for Experimental Learning.",
     "simulationTitle": "Simulation Center | ASCEL",
-    "simulationDescription": "Learn about ASCEL’s simulation-based learning environment for medical professionals in Gyumri, Armenia.",
+    "simulationDescription": "Learn about ASCEL’s simulation-based learning environment for doctors in Gyumri, Armenia.",
     "newsTitle": "News & Updates | ASCEL",
     "newsDescription": "News and updates from the Armenian Simulation Center for Experimental Learning.",
     "donateTitle": "Support & Donate | ASCEL",
@@ -71,12 +71,12 @@
     "supporting": "Armenian Simulation Center for Experimental Learning brings together medical education, simulation-based training, practical learning, and international expertise to help develop the next generation of healthcare professionals.",
     "primaryCta": "Explore Our Programs",
     "secondaryCta": "Support Our Mission",
-    "imageAlt": "Healthcare professionals training with a medical simulation mannequin in a skills laboratory"
+    "imageAlt": "Doctors training with a medical simulation mannequin in a skills laboratory"
   },
   "Intro": {
     "title": "Building the Future of Medical Education",
-    "body": "ASCEL provides an environment where medical professionals and learners can develop practical skills through simulation, experimental learning, education, and collaboration. The center is being established in Gyumri to address gaps in hands-on training and to support a regional culture of professional medical education.",
-    "imageAlt": "Medical professionals in conversation in an academic setting"
+    "body": "ASCEL provides an environment where doctors can develop practical skills through simulation, experimental learning, education, and collaboration. The center is being established in the city of Gyumri to develop the practical skills of doctors and to support a regional culture of professional medical education.",
+    "imageAlt": "Doctors in conversation in an academic setting"
   },
   "ProgramsHome": {
     "title": "Active Programs",
@@ -174,7 +174,7 @@
   "SimulationPage": {
     "eyebrow": "Simulation Center",
     "title": "A professional environment for practical medical learning",
-    "intro": "ASCEL’s simulation center is being developed in Gyumri to give healthcare professionals a setting for hands-on training. Public descriptions of the project include high-fidelity mannequins, virtual reality, robotics, and experimental learning methods.",
+    "intro": "ASCEL’s simulation center is being developed in Gyumri to give doctors a setting for hands-on training. Public descriptions of the project include high-fidelity mannequins, virtual reality, robotics, and experimental learning methods.",
     "areasTitle": "Learning areas",
     "note": "Facility photographs, equipment lists, and operating hours will be published when confirmed. The images on this page are editorial visuals created for the website, not documentary photographs of a finished building."
   },
