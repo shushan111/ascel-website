@@ -8,13 +8,13 @@ const programs: Program[] = [
     slug: "gyumri-orthopedic-school",
     title: {
       en: "Gyumri Orthopedic School",
-      hy: "Գյումրու օրթոպեդիական դպրոց",
-      ru: "Гюмрийская ортопедическая школа",
+      hy: "Gyumri Orthopedic School",
+      ru: "Gyumri Orthopedic School",
     },
     shortTitle: {
       en: "Gyumri Orthopedic School",
-      hy: "Գյումրու օրթոպեդիական դպրոց",
-      ru: "Гюмрийская ортопедическая школа",
+      hy: "Gyumri Orthopedic School",
+      ru: "Gyumri Orthopedic School",
     },
     category: {
       en: "Educational Program",
@@ -28,8 +28,8 @@ const programs: Program[] = [
     },
     overview: {
       en: "Gyumri Orthopedic School is one of ASCEL’s active educational programs. Courses are taught by practicing physicians and specialists from Armenia and other countries. Teaching combines focused lecture material with substantial practical sessions using anatomical models and contemporary surgical instrumentation. The program operates through its own official website; ASCEL presents it as part of a shared medical-education ecosystem, without replacing that independent site.",
-      hy: "Գյումրու օրթոպեդիական դպրոցը ASCEL-ի գործող կրթական ծրագրերից է։ Դասընթացները վարում են գործող բժիշկներ և մասնագետներ Հայաստանից և այլ երկրներից։ Ուսուցումը համատեղում է կենտրոնացված դասախոսական նյութը գործնական պարապմունքների հետ՝ անատոմիական մոդելների և ժամանակակից վիրաբուժական գործիքների կիրառմամբ։ Ծրագիրն ունի սեփական պաշտոնական կայք։ ASCEL-ը այն ներկայացնում է որպես ընդհանուր բժշկական կրթական միջավայրի մաս՝ առանց փոխարինելու այդ անկախ կայքը։",
-      ru: "Гюмрийская ортопедическая школа — одна из действующих образовательных программ ASCEL. Занятия ведут практикующие врачи и специалисты из Армении и других стран. Обучение сочетает сфокусированный лекционный материал с обширной практической частью на анатомических моделях и современном хирургическом инструментарии. У программы есть собственный официальный сайт; ASCEL представляет её как часть общей экосистемы медицинского образования, не подменяя этот независимый ресурс.",
+      hy: "Gyumri Orthopedic School-ը ASCEL-ի գործող կրթական ծրագրերից է։ Դասընթացները վարում են գործող բժիշկներ և մասնագետներ Հայաստանից և այլ երկրներից։ Ուսուցումը համատեղում է կենտրոնացված դասախոսական նյութը գործնական պարապմունքների հետ՝ անատոմիական մոդելների և ժամանակակից վիրաբուժական գործիքների կիրառմամբ։ Ծրագիրն ունի սեփական պաշտոնական կայք։ ASCEL-ը այն ներկայացնում է որպես ընդհանուր բժշկական կրթական միջավայրի մաս՝ առանց փոխարինելու այդ անկախ կայքը։",
+      ru: "Gyumri Orthopedic School — одна из действующих образовательных программ ASCEL. Занятия ведут практикующие врачи и специалисты из Армении и других стран. Обучение сочетает сфокусированный лекционный материал с обширной практической частью на анатомических моделях и современном хирургическом инструментарии. У программы есть собственный официальный сайт; ASCEL представляет её как часть общей экосистемы медицинского образования, не подменяя этот независимый ресурс.",
     },
     image: "/images/program-orthopedic.webp",
     gallery: [

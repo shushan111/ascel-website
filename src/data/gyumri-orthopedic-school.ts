@@ -18,8 +18,8 @@ export const gyumriOrthopedicSchoolDetail: ProgramDetailContent = {
   },
   seoDescription: {
     en: "Gyumri Orthopedic School is an educational project in Gyumri, Armenia, running lecture-and-practical courses in traumatology and orthopedics for surgeons, operating room nurses and allied specialists. An ASCEL program profile.",
-    hy: "Գյումրու օրթոպեդիական դպրոցը Գյումրիում գործող կրթական նախագիծ է, որը վարում է դասախոսական-գործնական դասընթացներ տրավմատոլոգիայի և օրթոպեդիայի ոլորտում՝ վիրաբույժների, վիրահատարանի բուժքույրերի և հարակից մասնագետների համար։ ASCEL-ի ծրագրային ակնարկ։",
-    ru: "Гюмрийская ортопедическая школа — образовательный проект в Гюмри (Армения), проводящий лекционно-практические курсы по травматологии и ортопедии для хирургов, операционных сестёр и смежных специалистов. Обзор программы ASCEL.",
+    hy: "Gyumri Orthopedic School-ը Գյումրիում գործող կրթական նախագիծ է, որը վարում է դասախոսական-գործնական դասընթացներ տրավմատոլոգիայի և օրթոպեդիայի ոլորտում՝ վիրաբույժների, վիրահատարանի բուժքույրերի և հարակից մասնագետների համար։ ASCEL-ի ծրագրային ակնարկ։",
+    ru: "Gyumri Orthopedic School — образовательный проект в Гюмри (Армения), проводящий лекционно-практические курсы по травматологии и ортопедии для хирургов, операционных сестёр и смежных специалистов. Обзор программы ASCEL.",
   },
   facts: [
     {
@@ -74,14 +74,14 @@ export const gyumriOrthopedicSchoolDetail: ProgramDetailContent = {
   about: {
     title: {
       en: "About Gyumri Orthopedic School",
-      hy: "Գյումրու օրթոպեդիական դպրոցի մասին",
-      ru: "О Гюмрийской ортопедической школе",
+      hy: "Gyumri Orthopedic School-ի մասին",
+      ru: "О Gyumri Orthopedic School",
     },
     body: [
       {
         en: "Gyumri Orthopedic School is an educational project based in Gyumri, Armenia, dedicated to traumatology and orthopedics. It exists to close a practical gap: specialised surgical knowledge advances quickly, while structured opportunities to learn and rehearse it are not always within reach of the physicians who need them. The school addresses this by bringing recognised specialists to Gyumri and teaching in a format that pairs theory with time at the instrument table.",
-        hy: "Գյումրու օրթոպեդիական դպրոցը Գյումրիում (Հայաստան) գործող կրթական նախագիծ է, որը նվիրված է տրավմատոլոգիային և օրթոպեդիային։ Այն ստեղծվել է գործնական բացը լրացնելու համար. մասնագիտացված վիրաբուժական գիտելիքը արագ զարգանում է, մինչդեռ այն սովորելու և կրկնելու կառուցվածքային հնարավորությունները միշտ չեն հասանելի այն բժիշկներին, որոնց դրանք անհրաժեշտ են։ Դպրոցը լուծում է այս խնդիրը՝ Գյումրի հրավիրելով ճանաչված մասնագետներ և դասավանդելով այն ձևաչափով, որտեղ տեսությունը զուգակցվում է գործիքի հետ աշխատելու ժամանակի հետ։",
-        ru: "Гюмрийская ортопедическая школа — образовательный проект в Гюмри (Армения), посвящённый травматологии и ортопедии. Он создан, чтобы восполнить практический пробел: специализированные хирургические знания развиваются быстро, а структурированные возможности их освоить и отработать доступны далеко не всем врачам, которым они нужны. Школа решает эту задачу, приглашая в Гюмри признанных специалистов и выстраивая обучение так, чтобы теория сочеталась с работой за инструментальным столом.",
+        hy: "Gyumri Orthopedic School-ը Գյումրիում (Հայաստան) գործող կրթական նախագիծ է, որը նվիրված է տրավմատոլոգիային և օրթոպեդիային։ Այն ստեղծվել է գործնական բացը լրացնելու համար. մասնագիտացված վիրաբուժական գիտելիքը արագ զարգանում է, մինչդեռ այն սովորելու և կրկնելու կառուցվածքային հնարավորությունները միշտ չեն հասանելի այն բժիշկներին, որոնց դրանք անհրաժեշտ են։ Դպրոցը լուծում է այս խնդիրը՝ Գյումրի հրավիրելով ճանաչված մասնագետներ և դասավանդելով այն ձևաչափով, որտեղ տեսությունը զուգակցվում է գործիքի հետ աշխատելու ժամանակի հետ։",
+        ru: "Gyumri Orthopedic School — образовательный проект в Гюмри (Армения), посвящённый травматологии и ортопедии. Он создан, чтобы восполнить практический пробел: специализированные хирургические знания развиваются быстро, а структурированные возможности их освоить и отработать доступны далеко не всем врачам, которым они нужны. Школа решает эту задачу, приглашая в Гюмри признанных специалистов и выстраивая обучение так, чтобы теория сочеталась с работой за инструментальным столом.",
       },
       {
         en: "The school works as a recurring cycle of courses rather than a one-off event. Since its first courses in 2019 it has convened surgeons in Gyumri several times a year, each course built around one clearly defined clinical area — joint replacement, shoulder trauma, hand surgery, foot and ankle surgery, fracture management, bone and joint infection, orthopedic oncology or soft tissue reconstruction. Selected larger events have also been held in Yerevan.",
@@ -618,8 +618,8 @@ export const gyumriOrthopedicSchoolDetail: ProgramDetailContent = {
     },
     body: {
       en: "Course programmes, faculty listings, venues, registration terms and current announcements are published and maintained by Gyumri Orthopedic School on its own website.",
-      hy: "Դասընթացների ծրագրերը, դասախոսների ցանկերը, անցկացման վայրերը, գրանցման պայմանները և ընթացիկ հայտարարությունները հրապարակվում և թարմացվում են Գյումրու օրթոպեդիական դպրոցի կողմից՝ իր սեփական կայքում։",
-      ru: "Программы курсов, состав преподавателей, места проведения, условия регистрации и актуальные анонсы публикуются и поддерживаются Гюмрийской ортопедической школой на её собственном сайте.",
+      hy: "Դասընթացների ծրագրերը, դասախոսների ցանկերը, անցկացման վայրերը, գրանցման պայմանները և ընթացիկ հայտարարությունները հրապարակվում և թարմացվում են Gyumri Orthopedic School-ի կողմից՝ իր սեփական կայքում։",
+      ru: "Программы курсов, состав преподавателей, места проведения, условия регистрации и актуальные анонсы публикуются и поддерживаются Gyumri Orthopedic School на её собственном сайте.",
     },
     label: {
       en: "Visit Official Website",
@@ -630,7 +630,7 @@ export const gyumriOrthopedicSchoolDetail: ProgramDetailContent = {
   },
   sourceNote: {
     en: "This profile is an ASCEL summary based on publicly available information from the official Gyumri Orthopedic School website. It is not a copy of that site, and it does not replace it: course details, dates and registration terms are maintained by the school itself.",
-    hy: "Այս ակնարկը ASCEL-ի ամփոփումն է՝ հիմնված Գյումրու օրթոպեդիական դպրոցի պաշտոնական կայքի հանրությանը հասանելի տեղեկության վրա։ Այն այդ կայքի պատճենը չէ և չի փոխարինում դրան․ դասընթացների մանրամասները, ամսաթվերը և գրանցման պայմանները վարում է դպրոցը։",
-    ru: "Этот обзор — подготовленное ASCEL изложение публично доступной информации с официального сайта Гюмрийской ортопедической школы. Он не является копией того сайта и не заменяет его: детали курсов, даты и условия регистрации ведёт сама школа.",
+    hy: "Այս ակնարկը ASCEL-ի ամփոփումն է՝ հիմնված Gyumri Orthopedic School-ի պաշտոնական կայքի հանրությանը հասանելի տեղեկության վրա։ Այն այդ կայքի պատճենը չէ և չի փոխարինում դրան․ դասընթացների մանրամասները, ամսաթվերը և գրանցման պայմանները վարում է դպրոցը։",
+    ru: "Этот обзор — подготовленное ASCEL изложение публично доступной информации с официального сайта Gyumri Orthopedic School. Он не является копией того сайта и не заменяет его: детали курсов, даты и условия регистрации ведёт сама школа.",
   },
 };

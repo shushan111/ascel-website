@@ -47,8 +47,8 @@ const articles: NewsArticle[] = [
     },
     excerpt: {
       en: "ASCEL’s current program landscape includes Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation.",
-      hy: "ASCEL-ի ընթացիկ ծրագրային դաշտում են Գյումրու օրթոպեդիական դպրոցը, Damage Control դասընթացները և Eternal Nation հիմնադրամի գործընկերային ներկայացումը։",
-      ru: "В текущем программном контуре ASCEL — Гюмрийская ортопедическая школа, курсы по Damage Control и партнёрское представление Фонда Eternal Nation.",
+      hy: "ASCEL-ի ընթացիկ ծրագրային դաշտում են Gyumri Orthopedic School-ը, Damage Control դասընթացները և Eternal Nation հիմնադրամի գործընկերային ներկայացումը։",
+      ru: "В текущем программном контуре ASCEL — Gyumri Orthopedic School, курсы по Damage Control и партнёрское представление Фонда Eternal Nation.",
     },
     body: [
       {
@@ -58,8 +58,8 @@ const articles: NewsArticle[] = [
       },
       {
         en: "Gyumri Orthopedic School and Eternal Nation Foundation each maintain official websites. Damage Control Courses is presented as an internal training direction until an external URL is provided.",
-        hy: "Գյումրու օրթոպեդիական դպրոցը և Eternal Nation հիմնադրամը ունեն պաշտոնական կայքեր։ Damage Control դասընթացները ներկայացվում են որպես ներքին վերապատրաստման ուղղություն, մինչև արտաքին հղում տրամադրվի։",
-        ru: "У Гюмрийской ортопедической школы и Фонда Eternal Nation есть официальные сайты. Курсы по Damage Control представлены как внутреннее направление подготовки до появления внешней ссылки.",
+        hy: "Gyumri Orthopedic School-ը և Eternal Nation հիմնադրամը ունեն պաշտոնական կայքեր։ Damage Control դասընթացները ներկայացվում են որպես ներքին վերապատրաստման ուղղություն, մինչև արտաքին հղում տրամադրվի։",
+        ru: "У Gyumri Orthopedic School и Фонда Eternal Nation есть официальные сайты. Курсы по Damage Control представлены как внутреннее направление подготовки до появления внешней ссылки.",
       },
     ],
     date: "2025-01-02",
