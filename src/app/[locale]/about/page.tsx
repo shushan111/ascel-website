@@ -18,7 +18,7 @@ export async function generateMetadata({
     description: t("aboutDescription"),
     path: "/about",
     locale,
-    image: "/images/about-intro.jpg",
+    image: "/images/about-intro.webp",
   });
 }
 
@@ -61,7 +61,7 @@ export default async function AboutPage({
             <ImageReveal>
               <div className="relative aspect-[4/5]">
                 <Image
-                  src="/images/about-intro.jpg"
+                  src="/images/about-intro.webp"
                   alt={t("imageAlt")}
                   fill
                   className="object-cover"

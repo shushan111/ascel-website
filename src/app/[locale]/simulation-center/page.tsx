@@ -26,7 +26,7 @@ export async function generateMetadata({
     description: t("simulationDescription"),
     path: "/simulation-center",
     locale,
-    image: "/images/simulation-center.jpg",
+    image: "/images/simulation-center.webp",
   });
 }
 
@@ -44,7 +44,7 @@ export default async function SimulationCenterPage({
     <>
       <section className="relative min-h-[48vh] overflow-hidden bg-navy">
         <Image
-          src="/images/simulation-center.jpg"
+          src="/images/simulation-center.webp"
           alt={home("imageAlt")}
           fill
           priority
@@ -81,7 +81,7 @@ export default async function SimulationCenterPage({
             <ImageReveal>
               <div className="relative aspect-[4/3]">
                 <Image
-                  src="/images/capability-simulation.jpg"
+                  src="/images/capability-simulation.webp"
                   alt={home("medicalSimulation")}
                   fill
                   className="object-cover"
@@ -92,7 +92,7 @@ export default async function SimulationCenterPage({
             <ImageReveal>
               <div className="relative aspect-[16/10]">
                 <Image
-                  src="/images/capability-team.jpg"
+                  src="/images/capability-team.webp"
                   alt={home("teamTraining")}
                   fill
                   className="object-cover"

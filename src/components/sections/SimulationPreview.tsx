@@ -25,7 +25,7 @@ export async function SimulationPreview() {
         <ImageReveal>
           <div className="relative aspect-[16/10] lg:aspect-[4/3]">
             <Image
-              src="/images/simulation-center.jpg"
+              src="/images/simulation-center.webp"
               alt={t("imageAlt")}
               fill
               className="object-cover"

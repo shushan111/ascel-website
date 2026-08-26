@@ -29,7 +29,7 @@ const articles: NewsArticle[] = [
     date: "2025-01-01",
     dateLabel: { en: "Sample article", hy: "Օրինակելի հոդված", ru: "Пример статьи" },
     category: { en: "Center", hy: "Կենտրոն", ru: "Центр" },
-    image: "/images/hero-simulation.jpg",
+    image: "/images/hero-simulation.webp",
     imageAlt: {
       en: "Medical simulation training environment",
       hy: "Բժշկական սիմուլյացիոն ուսուցման միջավայր",
@@ -65,7 +65,7 @@ const articles: NewsArticle[] = [
     date: "2025-01-02",
     dateLabel: { en: "Sample article", hy: "Օրինակելի հոդված", ru: "Пример статьи" },
     category: { en: "Programs", hy: "Ծրագրեր", ru: "Программы" },
-    image: "/images/news-education.jpg",
+    image: "/images/news-education.webp",
     imageAlt: {
       en: "Medical education workshop setting",
       hy: "Բժշկական կրթական արհեստանոցի միջավայր",
@@ -101,7 +101,7 @@ const articles: NewsArticle[] = [
     date: "2025-01-03",
     dateLabel: { en: "Sample article", hy: "Օրինակելի հոդված", ru: "Пример статьи" },
     category: { en: "Education", hy: "Կրթություն", ru: "Образование" },
-    image: "/images/simulation-center.jpg",
+    image: "/images/simulation-center.webp",
     imageAlt: {
       en: "Medical simulation laboratory interior",
       hy: "Բժշկական սիմուլյացիոն լաբորատորիայի ինտերիեր",
@@ -137,7 +137,7 @@ const articles: NewsArticle[] = [
     date: "2025-01-04",
     dateLabel: { en: "Sample article", hy: "Օրինակելի հոդված", ru: "Пример статьи" },
     category: { en: "Support", hy: "Աջակցություն", ru: "Поддержка" },
-    image: "/images/donate-support.jpg",
+    image: "/images/donate-support.webp",
     imageAlt: {
       en: "Simulation training equipment prepared in a laboratory",
       hy: "Սիմուլյացիոն ուսուցման սարքավորումներ լաբորատորիայում",

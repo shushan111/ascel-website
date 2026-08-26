@@ -25,7 +25,7 @@ export async function Intro({ locale }: { locale: string }) {
           <ImageReveal>
             <div className="relative aspect-[4/3]">
               <Image
-                src="/images/about-intro.jpg"
+                src="/images/about-intro.webp"
                 alt={t("imageAlt")}
                 fill
                 className="object-cover"

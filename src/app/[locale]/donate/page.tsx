@@ -21,7 +21,7 @@ export async function generateMetadata({
     description: t("donateDescription"),
     path: "/donate",
     locale,
-    image: "/images/donate-support.jpg",
+    image: "/images/donate-support.webp",
   });
 }
 
@@ -40,7 +40,7 @@ export default async function DonatePage({
     <>
       <section className="relative overflow-hidden bg-navy py-20 md:py-28">
         <Image
-          src="/images/donate-support.jpg"
+          src="/images/donate-support.webp"
           alt=""
           fill
           className="object-cover opacity-25"

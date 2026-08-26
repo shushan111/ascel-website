@@ -10,7 +10,7 @@ export async function Hero() {
   return (
     <section className="relative min-h-[88vh] overflow-hidden bg-navy-deep">
       <Image
-        src="/images/hero-simulation.jpg"
+        src="/images/hero-simulation.webp"
         alt={t("imageAlt")}
         fill
         priority

@@ -14,7 +14,7 @@ export async function SupportSection({ locale }: { locale: string }) {
     <Section tone="navy" className="relative overflow-hidden">
       <div className="absolute inset-0 opacity-25">
         <Image
-          src="/images/donate-support.jpg"
+          src="/images/donate-support.webp"
           alt=""
           fill
           className="object-cover"
