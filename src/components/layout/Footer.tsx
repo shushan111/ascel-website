@@ -1,12 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { footerNav, siteConfig } from "@/lib/config";
-import { getPrograms } from "@/data/programs";
+import { getProgramHref, getPrograms } from "@/data/programs";
 import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/logo/Logo";
 import { ExternalIcon } from "@/components/ui/ExternalIcon";
-import { getExternalUrl } from "@/lib/utils";
 
 export async function Footer({ locale }: { locale: string }) {
   const t = await getTranslations("Footer");
@@ -48,12 +47,12 @@ export async function Footer({ locale }: { locale: string }) {
           </p>
           <ul className="mt-4 space-y-2">
             {programs.map((program) => {
-              const external = getExternalUrl(program.externalUrlKey);
-              if (external) {
+              const target = getProgramHref(program);
+              if (target.external) {
                 return (
                   <li key={program.id}>
                     <a
-                      href={external}
+                      href={target.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-sm text-white/75 transition-colors hover:text-white"
@@ -68,7 +67,7 @@ export async function Footer({ locale }: { locale: string }) {
               return (
                 <li key={program.id}>
                   <Link
-                    href={`/programs/${program.slug}`}
+                    href={target.href}
                     className="text-sm text-white/75 transition-colors hover:text-white"
                   >
                     {loc(program.shortTitle, locale)}

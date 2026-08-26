@@ -17,9 +17,10 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const program = getProgramBySlug(slug);
   if (!program) return {};
+  const description = program.detail?.seoDescription ?? program.description;
   return buildMetadata({
     title: `${loc(program.title, locale)} | ASCEL`,
-    description: loc(program.description, locale),
+    description: loc(description, locale),
     path: `/programs/${program.slug}`,
     locale,
     image: program.image,

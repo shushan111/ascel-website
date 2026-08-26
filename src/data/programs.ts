@@ -1,5 +1,6 @@
 import type { Program } from "@/types";
 import { getExternalUrl } from "@/lib/utils";
+import { gyumriOrthopedicSchoolDetail } from "./gyumri-orthopedic-school";
 
 const programs: Program[] = [
   {
@@ -77,8 +78,9 @@ const programs: Program[] = [
         ru: "Показатели эффективности этой программы будут опубликованы здесь, когда появятся подтверждённые данные.",
       },
     ],
+    detail: gyumriOrthopedicSchoolDetail,
     externalUrlKey: "gyumriOrthopedicSchool",
-    ctaLabel: "visitWebsite",
+    ctaLabel: "learnMore",
   },
   {
     id: "damage-control-courses",
@@ -251,14 +253,23 @@ export function getProgramBySlug(slug: string) {
   return programs.find((program) => program.slug === slug);
 }
 
+/**
+ * Programs that carry a full profile on this site are linked internally; the
+ * external site is then surfaced from the detail page itself. Programs without
+ * a profile still link straight out to their own website when they have one.
+ */
 export function getProgramHref(program: Program, localePath = "") {
+  const prefix = localePath ? `${localePath}` : "";
+  const internal = {
+    href: `${prefix}/programs/${program.slug}`,
+    external: false as const,
+  };
+
+  if (program.detail) return internal;
+
   const external = getExternalUrl(program.externalUrlKey);
   if (external) {
     return { href: external, external: true as const };
   }
-  const prefix = localePath ? `${localePath}` : "";
-  return {
-    href: `${prefix}/programs/${program.slug}`,
-    external: false as const,
-  };
+  return internal;
 }
