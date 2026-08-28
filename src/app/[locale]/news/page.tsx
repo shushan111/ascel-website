@@ -28,7 +28,7 @@ export default async function NewsPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("NewsPage");
-  const articles = getNewsArticles();
+  const articles = await getNewsArticles();
 
   return (
     <>

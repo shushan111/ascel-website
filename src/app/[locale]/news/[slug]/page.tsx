@@ -8,8 +8,9 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
-export function generateStaticParams() {
-  return getNewsArticles().map((article) => ({ slug: article.slug }));
+export async function generateStaticParams() {
+  const articles = await getNewsArticles();
+  return articles.map((article) => ({ slug: article.slug }));
 }
 
 export async function generateMetadata({
@@ -18,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const article = getNewsBySlug(slug);
+  const article = await getNewsBySlug(slug);
   if (!article) return {};
   return buildMetadata({
     title: `${loc(article.title, locale)} | ASCEL`,
@@ -36,7 +37,7 @@ export default async function NewsArticlePage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const article = getNewsBySlug(slug);
+  const article = await getNewsBySlug(slug);
   if (!article) notFound();
   const common = await getTranslations("Common");
 

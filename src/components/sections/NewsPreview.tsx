@@ -8,7 +8,7 @@ import { NewsCard } from "@/components/news/NewsCard";
 
 export async function NewsPreview({ locale }: { locale: string }) {
   const t = await getTranslations("NewsHome");
-  const articles = getLatestNews(3);
+  const articles = await getLatestNews(3);
 
   return (
     <Section tone="canvas">
