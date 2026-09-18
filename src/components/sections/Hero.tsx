@@ -8,7 +8,9 @@ export async function Hero() {
   const t = await getTranslations("Hero");
 
   return (
-    <section className="relative min-h-[88vh] overflow-hidden bg-navy-deep">
+    // Sized in rem with a viewport floor rather than a flat 88vh: the old
+    // height pushed the first section fully below the fold on laptops.
+    <section className="relative flex min-h-[32rem] items-end overflow-hidden bg-ink md:min-h-[38rem] md:items-center lg:min-h-[41rem]">
       <Image
         src="/images/hero-simulation.webp"
         alt={t("imageAlt")}
@@ -17,27 +19,27 @@ export async function Hero() {
         className="object-cover object-center"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-linear-to-r from-navy-deep/90 via-navy/75 to-navy/35" />
-      <Container className="relative flex min-h-[88vh] items-end pb-20 pt-32 md:items-center md:py-28">
-        <div className="max-w-3xl">
-          <p className="text-xs font-medium uppercase tracking-[0.22em] text-white/60">
-            {t("eyebrow")}
-          </p>
-          <h1 className="mt-5 text-4xl font-semibold tracking-tight text-white text-balance sm:text-5xl lg:text-[3.35rem] lg:leading-[1.12]">
+      {/* A legibility scrim, not a decorative gradient. */}
+      <div className="absolute inset-0 bg-ink/78" />
+      <div className="absolute inset-0 bg-linear-to-r from-ink/55 to-transparent" />
+      <Container className="relative py-20 md:py-24">
+        <div className="max-w-2xl">
+          <p className="t-eyebrow text-accent-light">{t("eyebrow")}</p>
+          <h1 className="t-display mt-5 text-balance text-on-dark">
             {t("headline")}
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-white/78 sm:text-lg">
+          <p className="t-lead mt-6 max-w-xl text-on-dark/80">
             {t("supporting")}
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/programs" className={buttonClassName("donate")}>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/programs" className={buttonClassName("onDark")}>
               {t("primaryCta")}
             </Link>
             <Link
               href="/donate"
               className={buttonClassName(
                 "secondary",
-                "border-white/35 text-white hover:border-white hover:bg-white/10",
+                "border-on-dark/45 text-on-dark hover:border-on-dark hover:bg-on-dark/12 hover:text-on-dark",
               )}
             >
               {t("secondaryCta")}

@@ -14,13 +14,13 @@ export async function UpcomingEvents({ locale }: { locale: string }) {
       <Container className="max-w-4xl">
         <SectionHeader title={t("title")} subtitle={t("subtitle")} />
         {events.length > 0 ? (
-          <div>
+          <div className="border-t border-line">
             {events.map((event) => (
               <EventCard key={event.id} event={event} locale={locale} />
             ))}
           </div>
         ) : (
-          <p className="text-base leading-7 text-muted">{t("empty")}</p>
+          <p className="t-body text-muted">{t("empty")}</p>
         )}
       </Container>
     </Section>

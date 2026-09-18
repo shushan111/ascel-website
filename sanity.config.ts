@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * This configuration is used to for the Sanity Studio that’s mounted on the `/app/aasscceell/[[...tool]]/page.tsx` route
+ * This configuration is used to for the Sanity Studio that’s mounted on the `/app/admin_panel/[[...tool]]/page.tsx` route
  */
 
 import {visionTool} from '@sanity/vision'
@@ -14,7 +14,7 @@ import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 
 export default defineConfig({
-  basePath: '/aasscceell',
+  basePath: '/admin_panel',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder

@@ -9,18 +9,16 @@ export async function PartnersSection() {
   const partners = getPartners();
 
   return (
-    <Section>
+    <Section space="compact">
       <Container>
         <SectionHeader title={t("title")} subtitle={t("subtitle")} />
-        <ul className="grid grid-cols-2 gap-px bg-line sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((partner) => (
             <li
               key={partner.id}
-              className="flex min-h-28 items-center justify-center bg-white px-4 text-center"
+              className="flex min-h-24 items-center justify-center rounded-md border border-line bg-canvas px-4 text-center"
             >
-              <span className="text-xs uppercase tracking-[0.14em] text-muted">
-                {t("slotLabel")}
-              </span>
+              <span className="t-meta-sm text-muted">{t("slotLabel")}</span>
               <span className="sr-only">{partner.name}</span>
             </li>
           ))}

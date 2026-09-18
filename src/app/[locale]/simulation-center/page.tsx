@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 
 const areaKeys = [
@@ -42,61 +43,59 @@ export default async function SimulationCenterPage({
 
   return (
     <>
-      <section className="relative min-h-[48vh] overflow-hidden bg-navy">
-        <Image
-          src="/images/simulation-center.webp"
-          alt={home("imageAlt")}
-          fill
-          priority
-          className="object-cover opacity-40"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-navy/55" />
-        <Container className="relative flex min-h-[48vh] flex-col justify-end py-16">
-          <p className="text-xs font-medium uppercase tracking-[0.22em] text-white/60">
-            {t("eyebrow")}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-white text-balance md:text-5xl">
-            {t("title")}
-          </h1>
-        </Container>
-      </section>
+      <PageHeader eyebrow={t("eyebrow")} title={t("title")} intro={t("intro")} />
+
+      <Container className="mt-10 md:mt-14">
+        <div className="relative aspect-[4/3] sm:aspect-[2/1] lg:aspect-[21/9] overflow-hidden rounded-md bg-mist">
+          <Image
+            src="/images/simulation-center.webp"
+            alt={home("imageAlt")}
+            fill
+            priority
+            className="object-cover"
+            sizes="(min-width: 1200px) 1136px, 100vw"
+          />
+        </div>
+      </Container>
+
       <Section>
-        <Container className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <p className="text-base leading-7 text-muted">{t("intro")}</p>
-            <h2 className="mt-10 text-2xl font-semibold tracking-tight text-navy">
-              {t("areasTitle")}
-            </h2>
-            <ul className="mt-6 grid gap-px bg-line sm:grid-cols-2">
+        <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <h2 className="t-h2 text-balance text-ink">{t("areasTitle")}</h2>
+            <ul className="mt-8 grid gap-x-10 sm:grid-cols-2">
               {areaKeys.map((key) => (
-                <li key={key} className="bg-white px-4 py-4 text-sm text-navy">
+                <li
+                  key={key}
+                  className="border-t border-line py-4 text-sm leading-6 text-ink"
+                >
                   {home(key)}
                 </li>
               ))}
             </ul>
-            <p className="mt-8 text-sm leading-6 text-muted">{t("note")}</p>
+            <p className="t-small mt-10 border-l-2 border-accent pl-5 text-muted">
+              {t("note")}
+            </p>
           </div>
-          <div className="grid gap-4">
+          <div className="grid gap-6 lg:col-span-5">
             <ImageReveal>
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-mist">
                 <Image
                   src="/images/capability-simulation.webp"
                   alt={home("medicalSimulation")}
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
                 />
               </div>
             </ImageReveal>
             <ImageReveal>
-              <div className="relative aspect-[16/10]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-mist">
                 <Image
                   src="/images/capability-team.webp"
                   alt={home("teamTraining")}
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
                 />
               </div>
             </ImageReveal>

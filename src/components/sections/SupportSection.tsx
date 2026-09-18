@@ -11,7 +11,7 @@ export async function SupportSection({ locale }: { locale: string }) {
   const options = getDonationOptions();
 
   return (
-    <Section tone="navy" className="relative overflow-hidden">
+    <Section tone="ink" className="relative overflow-hidden">
       <div className="absolute inset-0 opacity-25">
         <Image
           src="/images/donate-support.webp"
@@ -21,19 +21,17 @@ export async function SupportSection({ locale }: { locale: string }) {
           sizes="100vw"
         />
       </div>
-      <div className="absolute inset-0 bg-navy/80" />
+      <div className="absolute inset-0 bg-ink/88" />
       <Container className="relative">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white text-balance sm:text-4xl">
-            {t("title")}
-          </h2>
-          <p className="mt-5 text-base leading-7 text-white/75">{t("body")}</p>
+        <div className="max-w-xl">
+          <h2 className="t-h2 text-balance text-on-dark">{t("title")}</h2>
+          <p className="t-body mt-5 text-on-dark/80">{t("body")}</p>
           <div className="mt-8">
             <DonateButtons invert />
           </div>
         </div>
-        <div className="mt-14">
-          <DonationCategories options={options} locale={locale} />
+        <div className="mt-16">
+          <DonationCategories options={options} locale={locale} invert />
         </div>
       </Container>
     </Section>

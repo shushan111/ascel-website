@@ -23,7 +23,7 @@ export async function SimulationPreview() {
     <Section>
       <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <ImageReveal>
-          <div className="relative aspect-[16/10] lg:aspect-[4/3]">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-mist lg:aspect-[4/3]">
             <Image
               src="/images/simulation-center.webp"
               alt={t("imageAlt")}
@@ -34,18 +34,22 @@ export async function SimulationPreview() {
           </div>
         </ImageReveal>
         <FadeIn>
-          <h2 className="text-3xl font-semibold tracking-tight text-navy text-balance sm:text-4xl">
-            {t("title")}
-          </h2>
-          <p className="mt-5 text-base leading-7 text-muted">{t("body")}</p>
-          <ul className="mt-8 grid grid-cols-1 gap-px bg-line sm:grid-cols-2">
+          <h2 className="t-h2 text-balance text-ink">{t("title")}</h2>
+          <p className="t-body mt-5 text-muted">{t("body")}</p>
+          <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8">
             {areaKeys.map((key) => (
-              <li key={key} className="bg-white px-4 py-3 text-sm text-navy">
+              <li
+                key={key}
+                className="border-t border-line py-3.5 text-sm leading-6 text-ink"
+              >
                 {t(key)}
               </li>
             ))}
           </ul>
-          <Link href="/simulation-center" className={buttonClassName("primary", "mt-8")}>
+          <Link
+            href="/simulation-center"
+            className={buttonClassName("primary", "mt-9")}
+          >
             {t("cta")}
           </Link>
         </FadeIn>

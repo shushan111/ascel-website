@@ -14,47 +14,45 @@ export async function CourseCard({
   const t = await getTranslations("CoursesPage");
   const common = await getTranslations("Common");
 
+  const rows = [
+    [t("date"), loc(course.date, locale)],
+    [t("location"), loc(course.location, locale)],
+    [t("instructor"), loc(course.instructor, locale)],
+  ] as const;
+
   return (
-    <article className="flex h-full flex-col border border-line bg-white">
-      <div className="relative aspect-[16/10] overflow-hidden">
+    <article className="flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper">
+      <div className="relative aspect-[16/10] overflow-hidden bg-mist">
         <Image
           src={course.image}
           alt={loc(course.title, locale)}
           fill
           className="object-cover"
-          sizes="(min-width: 1024px) 33vw, 100vw"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
         />
         {course.isPlaceholder ? (
-          <span className="absolute left-3 top-3 bg-white/95 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-navy">
+          <span className="t-meta-sm absolute left-3 top-3 rounded-sm bg-paper/95 px-2 py-1 text-ink">
             {common("sample")}
           </span>
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
-          {loc(course.type, locale)}
-        </p>
-        <h3 className="mt-2 text-lg font-semibold tracking-tight text-navy">
+        <p className="t-meta-sm text-accent">{loc(course.type, locale)}</p>
+        <h3 className="t-h4 mt-3 text-balance text-ink">
           {loc(course.title, locale)}
         </h3>
-        <dl className="mt-4 grid gap-2 text-sm text-muted">
-          <div>
-            <dt className="inline text-ink/70">{t("date")}: </dt>
-            <dd className="inline">{loc(course.date, locale)}</dd>
-          </div>
-          <div>
-            <dt className="inline text-ink/70">{t("location")}: </dt>
-            <dd className="inline">{loc(course.location, locale)}</dd>
-          </div>
-          <div>
-            <dt className="inline text-ink/70">{t("instructor")}: </dt>
-            <dd className="inline">{loc(course.instructor, locale)}</dd>
-          </div>
+        <dl className="mt-5 space-y-2.5 text-sm leading-6">
+          {rows.map(([label, value]) => (
+            <div key={label} className="flex flex-wrap gap-x-2">
+              <dt className="min-w-0 shrink-0 text-muted">{label}:</dt>
+              <dd className="min-w-0 text-ink">{value}</dd>
+            </div>
+          ))}
         </dl>
-        <p className="mt-4 flex-1 text-sm leading-6 text-muted">
+        <p className="t-small mt-5 flex-1 text-muted">
           {loc(course.description, locale)}
         </p>
-        <div className="mt-6">
+        <div className="mt-7">
           {course.registrationUrl ? (
             <a
               href={course.registrationUrl}
@@ -65,7 +63,12 @@ export async function CourseCard({
               {common("register")}
             </a>
           ) : (
-            <span className={buttonClassName("secondary", "pointer-events-none opacity-70")}>
+            <span
+              className={buttonClassName(
+                "secondary",
+                "pointer-events-none opacity-65",
+              )}
+            >
               {common("registrationPending")}
             </span>
           )}

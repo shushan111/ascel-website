@@ -62,7 +62,7 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         <Link
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-100 focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-navy"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-100 focus:rounded-md focus:border focus:border-line-strong focus:bg-paper focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink"
         >
           {navT("skip")}
         </Link>

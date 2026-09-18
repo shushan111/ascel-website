@@ -5,6 +5,7 @@ import { loc } from "@/lib/utils";
 import { getProgramHref } from "@/data/programs";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { ExternalIcon } from "@/components/ui/ExternalIcon";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { FadeIn } from "@/components/motion/FadeIn";
@@ -28,34 +29,37 @@ export async function ProgramDetail({
 
   return (
     <>
-      <section className="relative min-h-[52vh] overflow-hidden bg-navy">
-        <Image
-          src={program.image}
-          alt={loc(program.title, locale)}
-          fill
-          priority
-          className="object-cover opacity-35"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-navy-deep via-navy/70 to-navy/40" />
-        <Container className="relative flex min-h-[52vh] flex-col justify-end py-16">
+      {/* Same light opening as news articles and the simulation centre, so
+          every inner page enters the same way. */}
+      <header className="bg-canvas pt-10 pb-14 md:pt-14 md:pb-16">
+        <Container>
           <Link
             href="/programs"
-            className="mb-6 text-sm text-white/70 hover:text-white"
+            className="inline-flex min-h-9 items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
           >
-            ← {common("backToPrograms")}
+            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="m7.3 3.3.8.8L4.8 7.4h8.7v1.2H4.8l3.3 3.3-.8.8L2.6 8 7.3 3.3Z"
+              />
+            </svg>
+            {common("backToPrograms")}
           </Link>
-          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
-            {loc(program.category, locale)}
-          </p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-white text-balance md:text-5xl">
-            {loc(program.title, locale)}
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-white/75">
-            {loc(detail ? detail.tagline : program.description, locale)}
-          </p>
+
+          <div className="mt-8 max-w-2xl">
+            <p className="t-eyebrow text-accent">
+              {loc(program.category, locale)}
+            </p>
+            <h1 className="t-display mt-4 text-balance text-ink">
+              {loc(program.title, locale)}
+            </h1>
+            <p className="t-lead mt-6 text-muted">
+              {loc(detail ? detail.tagline : program.description, locale)}
+            </p>
+          </div>
+
           {/* Programs with a full profile surface their external CTA at the
-              foot of the page instead, so the hero stays uncluttered. */}
+              foot of the page instead, so the opening stays uncluttered. */}
           {detail ? null : (
             <div className="mt-8">
               {cta.external ? (
@@ -63,21 +67,34 @@ export async function ProgramDetail({
                   href={cta.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={buttonClassName("donate")}
+                  className={buttonClassName("primary")}
                 >
                   {ctaLabel}
                   <ExternalIcon />
                   <span className="sr-only">{common("externalLink")}</span>
                 </a>
               ) : (
-                <Link href={cta.href} className={buttonClassName("donate")}>
+                <Link href={cta.href} className={buttonClassName("primary")}>
                   {ctaLabel}
                 </Link>
               )}
             </div>
           )}
         </Container>
-      </section>
+      </header>
+
+      <Container className="mt-10 md:mt-14">
+        <div className="relative aspect-[4/3] sm:aspect-[2/1] lg:aspect-[21/9] overflow-hidden rounded-md bg-mist">
+          <Image
+            src={program.image}
+            alt={loc(program.title, locale)}
+            fill
+            priority
+            className="object-cover"
+            sizes="(min-width: 1200px) 1136px, 100vw"
+          />
+        </div>
+      </Container>
 
       {detail ? (
         <ProgramProfile detail={detail} locale={locale} />
@@ -97,74 +114,51 @@ async function ProgramSummary({
 }) {
   const t = await getTranslations("ProgramsPage");
 
+  const lists = [
+    [t("objectives"), program.objectives],
+    [t("activities"), program.activities],
+    [t("impact"), program.impact],
+  ] as const;
+
   return (
-    <section className="py-20 md:py-28">
-      <Container className="grid gap-16 lg:grid-cols-12">
+    <Section>
+      <Container className="grid gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">
           <FadeIn>
-            <h2 className="text-2xl font-semibold tracking-tight text-navy">
-              {t("overview")}
-            </h2>
-            <p className="mt-5 text-base leading-7 text-muted">
+            <h2 className="t-h2 text-balance text-ink">{t("overview")}</h2>
+            <p className="t-body mt-5 text-muted">
               {loc(program.overview, locale)}
             </p>
             {program.relationshipNote ? (
-              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-6 text-ink">
+              <p className="t-small mt-7 border-l-2 border-accent pl-5 text-ink">
                 {loc(program.relationshipNote, locale)}
               </p>
             ) : null}
           </FadeIn>
-          <FadeIn className="mt-12">
-            <h2 className="text-2xl font-semibold tracking-tight text-navy">
-              {t("objectives")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {program.objectives.map((item) => (
-                <li
-                  key={item.en}
-                  className="border-b border-line pb-3 text-sm leading-6 text-muted"
-                >
-                  {loc(item, locale)}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-          <FadeIn className="mt-12">
-            <h2 className="text-2xl font-semibold tracking-tight text-navy">
-              {t("activities")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {program.activities.map((item) => (
-                <li
-                  key={item.en}
-                  className="border-b border-line pb-3 text-sm leading-6 text-muted"
-                >
-                  {loc(item, locale)}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-          <FadeIn className="mt-12">
-            <h2 className="text-2xl font-semibold tracking-tight text-navy">
-              {t("impact")}
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {program.impact.map((item) => (
-                <li key={item.en} className="text-sm leading-6 text-muted">
-                  {loc(item, locale)}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
+
+          {lists.map(([heading, items]) => (
+            <FadeIn key={heading} className="mt-14">
+              <h2 className="t-h2 text-balance text-ink">{heading}</h2>
+              <ul className="mt-6 border-t border-line">
+                {items.map((item) => (
+                  <li
+                    key={item.en}
+                    className="border-b border-line py-4 text-sm leading-6 text-muted"
+                  >
+                    {loc(item, locale)}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          ))}
         </div>
+
         <div className="lg:col-span-5">
-          <h2 className="text-2xl font-semibold tracking-tight text-navy">
-            {t("gallery")}
-          </h2>
-          <div className="mt-6 grid gap-4">
+          <h2 className="t-h2 text-balance text-ink">{t("gallery")}</h2>
+          <div className="mt-6 grid gap-5">
             {program.gallery.map((src) => (
               <ImageReveal key={src}>
-                <div className="relative aspect-[4/3]">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-mist">
                   <Image
                     src={src}
                     alt={loc(program.title, locale)}
@@ -178,6 +172,6 @@ async function ProgramSummary({
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

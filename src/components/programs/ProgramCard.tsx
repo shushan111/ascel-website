@@ -22,28 +22,26 @@ export async function ProgramCard({
   const label = t(program.ctaLabel);
 
   return (
-    <FadeIn delay={index * 0.08}>
-      <article className="group flex h-full flex-col border border-line bg-white transition-transform duration-300 hover:-translate-y-1">
-        <div className="relative aspect-[4/3] overflow-hidden">
+    <FadeIn delay={index * 0.08} className="h-full">
+      <article className="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-colors duration-300 hover:border-ink">
+        <div className="relative aspect-[4/3] overflow-hidden bg-mist">
           <Image
             src={program.image}
             alt={loc(program.title, locale)}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
         </div>
         <div className="flex flex-1 flex-col p-6 md:p-7">
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
-            {loc(program.category, locale)}
-          </p>
-          <h3 className="mt-3 text-xl font-semibold tracking-tight text-navy">
+          <p className="t-meta-sm text-accent">{loc(program.category, locale)}</p>
+          <h3 className="t-h3 mt-3 text-balance text-ink">
             {loc(program.title, locale)}
           </h3>
-          <p className="mt-3 flex-1 text-sm leading-6 text-muted">
+          <p className="t-small mt-3 flex-1 text-muted">
             {loc(program.description, locale)}
           </p>
-          <div className="mt-6">
+          <div className="mt-7">
             {cta.external ? (
               <a
                 href={cta.href}
