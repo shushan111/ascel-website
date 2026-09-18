@@ -9,7 +9,6 @@ import { UpcomingEvents } from "@/components/sections/UpcomingEvents";
 import { NewsPreview } from "@/components/sections/NewsPreview";
 import { SupportSection } from "@/components/sections/SupportSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
-import { ImpactSection } from "@/components/sections/ImpactSection";
 
 export async function generateMetadata({
   params,
@@ -45,7 +44,6 @@ export default async function HomePage({
       <NewsPreview locale={locale} />
       <SupportSection locale={locale} />
       <PartnersSection />
-      <ImpactSection locale={locale} />
     </>
   );
 }

@@ -7,17 +7,21 @@ import { EventCard } from "@/components/events/EventCard";
 
 export async function UpcomingEvents({ locale }: { locale: string }) {
   const t = await getTranslations("EventsHome");
-  const events = getEvents();
+  const events = await getEvents();
 
   return (
     <Section>
       <Container className="max-w-4xl">
         <SectionHeader title={t("title")} subtitle={t("subtitle")} />
-        <div>
-          {events.map((event) => (
-            <EventCard key={event.id} event={event} locale={locale} />
-          ))}
-        </div>
+        {events.length > 0 ? (
+          <div>
+            {events.map((event) => (
+              <EventCard key={event.id} event={event} locale={locale} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-base leading-7 text-muted">{t("empty")}</p>
+        )}
       </Container>
     </Section>
   );

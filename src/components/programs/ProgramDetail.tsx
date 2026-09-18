@@ -22,7 +22,7 @@ export async function ProgramDetail({
   const detail = program.detail;
   const cta = getProgramHref(program);
   const ctaLabel =
-    program.id === "eternal-nation"
+    program.slug === "eternal-nation"
       ? common("officialWebsite")
       : common(program.ctaLabel);
 

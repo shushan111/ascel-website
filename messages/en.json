@@ -101,7 +101,8 @@
   },
   "EventsHome": {
     "title": "Upcoming Events",
-    "subtitle": "Workshops, forums, and open sessions will appear here as dates are confirmed."
+    "subtitle": "Workshops, forums, and open sessions will appear here as dates are confirmed.",
+    "empty": "There are no upcoming events at the moment."
   },
   "NewsHome": {
     "title": "News & Updates",
@@ -120,10 +121,6 @@
     "title": "Our Partners & Collaborators",
     "subtitle": "Partner organizations will be listed as collaborations are confirmed.",
     "slotLabel": "Logo to be provided"
-  },
-  "ImpactHome": {
-    "title": "Impact",
-    "subtitle": "Measurable outcomes will be published here when verified data is available. Placeholder values are used until then."
   },
   "AboutPage": {
     "eyebrow": "About ASCEL",

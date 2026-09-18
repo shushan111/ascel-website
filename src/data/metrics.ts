@@ -41,32 +41,8 @@ const metrics: Metric[] = [
     display: "XX+",
     numericValue: null,
   },
-  {
-    id: "courses",
-    label: {
-      en: "Courses Delivered",
-      hy: "Անցկացված դասընթացներ",
-      ru: "Проведённые курсы",
-    },
-    display: "XX+",
-    numericValue: null,
-  },
-  {
-    id: "institutions",
-    label: {
-      en: "Partner Institutions",
-      hy: "Գործընկեր հաստատություններ",
-      ru: "Партнёрские учреждения",
-    },
-    display: "XX+",
-    numericValue: null,
-  },
 ];
 
 export function getIntroMetrics() {
-  return metrics.slice(0, 4);
-}
-
-export function getImpactMetrics() {
   return metrics;
 }

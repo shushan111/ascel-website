@@ -28,7 +28,7 @@ export default async function ProgramsPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("ProgramsPage");
-  const programs = getPrograms();
+  const programs = await getPrograms();
 
   return (
     <>

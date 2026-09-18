@@ -11,7 +11,7 @@ export async function Footer({ locale }: { locale: string }) {
   const t = await getTranslations("Footer");
   const navT = await getTranslations("Nav");
   const common = await getTranslations("Common");
-  const programs = getPrograms();
+  const programs = await getPrograms();
   const year = new Date().getFullYear();
   const social = Object.entries(siteConfig.social).filter(([, url]) => url);
 

@@ -70,7 +70,9 @@ export interface Program {
   impact: LocalizedString[];
   relationshipNote?: LocalizedString;
   detail?: ProgramDetailContent;
-  externalUrlKey: "gyumriOrthopedicSchool" | "damageControlCourses" | "eternalNation";
+  /** When true, program cards link to the on-site profile page. */
+  hasOnSiteProfile?: boolean;
+  externalUrlKey?: "gyumriOrthopedicSchool" | "damageControlCourses" | "eternalNation";
   ctaLabel: "visitWebsite" | "exploreCourses" | "learnMore";
 }
 

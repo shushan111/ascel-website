@@ -8,7 +8,7 @@ import { CourseCard } from "@/components/courses/CourseCard";
 
 export async function CoursesPreview({ locale }: { locale: string }) {
   const t = await getTranslations("CoursesHome");
-  const courses = getCourses().slice(0, 3);
+  const courses = (await getCourses()).slice(0, 3);
 
   return (
     <Section tone="canvas">
