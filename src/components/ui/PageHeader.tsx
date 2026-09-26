@@ -27,7 +27,9 @@ export function PageHeader({
   return (
     <header
       className={cn(
-        "pt-10 pb-8 md:pt-[2.8rem] md:pb-6",
+        // Old: pt-10 pb-8 md:pt-[2.8rem] md:pb-6 — 44.8px above an h1 that is
+        // now 48px tall. The opening block gets the same air as a section.
+        "pt-12 pb-10 md:pt-20 md:pb-14",
         tone === "canvas" ? "bg-canvas" : "bg-paper",
         className,
       )}
@@ -39,7 +41,7 @@ export function PageHeader({
           ) : null}
           <h1 className="t-display text-balance text-ink">{title}</h1>
           {intro ? (
-            <p className="t-lead mt-6 max-w-xl text-muted">{intro}</p>
+            <p className="t-lead mt-6 max-w-[36rem] text-muted">{intro}</p>
           ) : null}
         </div>
         {aside ? <div className="shrink-0">{aside}</div> : null}
