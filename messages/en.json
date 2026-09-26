@@ -1,32 +1,32 @@
 {
   "Meta": {
     "siteName": "ASCEL",
-    "homeTitle": "Armenian Simulation Center for Experimental Learning | ASCEL",
-    "homeDescription": "Armenian Simulation Center for Experimental Learning provides simulation-based medical education, professional training, experimental learning, and collaborative healthcare initiatives in Armenia.",
-    "aboutTitle": "About ASCEL | Armenian Simulation Center for Experimental Learning",
-    "aboutDescription": "Learn about ASCEL’s mission to advance medical education through simulation, experimental learning, and professional development in Gyumri, Armenia.",
+    "homeTitle": "Gyumri Medical Training Center | ASCEL",
+    "homeDescription": "A 19th-century monument house at 20-22 Myasnikyan Street, Gyumri is being restored and turned into a medical training center with an operating room, a cadaver lab, study rooms and a library. The project is built on donations.",
+    "aboutTitle": "About | Gyumri Medical Training Center",
+    "aboutDescription": "Learn about the mission of the medical training center being created in Gyumri, Armenia, for the practical education of doctors.",
     "programsTitle": "Programs | ASCEL",
-    "programsDescription": "Explore ASCEL’s active programs: Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation.",
+    "programsDescription": "Active programs of the center: Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation.",
     "coursesTitle": "Courses & Training | ASCEL",
-    "coursesDescription": "Upcoming and current medical education courses from the Armenian Simulation Center for Experimental Learning.",
-    "simulationTitle": "Simulation Center | ASCEL",
-    "simulationDescription": "Learn about ASCEL’s simulation-based learning environment for doctors in Gyumri, Armenia.",
+    "coursesDescription": "Upcoming and current medical education courses from the Gyumri Medical Training Center.",
+    "simulationTitle": "Medical Training Center | ASCEL",
+    "simulationDescription": "The sketch design for the medical training center at 20-22 Myasnikyan Street, Gyumri: restoring the monument, the floor-by-floor brief, and the massing.",
     "newsTitle": "News & Updates | ASCEL",
-    "newsDescription": "News and updates from the Armenian Simulation Center for Experimental Learning.",
-    "donateTitle": "Support & Donate | ASCEL",
-    "donateDescription": "Support medical education, simulation-based training, and healthcare initiatives in Armenia.",
+    "newsDescription": "News and updates from the Gyumri Medical Training Center.",
+    "donateTitle": "Support the project | ASCEL",
+    "donateDescription": "Support the restoration of the monument at 20-22 Myasnikyan Street and the construction of the Gyumri Medical Training Center.",
     "contactTitle": "Contact | ASCEL",
-    "contactDescription": "Contact the Armenian Simulation Center for Experimental Learning.",
+    "contactDescription": "Contact the Gyumri Medical Training Center.",
     "privacyTitle": "Privacy Policy | ASCEL",
     "termsTitle": "Terms of Use | ASCEL",
     "notFoundTitle": "Page not found | ASCEL"
   },
   "Nav": {
     "home": "Home",
-    "about": "About ASCEL",
+    "about": "About",
     "programs": "Programs",
     "courses": "Courses",
-    "simulation": "Simulation Center",
+    "simulation": "Medical Training Center",
     "news": "News",
     "donate": "Support / Donate",
     "contact": "Contact",
@@ -40,13 +40,13 @@
     "donate": "Donate"
   },
   "Footer": {
-    "description": "Armenian Simulation Center for Experimental Learning brings together medical education, simulation-based training, and experimental learning in Armenia.",
+    "description": "The Gyumri Medical Training Center is being created inside the monument house at 20-22 Myasnikyan Street, for the practical education of doctors.",
     "navigation": "Navigation",
     "programs": "Programs",
     "legal": "Legal",
     "privacy": "Privacy Policy",
     "terms": "Terms",
-    "copyright": "Armenian Simulation Center for Experimental Learning (ASCEL). All rights reserved.",
+    "copyright": "Gyumri Medical Training Center (ASCEL). All rights reserved.",
     "social": "Social"
   },
   "Common": {
@@ -63,15 +63,9 @@
     "register": "Register",
     "registrationPending": "Registration details to be provided",
     "viewEvent": "View Event",
-    "placeholderMetricsNote": "Figures shown as XX+ are placeholders until verified statistics are available."
-  },
-  "Hero": {
-    "eyebrow": "Medical education · Simulation · Armenia",
-    "headline": "Advancing Medical Education Through Simulation and Experimental Learning",
-    "supporting": "Armenian Simulation Center for Experimental Learning brings together medical education, simulation-based training, practical learning, and international expertise to help develop the next generation of healthcare professionals.",
-    "primaryCta": "Explore Our Programs",
-    "secondaryCta": "Support Our Mission",
-    "imageAlt": "Doctors training with a medical simulation mannequin in a skills laboratory"
+    "placeholderMetricsNote": "The figures are counted from the published course programmes of Gyumri Orthopedic School and from the 2024–2025 results of the Damage Control Surgery (ACDCS) programme. A “+” means only published data is included in the count.",
+    "backToCourses": "Back to courses",
+    "gallery": "Gallery"
   },
   "Intro": {
     "title": "Building the Future of Medical Education",
@@ -82,17 +76,8 @@
     "title": "Active Programs",
     "subtitle": "Education, training, collaboration, and impact through specialized medical initiatives."
   },
-  "SimulationHome": {
-    "title": "Learn by Doing",
-    "body": "ASCEL’s simulation environment is designed for practical medical education: controlled scenarios, team communication, procedural rehearsal, and experimental learning methods. The aim is not spectacle, but competence — a professional setting where skills can be practiced before they are needed in clinical care.",
-    "cta": "Explore the Simulation Center",
-    "imageAlt": "Interior of a medical simulation laboratory",
-    "medicalSimulation": "Medical simulation",
-    "surgicalTraining": "Surgical training",
-    "emergencyScenarios": "Emergency scenarios",
-    "teamTraining": "Team-based training",
-    "proceduralSkills": "Procedural skills",
-    "experimentalLearning": "Experimental learning"
+  "FoundersSection": {
+    "title": "Founders"
   },
   "CoursesHome": {
     "title": "Courses & Training",
@@ -106,16 +91,17 @@
   },
   "NewsHome": {
     "title": "News & Updates",
-    "subtitle": "Institutional updates from ASCEL. Sample articles are marked until real announcements are published.",
+    "subtitle": "Institutional updates on the project and the center.",
     "viewAll": "All news"
   },
   "DonateHome": {
-    "title": "Support the Future of Medical Education",
-    "body": "Your support helps expand access to medical education, simulation-based training, professional development, and healthcare initiatives in Armenia.",
-    "donateNow": "Donate Now",
-    "supportPrograms": "Support Our Programs",
-    "providerPending": "A donation provider has not been connected yet. This page describes how support will be directed; no payment is processed on this website.",
-    "categoriesTitle": "Ways to support"
+    "title": "This building is being built on donations",
+    "body": "Your support goes to one specific project: restoring the monument at 20-22 Myasnikyan Street and creating a medical training center inside it.",
+    "bodySecond": "Each of the directions below is a real part of the building, taken from the sketch design.",
+    "donateNow": "Donate now",
+    "supportPrograms": "See the project",
+    "providerPending": "A donation provider has not been connected yet. This page describes where support will go; no payment is processed on this website.",
+    "categoriesTitle": "Where support goes"
   },
   "PartnersHome": {
     "title": "Our Partners & Collaborators",
@@ -123,36 +109,36 @@
     "slotLabel": "Logo to be provided"
   },
   "AboutPage": {
-    "eyebrow": "About ASCEL",
-    "title": "A center for simulation, education, and professional practice",
+    "eyebrow": "About",
+    "title": "A center for medical education, practical training and professional practice",
     "whoTitle": "Who We Are",
-    "whoBody": "The Armenian Simulation Center for Experimental Learning (ASCEL) is being established in Gyumri as a medical simulation center for experimental learning. It is intended to address critical gaps in practical skills training for healthcare professionals and to serve as a regional hub for medical education.",
+    "whoBody": "The Gyumri Medical Training Center is being created inside the monument house at 20-22 Myasnikyan Street as a center for practical medical education. The aim is to close gaps in hands-on skills preparation and to serve as a regional hub for medical education.",
     "missionTitle": "Mission",
-    "missionBody": "To provide a professional environment where physicians and medical learners can develop practical skills through simulation-based education, experimental learning, and international collaboration.",
+    "missionBody": "To create a professional environment where doctors and learners can develop practical skills through a cadaver lab, structured teaching space and international collaboration.",
     "visionTitle": "Vision",
-    "visionBody": "To help Armenia become a regional center for advanced medical education and simulation-based professional training — serious, international in standard, and grounded in practical competence.",
+    "visionBody": "To help Armenia become a regional center for advanced medical education and practical professional training — serious, international in standard, and grounded in practical competence.",
     "whatTitle": "What We Do",
-    "whatBody": "ASCEL brings together medical education, simulation-based training, practical learning, and related programs. Active directions currently include Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation — each distinct, presented under one institutional platform.",
-    "simulationTitle": "Simulation-Based Education",
-    "simulationBody": "Simulation allows teams to rehearse procedures, communication, and decision-making in a controlled setting. Intended methods include high-fidelity mannequins, virtual reality, robotics, and other experimental learning approaches described in public project materials.",
+    "whatBody": "The center brings together medical education, practical training and related programs. Active strands include Gyumri Orthopedic School, the Damage Control Courses, and a partnership presentation of Eternal Nation Foundation — each distinct, under one institutional platform.",
+    "simulationTitle": "Practical, body-based training",
+    "simulationBody": "The center's working level — a 93 m² operating room and a cadaver lab — lets teams rehearse procedures, communication and decision-making in a controlled setting before any of it is needed in clinical care.",
     "experimentalTitle": "Experimental Learning",
-    "experimentalBody": "Experimental learning at ASCEL refers to structured, hands-on methods that go beyond lecture: skills laboratories, scenario-based teaching, and, where appropriate and ethically governed, advanced simulation techniques used in medical education internationally.",
+    "experimentalBody": "Experimental learning here means structured, practical methods beyond the lecture: skills labs, scenario-based teaching and, within ethical rules, the advanced methods used in international medical education.",
     "developmentTitle": "Medical Professional Development",
     "developmentBody": "The center is conceived as a setting for continuing education — courses, workshops, and collaborative teaching that help physicians and related professionals strengthen practical competence.",
     "collaborationTitle": "International Collaboration",
-    "collaborationBody": "ASCEL is designed to work with faculty and partners from Armenia and abroad. Confirmed institutional partnerships will be listed when they are authorized for publication.",
+    "collaborationBody": "The center is designed to work with faculty and partners from Armenia and abroad. Confirmed institutional partnerships will be listed once cleared for publication.",
     "approachTitle": "Our Approach",
-    "approachBody": "The design of the center is educational first: clear programs, practical training, and a calm professional environment. Programs remain distinguishable. Independent partner organizations are not presented as the same legal entity as ASCEL.",
+    "approachBody": "The design of the center is educational first: clear programs, practical teaching and a calm professional environment. Programs stay distinguishable. Independent partner organizations are not presented as the same legal entity.",
     "timelineTitle": "Public timeline",
     "timelineItem1Date": "2025",
     "timelineItem1Title": "Public project presentation",
-    "timelineItem1Body": "ASCEL was presented as a healthcare education project focused on establishing a medical simulation center in Gyumri, including as a featured project at AMWC 2025.",
+    "timelineItem1Body": "The center was presented as a healthcare education project working towards a medical training center in Gyumri, including as a featured project at AMWC 2025.",
     "imageAlt": "Academic conversation in a medical education setting"
   },
   "ProgramsPage": {
     "eyebrow": "Programs",
     "title": "Active programs and related initiatives",
-    "intro": "ASCEL is the institutional platform. The programs below are active educational, training, or partner directions — related, but not interchangeable.",
+    "intro": "The center is the institutional platform. The programs below are educational, training or partnership strands — related, but not interchangeable.",
     "overview": "Overview",
     "objectives": "Objectives",
     "activities": "Activities",
@@ -166,14 +152,10 @@
     "date": "Date",
     "location": "Location",
     "type": "Type",
-    "instructor": "Instructor"
-  },
-  "SimulationPage": {
-    "eyebrow": "Simulation Center",
-    "title": "A professional environment for practical medical learning",
-    "intro": "ASCEL’s simulation center is being developed in Gyumri to give doctors a setting for hands-on training. Public descriptions of the project include high-fidelity mannequins, virtual reality, robotics, and experimental learning methods.",
-    "areasTitle": "Learning areas",
-    "note": "Facility photographs, equipment lists, and operating hours will be published when confirmed. The images on this page are editorial visuals created for the website, not documentary photographs of a finished building."
+    "instructor": "Instructor",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "programme": "Programme"
   },
   "NewsPage": {
     "eyebrow": "News",
@@ -182,15 +164,15 @@
   },
   "DonatePage": {
     "eyebrow": "Support",
-    "title": "Support the Future of Medical Education",
-    "intro": "Your support helps expand access to medical education, simulation-based training, professional development, and healthcare initiatives in Armenia.",
-    "trust": "Donations are not processed on this page. When a payment provider is selected, it will be connected through the site configuration. Until then, please use the contact form if you wish to discuss support.",
+    "title": "Support the Gyumri Medical Training Center",
+    "intro": "The monument at 20-22 Myasnikyan Street has a finished design and no construction budget. Your support is what turns the design into a building.",
+    "trust": "No donation is processed on this page. Once a payment provider is chosen it will be connected through the site configuration. Until then, please use the contact form to discuss support.",
     "contactCta": "Contact us about support"
   },
   "ContactPage": {
     "eyebrow": "Contact",
     "title": "Get in touch",
-    "intro": "Use the form to reach ASCEL. Direct email, phone, and a detailed street address will replace placeholders when they are provided.",
+    "intro": "Use the form to reach the center. Email, phone and the detailed address will replace the placeholder fields once provided.",
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
@@ -211,13 +193,82 @@
   },
   "Legal": {
     "privacyTitle": "Privacy Policy",
-    "privacyBody": "This is a placeholder privacy policy. ASCEL will publish a complete statement covering data collected through this website, cookies, and contact forms when legal review is complete. Until then, do not submit sensitive personal information through the contact form.",
+    "privacyBody": "This is a preliminary privacy policy. The center will publish a full statement on the data collected through this website, cookies and contact forms after legal review. Until then, please do not send sensitive personal data through the contact form.",
     "termsTitle": "Terms of Use",
-    "termsBody": "This is a placeholder terms of use page. The website is provided for informational purposes about ASCEL and its programs. External program websites remain governed by their own terms. Full legal terms will replace this placeholder after review."
+    "termsBody": "This is a preliminary terms of use page. The website is provided for information about the center and its programs. External program websites are governed by their own terms. Full legal terms will replace this preliminary text after review."
   },
   "NotFound": {
     "title": "This page is not available",
     "body": "The address may have changed, or the page does not exist.",
     "cta": "Return home"
+  },
+  "ProjectHero": {
+    "eyebrowStage": "Sketch design · 2026",
+    "headline": "An abandoned monument in Gyumri becomes a medical training center",
+    "supporting": "The 19th-century house at 20-22 Myasnikyan Street has stood for years with its windows bricked up and its roof collapsing. The project restores it and creates 713.92 m² of teaching space inside and beneath it: an operating room, a cadaver lab, study rooms and a library. Construction depends on donations.",
+    "primaryCta": "Donate to the project",
+    "secondaryCta": "See the whole project",
+    "imageAlt": "The restored monument facade seen from Myasnikyan Street, under its new wave roof",
+    "credit": "Sketch design by {architects}."
+  },
+  "ProjectIntro": {
+    "eyebrow": "The project",
+    "title": "One address, one building, one purpose",
+    "body": "This is not an abstract programme. It has an address — 20-22 Myasnikyan Street, Gyumri, parcel 08-001-1333-0029 — and a completed sketch design. The monument is kept whole, and the extra space the brief needs is found in two ways: underground, and in a volume invisible from the street.",
+    "bodySecond": "That keeps the building's height at the scale of the neighbourhood while the dark, technical zones — the operating room and the lab — drop to the basement level. 335.79 m² of the site is planted: an inner courtyard and a roof terrace.",
+    "imageAlt": "The project within Gyumri's urban fabric, seen from the air",
+    "figuresNote": "Figures are taken from the technical indicators table of the sketch design dated 07.11.2026."
+  },
+  "Monument": {
+    "eyebrow": "The monument",
+    "title": "What the building is today",
+    "subtitle": "The sketch design records the building's present condition and proposes a repair for each item of damage.",
+    "captionBefore": "The Myasnikyan Street facade today: every window opening is bricked up with tuff blocks.",
+    "captionAfter": "The same facade after the project: the openings reopened, and a new roof carried on its own structure.",
+    "altBefore": "The monument's facade today, with bricked-up windows",
+    "altAfter": "The restored facade with white-painted wooden windows",
+    "nowLabel": "Today",
+    "afterLabel": "Proposed"
+  },
+  "Steps": {
+    "eyebrow": "How it gets built",
+    "title": "Six steps from ruin to center",
+    "subtitle": "The massing steps, in the order given by the axonometric diagram of the sketch design."
+  },
+  "Levels": {
+    "eyebrow": "The brief",
+    "title": "What will be inside",
+    "subtitle": "Three levels, each with its own role. Areas are taken from the floor plans, unrounded.",
+    "elevation": "Level {value}",
+    "roomsHeading": "Room",
+    "areaHeading": "m²",
+    "totalLabel": "Total",
+    "unit": "m²"
+  },
+  "CadaverLab": {
+    "eyebrow": "Cadaver lab",
+    "title": "Why the center needs a basement",
+    "body": "A cadaver medical laboratory is a specialised educational environment where healthcare students and professionals carry out detailed dissections of the human body in order to study anatomy.",
+    "bodySecond": "These laboratories are a formative experience: they let students touch and examine tissue, and understand anatomical features that digital models cannot fully convey.",
+    "note": "Level −3.900 holds a 93.01 m² operating room, a 34.30 m² vet lab, cold storage and changing rooms — 215.33 m² in total.",
+    "imageAlt": "The new volume with its metal cladding"
+  },
+  "ProjectGallery": {
+    "eyebrow": "Views",
+    "title": "What the center will look like",
+    "subtitle": "Renderings from the sketch design.",
+    "credit": "{stage} by {architects}. These are project visualisations, not photographs of a finished building."
+  },
+  "CenterPage": {
+    "eyebrow": "Medical Training Center",
+    "title": "The Gyumri Medical Training Center project",
+    "intro": "Restoring the monument house at 20-22 Myasnikyan Street and turning it into a medical training center with an operating room, a cadaver lab, study rooms, a library and a courtyard.",
+    "imageAlt": "The restored monument facade seen from Myasnikyan Street, under its new wave roof",
+    "donateCta": "Support the project",
+    "factAddress": "Address",
+    "factPlot": "Land parcel",
+    "factStage": "Design stage",
+    "factArchitects": "Architects",
+    "closing": "The design is ready; what is missing is the money to build. Support of any size goes to a specific piece of work — from a single window to the whole roof."
   }
 }

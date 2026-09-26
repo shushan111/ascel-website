@@ -38,6 +38,7 @@ export async function ProgramProfile({
   locale: string;
 }) {
   const common = await getTranslations("Common");
+  const sourceNote = loc(detail.sourceNote, locale);
 
   return (
     <>
@@ -252,41 +253,54 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="paper">
-        <Container>
-          <FadeIn>
-            <div className="rounded-md border border-line bg-paper px-6 py-14 text-center sm:px-10 md:py-20">
-              <p className="t-meta-sm text-accent">
-                {loc(detail.cta.eyebrow, locale)}
-              </p>
-              <h2 className="t-h2 mx-auto mt-4 max-w-2xl text-balance text-ink">
-                {loc(detail.cta.title, locale)}
-              </h2>
-              <p className="t-body mx-auto mt-5 max-w-xl text-muted">
-                {loc(detail.cta.body, locale)}
-              </p>
-              <div className="mt-9 flex justify-center">
-                <a
-                  href={detail.cta.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonClassName(
-                    "primary",
-                    "w-full min-h-12 sm:w-auto sm:px-8",
-                  )}
-                >
-                  {loc(detail.cta.label, locale)}
-                  <ExternalIcon />
-                  <span className="sr-only">{common("externalLink")}</span>
-                </a>
+      {detail.cta || sourceNote ? (
+        <Section tone="paper">
+          <Container>
+            <FadeIn>
+              <div className="rounded-md border border-line bg-paper px-6 py-14 text-center sm:px-10 md:py-20">
+                {detail.cta ? (
+                  <>
+                    <p className="t-meta-sm text-accent">
+                      {loc(detail.cta.eyebrow, locale)}
+                    </p>
+                    <h2 className="t-h2 mx-auto mt-4 max-w-2xl text-balance text-ink">
+                      {loc(detail.cta.title, locale)}
+                    </h2>
+                    <p className="t-body mx-auto mt-5 max-w-xl text-muted">
+                      {loc(detail.cta.body, locale)}
+                    </p>
+                    <div className="mt-9 flex justify-center">
+                      <a
+                        href={detail.cta.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={buttonClassName(
+                          "primary",
+                          "w-full min-h-12 sm:w-auto sm:px-8",
+                        )}
+                      >
+                        {loc(detail.cta.label, locale)}
+                        <ExternalIcon />
+                        <span className="sr-only">{common("externalLink")}</span>
+                      </a>
+                    </div>
+                  </>
+                ) : null}
+                {sourceNote ? (
+                  <p
+                    className={cn(
+                      "mx-auto max-w-2xl text-xs leading-6 text-muted",
+                      detail.cta ? "mt-10 border-t border-line pt-7" : "",
+                    )}
+                  >
+                    {sourceNote}
+                  </p>
+                ) : null}
               </div>
-              <p className="mx-auto mt-10 max-w-2xl border-t border-line pt-7 text-xs leading-6 text-muted">
-                {loc(detail.sourceNote, locale)}
-              </p>
-            </div>
-          </FadeIn>
-        </Container>
-      </Section>
+            </FadeIn>
+          </Container>
+        </Section>
+      ) : null}
     </>
   );
 }

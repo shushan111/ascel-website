@@ -9,9 +9,20 @@ export const newsArticlesQuery = defineQuery(`*[
   title,
   excerpt,
   body,
+  richBody,
+  sourceUrl,
   date,
   category,
   image {
+    asset->{
+      _id,
+      url
+    },
+    alt,
+    hotspot,
+    crop
+  },
+  gallery[] {
     asset->{
       _id,
       url

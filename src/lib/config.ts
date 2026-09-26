@@ -1,14 +1,14 @@
 export const siteConfig = {
   name: "ASCEL",
-  legalName: "Armenian Simulation Center for Experimental Learning",
+  legalName: "Gyumri Medical Training Center",
   shortDescription:
-    "Medical education, simulation-based training, and experimental learning in Armenia.",
+    "A 19th-century monument in Gyumri, restored and rebuilt as a medical training center.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   localeDefault: "en" as const,
   contact: {
     email: "[Content to be provided]",
     phone: "[Content to be provided]",
-    addressLine: "Gyumri, Armenia",
+    addressLine: "20-22 Myasnikyan St., Gyumri, Armenia",
     addressDetail: "[Content to be provided]",
     mapEmbedUrl: "",
   },

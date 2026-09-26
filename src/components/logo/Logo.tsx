@@ -57,7 +57,7 @@ export function Logo({
               invert ? "text-on-dark/60" : "text-muted",
             )}
           >
-            Armenian Simulation Center
+            Medical Training Center
           </span>
         )}
       </span>

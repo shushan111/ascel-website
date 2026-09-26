@@ -1,61 +1,103 @@
 import {defineField, defineType} from 'sanity'
 
+const MONTHS_HY = [
+  'հունվար',
+  'փետրվար',
+  'մարտ',
+  'ապրիլ',
+  'մայիս',
+  'հունիս',
+  'հուլիս',
+  'օգոստոս',
+  'սեպտեմբեր',
+  'հոկտեմբեր',
+  'նոյեմբեր',
+  'դեկտեմբեր',
+]
+
 export const event = defineType({
   name: 'event',
-  title: 'Event',
+  title: 'Միջոցառում',
   type: 'document',
+  description:
+    'Գլխավոր էջի «Առաջիկա միջոցառումներ» բաժնի քարտերը։ Անցած ամսաթվով միջոցառումներն ինքնաբերաբար դուրս են գալիս ցանկից։',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Անվանում',
       type: 'localizedString',
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().error('Լրացրու միջոցառման անվանումը'),
     }),
     defineField({
       name: 'date',
-      title: 'Date',
+      title: 'Ամսաթիվ',
       type: 'date',
       description:
-        'Event date. Used for sorting upcoming events and for the month/day badge on event cards.',
-      validation: (rule) => rule.required(),
+        'Միջոցառման օրը։ Օգտագործվում է դասավորության համար և քարտի վրա՝ ամիս/օր նշագրի տեսքով։',
+      validation: (rule) => rule.required().error('Նշիր միջոցառման ամսաթիվը'),
     }),
     defineField({
       name: 'location',
-      title: 'Location',
+      title: 'Վայր',
       type: 'localizedString',
-      validation: (rule) => rule.required(),
+      description: 'Օրինակ՝ «Գյումրի, Հայաստան» կամ կոնկրետ հասցե։',
+      validation: (rule) => rule.required().error('Լրացրու անցկացման վայրը'),
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Նկարագրություն',
       type: 'localizedText',
-      description: 'Summary shown on the event card.',
-      validation: (rule) => rule.required(),
+      description: 'Կարճ ամփոփում, որը երևում է միջոցառման քարտի վրա։',
+      validation: (rule) => rule.required().error('Լրացրու կարճ նկարագրությունը'),
     }),
     defineField({
       name: 'href',
-      title: 'Link path',
+      title: 'Հղման հասցե կայքում',
       type: 'string',
-      description: 'Internal site path for the View Event button (for example /courses, /news, or /simulation-center).',
-      validation: (rule) => rule.required(),
+      description:
+        'Ո՞ր էջին տանի «Տեսնել միջոցառումը» կոճակը։ Ներքին հասցե է՝ /courses, /news կամ /simulation-center։',
+      validation: (rule) =>
+        rule
+          .required()
+          .error('Նշիր, թե որ էջին է տանելու կոճակը')
+          .custom((value?: string) =>
+            !value || value.startsWith('/') ? true : 'Հասցեն պետք է սկսվի «/» նշանով',
+          ),
     }),
   ],
   orderings: [
     {
-      title: 'Date, soonest',
+      title: 'Ամսաթիվ՝ մոտակայից',
       name: 'dateAsc',
       by: [{field: 'date', direction: 'asc'}],
     },
     {
-      title: 'Date, latest',
+      title: 'Ամսաթիվ՝ վերջիններից',
       name: 'dateDesc',
       by: [{field: 'date', direction: 'desc'}],
     },
   ],
   preview: {
     select: {
-      title: 'title.en',
-      subtitle: 'date',
+      title: 'title.hy',
+      titleRu: 'title.ru',
+      date: 'date',
+      location: 'location.hy',
+      locationRu: 'location.ru',
+    },
+    prepare({title, titleRu, date, location, locationRu}) {
+      const day = typeof date === 'string' ? new Date(date) : null
+      const shown =
+        day && !Number.isNaN(day.getTime())
+          ? `${day.getDate()} ${MONTHS_HY[day.getMonth()]} ${day.getFullYear()}`
+          : 'Ամսաթիվը նշված չէ'
+      const past = day && !Number.isNaN(day.getTime()) && day < new Date(new Date().toDateString())
+      return {
+        title: title || titleRu || 'Անվերնագիր միջոցառում',
+        subtitle: [shown, location || locationRu, past ? '● Անցած' : null]
+          .filter(Boolean)
+          .join('  ·  '),
+      }
     },
   },
 })

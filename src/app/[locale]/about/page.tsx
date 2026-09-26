@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ImageReveal } from "@/components/motion/ImageReveal";
+import { FoundersSection } from "@/components/sections/FoundersSection";
 
 export async function generateMetadata({
   params,
@@ -92,6 +93,7 @@ export default async function AboutPage({
           </ol>
         </Container>
       </Section>
+      <FoundersSection locale={locale} />
     </>
   );
 }

@@ -44,7 +44,6 @@ export const programsQuery = defineQuery(`*[
   activities[] ${localizedFields},
   impact[] ${localizedFields},
   image ${imageProjection},
-  gallery[] ${imageProjection},
   profile {
     tagline ${localizedFields},
     seoDescription ${localizedFields},

@@ -38,13 +38,23 @@ function blockLanguage(block: Block): Lang | null {
 
 export interface Segmented {
   byLang: Partial<Record<Lang, Block[]>>;
-  /** True when the page carried more than one language for the same content. */
+  /** Every block in document order, tagged with the language it was read as. */
+  ordered: Array<Block & { lang: Lang }>;
+  /** True when the page carried more than one language at all. */
   multilingual: boolean;
+  /**
+   * True when the segments interleave — which is what a genuinely translated
+   * page looks like. A page that simply switches language once partway down is
+   * one document in mixed scripts, and splitting it by language misrepresents
+   * it, so the caller must use `ordered` instead.
+   */
+  parallel: boolean;
   primary: Lang;
 }
 
 export function segmentByLanguage(blocks: Block[]): Segmented {
   const byLang: Partial<Record<Lang, Block[]>> = {};
+  const ordered: Array<Block & { lang: Lang }> = [];
   let current: Lang | null = null;
 
   for (const block of blocks) {
@@ -52,6 +62,7 @@ export function segmentByLanguage(blocks: Block[]): Segmented {
     if (detected) current = detected;
     const lang = current ?? detectLanguage(blockText(block));
     (byLang[lang] ??= []).push(block);
+    ordered.push({ ...block, lang });
   }
 
   const present = (Object.keys(byLang) as Lang[]).filter((l) => (byLang[l]?.length ?? 0) > 0);
@@ -62,5 +73,15 @@ export function segmentByLanguage(blocks: Block[]): Segmented {
         (byLang[a]?.reduce((n, x) => n + blockText(x).length, 0) ?? 0),
     )[0] ?? "ru";
 
-  return { byLang, multilingual: present.length > 1, primary };
+  // Counting language runs does not separate the two cases — a genuinely
+  // translated page has exactly one run per language, which is also what a
+  // page that switches language once looks like. Length does separate them:
+  // translations of the same text are comparable in size, whereas a stray
+  // English strapline above Russian prose is a small fraction of it.
+  const chars = (lang: Lang) =>
+    byLang[lang]?.reduce((n, b) => n + blockText(b).length, 0) ?? 0;
+  const longest = Math.max(...present.map(chars), 1);
+  const parallel = present.length > 1 && present.every((l) => chars(l) / longest >= 0.4);
+
+  return { byLang, ordered, multilingual: present.length > 1, parallel, primary };
 }

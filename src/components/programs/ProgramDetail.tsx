@@ -9,7 +9,6 @@ import { Section } from "@/components/ui/Section";
 import { ExternalIcon } from "@/components/ui/ExternalIcon";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { ImageReveal } from "@/components/motion/ImageReveal";
 import { ProgramProfile } from "@/components/programs/ProgramProfile";
 
 export async function ProgramDetail({
@@ -122,24 +121,24 @@ async function ProgramSummary({
 
   return (
     <Section>
-      <Container className="grid gap-14 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-7">
-          <FadeIn>
-            <h2 className="t-h2 text-balance text-ink">{t("overview")}</h2>
-            <p className="t-body mt-5 text-muted">
-              {loc(program.overview, locale)}
+      <Container>
+        <FadeIn className="max-w-3xl">
+          <h2 className="t-h2 text-balance text-ink">{t("overview")}</h2>
+          <p className="t-body mt-5 text-muted">{loc(program.overview, locale)}</p>
+          {program.relationshipNote ? (
+            <p className="t-small mt-7 border-l-2 border-accent pl-5 text-ink">
+              {loc(program.relationshipNote, locale)}
             </p>
-            {program.relationshipNote ? (
-              <p className="t-small mt-7 border-l-2 border-accent pl-5 text-ink">
-                {loc(program.relationshipNote, locale)}
-              </p>
-            ) : null}
-          </FadeIn>
+          ) : null}
+        </FadeIn>
 
-          {lists.map(([heading, items]) => (
-            <FadeIn key={heading} className="mt-14">
-              <h2 className="t-h2 text-balance text-ink">{heading}</h2>
-              <ul className="mt-6 border-t border-line">
+        {/* The three lists read better side by side now that the gallery
+            column is gone — on a phone they simply stack. */}
+        <div className="mt-14 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-8">
+          {lists.map(([heading, items], index) => (
+            <FadeIn key={heading} delay={index * 0.06}>
+              <h2 className="t-h3 text-balance text-ink">{heading}</h2>
+              <ul className="mt-5 border-t border-line">
                 {items.map((item) => (
                   <li
                     key={item.en}
@@ -151,25 +150,6 @@ async function ProgramSummary({
               </ul>
             </FadeIn>
           ))}
-        </div>
-
-        <div className="lg:col-span-5">
-          <h2 className="t-h2 text-balance text-ink">{t("gallery")}</h2>
-          <div className="mt-6 grid gap-5">
-            {program.gallery.map((src) => (
-              <ImageReveal key={src}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-mist">
-                  <Image
-                    src={src}
-                    alt={loc(program.title, locale)}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                  />
-                </div>
-              </ImageReveal>
-            ))}
-          </div>
         </div>
       </Container>
     </Section>

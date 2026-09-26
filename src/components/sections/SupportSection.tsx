@@ -14,7 +14,7 @@ export async function SupportSection({ locale }: { locale: string }) {
     <Section tone="ink" className="relative overflow-hidden">
       <div className="absolute inset-0 opacity-25">
         <Image
-          src="/images/donate-support.webp"
+          src="/images/project/courtyard.webp"
           alt=""
           fill
           className="object-cover"
@@ -26,6 +26,7 @@ export async function SupportSection({ locale }: { locale: string }) {
         <div className="max-w-xl">
           <h2 className="t-h2 text-balance text-on-dark">{t("title")}</h2>
           <p className="t-body mt-5 text-on-dark/80">{t("body")}</p>
+          <p className="t-body mt-4 text-on-dark/80">{t("bodySecond")}</p>
           <div className="mt-8">
             <DonateButtons invert />
           </div>

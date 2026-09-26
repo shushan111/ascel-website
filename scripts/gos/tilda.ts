@@ -76,12 +76,32 @@ export function pageTitle(html: string): string {
  * text node — the course programmes (time; topic; speaker) all live in it.
  */
 function parseSemicolonTable(text: string): string[][] {
-  return text
+  const rows = text
     .split(/\n+/)
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => line.split(";").map((cell) => clean(cell)))
     .filter((row) => row.some(Boolean));
+
+  // Some tables put the header row and the first data row in one text node, so
+  // the last header cell comes back as "Notes08:30 - 09:00". Splitting on a
+  // time that starts mid-cell recovers both rows.
+  const first = rows[0];
+  if (first) {
+    // The label must end in a letter — "Примечания08:30" splits, "09:00–09:30"
+    // must not, or every ordinary time cell would be cut in half.
+    const GLUED = /^(\D*\p{L})(\d{1,2}:\d{2}\s*[-–—].*)$/u;
+    const at = first.findIndex((cell) => GLUED.test(cell));
+    if (at >= 0) {
+      const m = first[at].match(GLUED);
+      if (m) {
+        const header = [...first.slice(0, at), m[1].trim()];
+        const dataRow = [m[2].trim(), ...first.slice(at + 1)];
+        rows.splice(0, 1, header, dataRow);
+      }
+    }
+  }
+  return rows;
 }
 
 /**

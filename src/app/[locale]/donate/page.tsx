@@ -21,7 +21,7 @@ export async function generateMetadata({
     description: t("donateDescription"),
     path: "/donate",
     locale,
-    image: "/images/donate-support.webp",
+    image: "/images/project/facade-after.webp",
   });
 }
 

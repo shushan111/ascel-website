@@ -1,10 +1,9 @@
 import { defineQuery } from "next-sanity";
 
-export const coursesQuery = defineQuery(`*[
-  _type == "course" &&
-  !(_id in path("drafts.**"))
-] | order(_createdAt desc) {
+const courseFields = `
   _id,
+  "slug": slug.current,
+  status,
   title,
   type,
   date,
@@ -12,12 +11,29 @@ export const coursesQuery = defineQuery(`*[
   instructor,
   description,
   registrationUrl,
+  sourceUrl,
+  body,
   image {
-    asset->{
-      _id,
-      url
-    },
+    asset->{ _id, url },
+    alt,
+    hotspot,
+    crop
+  },
+  gallery[] {
+    asset->{ _id, url },
+    alt,
     hotspot,
     crop
   }
-}`);
+`;
+
+export const coursesQuery = defineQuery(`*[
+  _type == "course" &&
+  !(_id in path("drafts.**"))
+] | order(status asc, _createdAt desc) {${courseFields}}`);
+
+export const courseBySlugQuery = defineQuery(`*[
+  _type == "course" &&
+  slug.current == $slug &&
+  !(_id in path("drafts.**"))
+][0] {${courseFields}}`);

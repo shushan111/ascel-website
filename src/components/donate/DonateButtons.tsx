@@ -38,7 +38,7 @@ export async function DonateButtons({
           {t("donateNow")}
         </Link>
       )}
-      <Link href="/programs" className={supportClass}>
+      <Link href="/simulation-center" className={supportClass}>
         {t("supportPrograms")}
       </Link>
     </div>

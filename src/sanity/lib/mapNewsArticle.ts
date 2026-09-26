@@ -1,5 +1,6 @@
-import type { LocalizedString, NewsArticle } from "@/types";
+import type { LocalizedString, NewsArticle, PortableBlock } from "@/types";
 import { formatNewsDate } from "@/lib/utils";
+import { mapGallery, mapRichBody, type SanityImage } from "./mapShared";
 import { urlFor } from "./image";
 
 type SanityLocalizedValue = {
@@ -23,6 +24,8 @@ type SanityNewsDocument = {
     hy?: PortableTextBlock[];
     ru?: PortableTextBlock[];
   };
+  richBody?: { ru?: PortableBlock[] | null; hy?: PortableBlock[] | null; en?: PortableBlock[] | null } | null;
+  sourceUrl?: string | null;
   date: string;
   category: SanityLocalizedValue;
   image?: {
@@ -31,15 +34,16 @@ type SanityNewsDocument = {
     hotspot?: unknown;
     crop?: unknown;
   };
+  gallery?: SanityImage[] | null;
 };
 
 const fallbackNewsImage = "/images/hero-simulation.webp";
 
 function toLocalizedString(value: SanityLocalizedValue | null | undefined): LocalizedString {
   return {
-    en: value?.en ?? "",
-    hy: value?.hy ?? "",
     ru: value?.ru ?? "",
+    hy: value?.hy ?? "",
+    en: value?.en ?? "",
   };
 }
 
@@ -59,17 +63,17 @@ function zipLocalizedParagraphs(body: SanityNewsDocument["body"]): LocalizedStri
   const length = Math.max(en.length, hy.length, ru.length);
 
   return Array.from({ length: length }, (_, index) => ({
-    en: en[index] ?? "",
-    hy: hy[index] ?? "",
     ru: ru[index] ?? "",
+    hy: hy[index] ?? "",
+    en: en[index] ?? "",
   }));
 }
 
 function buildDateLabel(date: string): LocalizedString {
   return {
-    en: formatNewsDate(date, "en"),
-    hy: formatNewsDate(date, "hy"),
     ru: formatNewsDate(date, "ru"),
+    hy: formatNewsDate(date, "hy"),
+    en: formatNewsDate(date, "en"),
   };
 }
 
@@ -86,6 +90,9 @@ export function mapSanityNewsArticle(doc: SanityNewsDocument): NewsArticle {
     title: toLocalizedString(doc.title),
     excerpt: toLocalizedString(doc.excerpt),
     body: zipLocalizedParagraphs(doc.body),
+    richBody: mapRichBody(doc.richBody ?? null),
+    gallery: mapGallery(doc.gallery),
+    sourceUrl: doc.sourceUrl ?? "",
     date: doc.date,
     dateLabel: buildDateLabel(doc.date),
     category: toLocalizedString(doc.category),

@@ -23,7 +23,7 @@ export function MetricGrid({
         <div
           key={metric.id}
           className={cn(
-            "px-4 py-[1.15rem] sm:px-5",
+            "px-4 py-6 sm:px-5 sm:py-7",
             invert ? "border-on-dark/20" : "border-line",
             // Dividers only between cells: every other one at 2-up, all but
             // the last at 4-up.
@@ -32,22 +32,19 @@ export function MetricGrid({
             "sm:border-r sm:last:border-r-0",
           )}
         >
+          {/* Label above the figure, as the published site has it: the small
+              caps line reads as the question, the figure as the answer. */}
+          <dt className={cn("t-meta-sm", invert ? "text-on-dark/70" : "text-muted")}>
+            {loc(metric.label, locale)}
+          </dt>
           <dd
             className={cn(
-              "font-display text-[1.7rem] font-semibold tracking-[-0.03em] tabular-nums",
+              "font-display mt-3 text-[1.7rem] font-semibold tracking-[-0.03em] tabular-nums",
               invert ? "text-on-dark" : "text-ink",
             )}
           >
             {metric.display}
           </dd>
-          <dt
-            className={cn(
-              "mt-1 text-[0.82rem] font-semibold tracking-[0.04em]",
-              invert ? "text-on-dark/70" : "text-muted",
-            )}
-          >
-            {loc(metric.label, locale)}
-          </dt>
         </div>
       ))}
     </dl>

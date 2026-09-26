@@ -10,7 +10,7 @@
  *   npx tsx scripts/scrape-gos.ts --only hip2026,16082022
  *   npx tsx scripts/scrape-gos.ts --no-images
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import * as cheerio from "cheerio";
 
@@ -37,7 +37,15 @@ export interface GosItem {
   sourceLangs: Lang[];
   title: Partial<Record<Lang, string>>;
   date: { iso: string | null; raw: string };
+  /** The page in document order, each block tagged with its detected language. */
+  blocks: Array<Block & { lang: Lang }>;
+  /** Blocks grouped by language. Only meaningful when `parallel` is true. */
   body: Partial<Record<Lang, Block[]>>;
+  /**
+   * True when the language segments look like translations of one another
+   * rather than consecutive parts of one page.
+   */
+  parallel: boolean;
   mainImage: string | null;
   gallery: string[];
   images: Array<{
@@ -59,6 +67,9 @@ function flag(name: string): string | undefined {
 const LIMIT = flag("limit") ? Number(flag("limit")) : undefined;
 const ONLY = flag("only")?.split(",").map((s) => s.trim()).filter(Boolean);
 const NO_IMAGES = args.includes("--no-images");
+// Re-parsing the pages should not mean re-downloading 400 images that are
+// already on disk and unchanged.
+const KEEP_IMAGES = args.includes("--keep-images");
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -144,6 +155,19 @@ function dropRepeatedTitle(blocks: Block[], title: string): Block[] {
   return blocks;
 }
 
+/**
+ * News pages open with a bare date strip ("11/03/2019", "16 | 08 | 2022") that
+ * parses as a paragraph. It is the item's date, not its first sentence, so it
+ * is dropped from the body and carried by the `date` field instead.
+ */
+function dropLeadingDateParagraph(blocks: Block[]): Block[] {
+  const first = blocks[0];
+  if (!first || !("text" in first)) return blocks;
+  const bare = first.text.replace(/[\s|./-]/g, "");
+  if (/^\d{6,8}$/.test(bare)) return blocks.slice(1);
+  return blocks;
+}
+
 /** Tilda's `t37` block is the dedicated date strip on news pages. */
 function dateRecordText(html: string): string {
   const $ = cheerio.load(html);
@@ -191,6 +215,18 @@ async function downloadImages(slug: string, refs: Array<{ order: number; src: st
   return kept;
 }
 
+/** Reads back the image list a previous run already downloaded. */
+async function reuseImages(slug: string): Promise<GosItem["images"]> {
+  try {
+    const previous = JSON.parse(
+      await readFile(path.join(OUT_DIR, `${slug}.json`), "utf8"),
+    ) as GosItem;
+    return previous.images ?? [];
+  } catch {
+    return [];
+  }
+}
+
 async function scrapeItem(
   slug: string,
   kind: Kind,
@@ -206,8 +242,10 @@ async function scrapeItem(
   // Course titles are written as "Name | 2-3 October, Gyumri".
   const title = rawTitle.split("|")[0].trim() || slug;
 
-  const blocks = dropRepeatedTitle(extractBlocks(html, chrome), title);
-  const { byLang, multilingual, primary } = segmentByLanguage(blocks);
+  const blocks = dropLeadingDateParagraph(
+    dropRepeatedTitle(extractBlocks(html, chrome), title),
+  );
+  const { byLang, multilingual, primary, ordered, parallel } = segmentByLanguage(blocks);
   const sourceLangs = (Object.keys(byLang) as Lang[]).filter((l) => (byLang[l]?.length ?? 0) > 0);
 
   // The <title> element is single-language; attribute it to whichever language
@@ -243,7 +281,11 @@ async function scrapeItem(
   if (imageRefs.length === 0 && fallbackImage) {
     imageRefs.push({ order: 0, src: fallbackImage });
   }
-  const images = NO_IMAGES ? [] : await downloadImages(slug, imageRefs);
+  const images = NO_IMAGES
+    ? []
+    : KEEP_IMAGES
+      ? await reuseImages(slug)
+      : await downloadImages(slug, imageRefs);
 
   if (!NO_IMAGES && images.length === 0) warnings.push("no usable images found");
   if (blocks.length === 0) warnings.push("no body blocks extracted");
@@ -257,7 +299,9 @@ async function scrapeItem(
     sourceLangs,
     title: { [titleLang]: title },
     date,
+    blocks: ordered,
     body: byLang,
+    parallel,
     mainImage: images[0]?.file ?? null,
     gallery: images.slice(1).map((i) => i.file),
     images,
@@ -265,6 +309,11 @@ async function scrapeItem(
   };
 
   if (!multilingual) warnings.push(`only ${primary} on the source page — needs translation`);
+  if (multilingual && !parallel) {
+    warnings.push(
+      "language segments are consecutive parts of the page, not translations of each other — translate from `blocks`, not from `body`",
+    );
+  }
   for (const lang of ["hy", "ru", "en"] as Lang[]) {
     if (!sourceLangs.includes(lang)) warnings.push(`missing ${lang}`);
   }

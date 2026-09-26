@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Course } from "@/types";
 import { loc } from "@/lib/utils";
 import { buttonClassName } from "@/components/ui/buttonStyles";
@@ -20,9 +21,16 @@ export async function CourseCard({
     [t("instructor"), loc(course.instructor, locale)],
   ] as const;
 
+  const href = `/courses/${course.slug}`;
+
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper">
-      <div className="relative aspect-[16/10] overflow-hidden bg-mist">
+    <article className="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-colors duration-300 hover:border-ink">
+      <Link
+        href={href}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="relative block aspect-[16/10] overflow-hidden bg-mist"
+      >
         <Image
           src={course.image}
           alt={loc(course.title, locale)}
@@ -35,11 +43,21 @@ export async function CourseCard({
             {common("sample")}
           </span>
         ) : null}
-      </div>
+      </Link>
       <div className="flex flex-1 flex-col p-6">
-        <p className="t-meta-sm text-accent">{loc(course.type, locale)}</p>
-        <h3 className="t-h4 mt-3 text-balance text-ink">
-          {loc(course.title, locale)}
+        <p className="t-meta-sm flex flex-wrap items-center gap-x-2.5 text-accent">
+          <span>{course.status === "upcoming" ? t("upcoming") : t("past")}</span>
+          {loc(course.type, locale) ? (
+            <>
+              <span aria-hidden="true" className="text-line-strong">
+                /
+              </span>
+              <span className="text-muted">{loc(course.type, locale)}</span>
+            </>
+          ) : null}
+        </p>
+        <h3 className="t-h4 mt-3 text-balance text-ink transition-colors group-hover:text-accent">
+          <Link href={href}>{loc(course.title, locale)}</Link>
         </h3>
         <dl className="mt-5 space-y-2.5 text-sm leading-6">
           {rows.map(([label, value]) => (
@@ -52,7 +70,10 @@ export async function CourseCard({
         <p className="t-small mt-5 flex-1 text-muted">
           {loc(course.description, locale)}
         </p>
-        <div className="mt-7">
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Link href={href} className={buttonClassName("secondary")}>
+            {common("learnMore")}
+          </Link>
           {course.registrationUrl ? (
             <a
               href={course.registrationUrl}
@@ -62,16 +83,7 @@ export async function CourseCard({
             >
               {common("register")}
             </a>
-          ) : (
-            <span
-              className={buttonClassName(
-                "secondary",
-                "pointer-events-none opacity-65",
-              )}
-            >
-              {common("registrationPending")}
-            </span>
-          )}
+          ) : null}
         </div>
       </div>
     </article>

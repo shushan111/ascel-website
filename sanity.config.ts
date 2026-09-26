@@ -12,17 +12,25 @@ import {structureTool} from 'sanity/structure'
 import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
+import {StudioLogo} from './src/sanity/components/StudioLogo'
 
 export default defineConfig({
   basePath: '/admin_panel',
+  name: 'ascel-studio',
+  title: 'ASCEL — Կայքի կառավարում',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
   plugins: [
-    structureTool({structure}),
+    structureTool({title: 'Բովանդակություն', structure}),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({defaultApiVersion: apiVersion}),
+    visionTool({title: 'Հարցումներ (GROQ)', defaultApiVersion: apiVersion}),
   ],
+  studio: {
+    components: {
+      logo: StudioLogo,
+    },
+  },
 })

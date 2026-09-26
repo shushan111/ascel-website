@@ -7,6 +7,8 @@ import { buildMetadata } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Prose } from "@/components/ui/Prose";
+import { RichText } from "@/components/ui/RichText";
+import { Gallery } from "@/components/ui/Gallery";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 
 export async function generateStaticParams() {
@@ -41,6 +43,13 @@ export default async function NewsArticlePage({
   const article = await getNewsBySlug(slug);
   if (!article) notFound();
   const common = await getTranslations("Common");
+
+  // Imported articles carry Portable Text; the hand-authored ones predate it
+  // and still use the plain paragraph list.
+  const richBody =
+    article.richBody[locale as "ru" | "hy" | "en"] ??
+    article.richBody.ru ??
+    article.richBody.en;
 
   return (
     <article>
@@ -100,11 +109,17 @@ export default async function NewsArticlePage({
       </Container>
 
       <Container width="text" className="pt-12 pb-20 md:pt-16 md:pb-28">
-        <Prose>
-          {article.body.map((paragraph) => (
-            <p key={paragraph.en}>{loc(paragraph, locale)}</p>
-          ))}
-        </Prose>
+        {richBody ? (
+          <RichText value={richBody} />
+        ) : (
+          <Prose>
+            {article.body.map((paragraph, index) => (
+              <p key={`${index}-${paragraph.ru}`}>{loc(paragraph, locale)}</p>
+            ))}
+          </Prose>
+        )}
+
+        <Gallery images={article.gallery} locale={locale} title={common("gallery")} />
 
         <div className="mt-14 border-t border-line pt-8">
           <Link href="/news" className={buttonClassName("secondary")}>

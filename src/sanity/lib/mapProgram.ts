@@ -49,7 +49,6 @@ export type SanityProgramDocument = {
   activities?: SanityLocalizedValue[] | null;
   impact?: SanityLocalizedValue[] | null;
   image?: SanityImage;
-  gallery?: SanityImage[] | null;
   profile?: {
     tagline?: SanityLocalizedValue | null;
     seoDescription?: SanityLocalizedValue | null;
@@ -215,7 +214,7 @@ function mapMilestones(
 function mapProfile(
   profile: SanityProgramDocument["profile"],
 ): ProgramDetailContent | undefined {
-  if (!profile?.tagline?.en || !profile.cta?.url) return undefined;
+  if (!profile?.tagline?.en) return undefined;
 
   return {
     tagline: toLocalizedString(profile.tagline),
@@ -242,13 +241,15 @@ function mapProfile(
       ...mapNarrative(profile.highlights),
       milestones: mapMilestones(profile.highlights?.milestones),
     },
-    cta: {
-      eyebrow: toLocalizedString(profile.cta.eyebrow),
-      title: toLocalizedString(profile.cta.title),
-      body: toLocalizedString(profile.cta.body),
-      label: toLocalizedString(profile.cta.label),
-      url: profile.cta.url,
-    },
+    cta: profile.cta?.url
+      ? {
+          eyebrow: toLocalizedString(profile.cta.eyebrow),
+          title: toLocalizedString(profile.cta.title),
+          body: toLocalizedString(profile.cta.body),
+          label: toLocalizedString(profile.cta.label),
+          url: profile.cta.url,
+        }
+      : undefined,
     sourceNote: toLocalizedString(profile.sourceNote),
   };
 }
@@ -257,10 +258,6 @@ export function mapSanityProgram(doc: SanityProgramDocument): Program {
   const slug = doc.slug ?? doc._id;
   const title = toLocalizedString(doc.title);
   const image = buildImageUrl(doc.image, "/images/capability-simulation.webp");
-  const gallery =
-    (doc.gallery ?? [])
-      .map((item) => buildImageUrl(item, ""))
-      .filter(Boolean) || [];
   const shortTitle = doc.shortTitle?.en
     ? toLocalizedString(doc.shortTitle)
     : title;
@@ -282,7 +279,6 @@ export function mapSanityProgram(doc: SanityProgramDocument): Program {
     externalUrlKey: toExternalUrlKey(doc.externalUrlKey),
     hasOnSiteProfile,
     overview: toLocalizedString(doc.overview),
-    gallery: gallery.length > 0 ? gallery : [image],
     objectives: toLocalizedList(doc.objectives),
     activities: toLocalizedList(doc.activities),
     impact: toLocalizedList(doc.impact),
