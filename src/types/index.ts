@@ -159,10 +159,22 @@ export interface Partner {
   isPlaceholder: boolean;
 }
 
+export type DonationStatus = "planned" | "in-progress" | "funded";
+
 export interface DonationOption {
   id: string;
   title: LocalizedString;
   description: LocalizedString;
+  /**
+   * Display order on the funding list, lowest first. The sequence follows the
+   * build: the structure has to stand before anything can be fitted out.
+   */
+  priority: number;
+  /** Cost in `fundraising.currency`, or null while no figure is confirmed. */
+  amount: number | null;
+  status: DonationStatus;
+  /** Area in m² taken from the sketch design, where the option maps to rooms. */
+  area: string | null;
 }
 
 export interface Metric {

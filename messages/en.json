@@ -270,5 +270,58 @@
     "factStage": "Design stage",
     "factArchitects": "Architects",
     "closing": "The design is ready; what is missing is the money to build. Support of any size goes to a specific piece of work — from a single window to the whole roof."
+  },
+  "WhyNow": {
+    "eyebrow": "Why now",
+    "title": "Why this building is needed now"
+  },
+  "Proof": {
+    "eyebrow": "What we have already done",
+    "title": "The programme has run since 2019",
+    "subtitle": "The center does not start from zero. The courses already run in Gyumri; the building gives them a permanent home.",
+    "nursesTitle": "Operating room nurses school",
+    "nursesCount": "6",
+    "nursesBody": "Held six times between 2019 and 2026. Surgery is teamwork, and the center trains the whole team, not only the surgeon.",
+    "viewCourses": "See all courses",
+    "sourcesToggle": "How these numbers are counted"
+  },
+  "Building": {
+    "eyebrow": "The building",
+    "title": "What we are restoring",
+    "subtitle": "The 19th-century house at 20-22 Myasnikyan Street. The monument is kept whole, and the additional space the programme needs goes underground.",
+    "nowLabel": "Today",
+    "afterLabel": "As designed",
+    "planLabel": "Site plan",
+    "viewProject": "See the full project"
+  },
+  "Funding": {
+    "eyebrow": "Where support goes",
+    "title": "Six directions, in build order",
+    "subtitle": "Each one is a real part of the building, taken from the sketch design. The roof comes first, because without it the rest is pointless.",
+    "amountPending": "Cost being confirmed",
+    "statusPlanned": "Planned",
+    "statusInProgress": "In progress",
+    "statusFunded": "Funded",
+    "supportThis": "Support this"
+  },
+  "Trust": {
+    "eyebrow": "Trust",
+    "title": "Who you are trusting with the money",
+    "subtitle": "Legal status, who controls the funds, and how spending is reported.",
+    "pending": "These details will be published once the legal set-up is complete."
+  },
+  "Checkout": {
+    "title": "Donate",
+    "amountLabel": "Amount",
+    "otherAmount": "Other amount",
+    "directionLabel": "Direction",
+    "anyDirection": "Wherever it is needed most",
+    "continue": "Continue",
+    "providerPending": "Online payment is not connected yet. Work with the bank is under way, and this step will work once the account is open.",
+    "bankTitle": "Bank transfer",
+    "bankPending": "Bank details will be published once the account is open.",
+    "contactTitle": "Talk about supporting the project",
+    "contactBody": "For a major gift, a partnership or targeted funding, write to us directly.",
+    "contactCta": "Get in touch"
   }
 }
