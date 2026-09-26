@@ -26,7 +26,7 @@ export async function NewsCard({
   const href = `/news/${article.slug}`;
 
   return (
-    <article className="group flex h-full flex-col border-t border-line pt-6 md:pt-8">
+    <article className="group flex h-full flex-col border-t border-line pt-6 transition-colors duration-200 hover:border-line-strong md:pt-8">
       <Link
         href={href}
         tabIndex={-1}
@@ -40,7 +40,7 @@ export async function NewsCard({
           src={article.image}
           alt={loc(article.imageAlt, locale)}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           sizes={
             feature
               ? "(min-width: 768px) 50vw, 100vw"
@@ -50,7 +50,10 @@ export async function NewsCard({
       </Link>
 
       <div className="flex flex-1 flex-col pt-5">
-        <p className="t-meta-sm flex flex-wrap items-center gap-x-2.5 gap-y-1 text-accent">
+        {/* The category was bronze on every card, which put two accent marks
+            in each item and made the colour ambient instead of meaningful.
+            It is a quiet label; the accent stays for hover. */}
+        <p className="t-meta-sm flex flex-wrap items-center gap-x-2.5 gap-y-1 text-muted">
           <span>{loc(article.category, locale)}</span>
           {article.isPlaceholder ? (
             <>
@@ -64,15 +67,18 @@ export async function NewsCard({
 
         <h3
           className={cn(
-            "mt-3 text-balance text-ink transition-colors group-hover:text-accent",
+            "mt-3 text-balance text-ink transition-colors duration-200 group-hover:text-accent",
             feature ? "t-h3" : "t-h4",
           )}
         >
           <Link href={href}>{loc(article.title, locale)}</Link>
         </h3>
 
-        {/* Date sits below the title, as it does on the reference site. */}
-        <p className="t-meta-sm mt-3 text-muted">
+        {/* Date sits below the title, as it does on the reference site — and
+            at .t-meta, not .t-meta-sm: 11.5px uppercase bold competed with
+            the title above it. The reference sets the same date at 20px
+            regular grey and lets it sit quietly. */}
+        <p className="t-meta mt-3 text-muted">
           <time dateTime={article.date}>{loc(article.dateLabel, locale)}</time>
         </p>
 
@@ -83,7 +89,7 @@ export async function NewsCard({
             </p>
             <span
               aria-hidden="true"
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors group-hover:text-accent-hover"
+              className="mt-5 inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-ink transition-colors duration-200 group-hover:text-accent"
             >
               {common("readMore")}
               <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">

@@ -15,7 +15,10 @@ export function ArrowLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover",
+        // Ink at rest, bronze on hover. As a standing bronze link this
+        // appeared in every section header and was a third of the accent
+        // budget on its own.
+        "group inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-medium text-ink transition-colors duration-200 hover:text-accent",
         className,
       )}
     >

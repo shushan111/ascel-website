@@ -70,7 +70,7 @@ export default async function NewsArticlePage({
             {common("backToNews")}
           </Link>
 
-          <p className="t-meta-sm mt-8 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-accent">
+          <p className="t-meta-sm mt-8 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-muted">
             <span>{loc(article.category, locale)}</span>
             <span aria-hidden="true" className="text-line-strong">
               /

@@ -18,7 +18,7 @@ export async function NewsPreview({ locale }: { locale: string }) {
           subtitle={t("subtitle")}
           action={<ArrowLink href="/news">{t("viewAll")}</ArrowLink>}
         />
-        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => (
             <NewsCard key={article.id} article={article} locale={locale} />
           ))}

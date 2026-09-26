@@ -35,7 +35,7 @@ export async function CourseCard({
           src={course.image}
           alt={loc(course.title, locale)}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
         />
         {course.isPlaceholder ? (
@@ -45,7 +45,7 @@ export async function CourseCard({
         ) : null}
       </Link>
       <div className="flex flex-1 flex-col p-6">
-        <p className="t-meta-sm flex flex-wrap items-center gap-x-2.5 text-accent">
+        <p className="t-meta-sm flex flex-wrap items-center gap-x-2.5 text-muted">
           <span>{course.status === "upcoming" ? t("upcoming") : t("past")}</span>
           {loc(course.type, locale) ? (
             <>
@@ -56,10 +56,12 @@ export async function CourseCard({
             </>
           ) : null}
         </p>
-        <h3 className="t-h4 mt-3 text-balance text-ink transition-colors group-hover:text-accent">
+        <h3 className="t-h4 mt-3 text-balance text-ink transition-colors duration-200 group-hover:text-accent">
           <Link href={href}>{loc(course.title, locale)}</Link>
         </h3>
-        <dl className="mt-5 space-y-2.5 text-sm leading-6">
+        {/* Dates and places read as data, so they take .t-meta and its
+            tabular figures rather than a 14px catch-all. */}
+        <dl className="t-meta mt-5 space-y-2.5">
           {rows.map(([label, value]) => (
             <div key={label} className="flex flex-wrap gap-x-2">
               <dt className="min-w-0 shrink-0 text-muted">{label}:</dt>

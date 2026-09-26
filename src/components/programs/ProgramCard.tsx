@@ -30,12 +30,12 @@ export async function ProgramCard({
             alt={loc(program.title, locale)}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           />
         </div>
         <div className="flex flex-1 flex-col p-6 md:p-7">
-          <p className="t-meta-sm text-accent">{loc(program.category, locale)}</p>
-          <h3 className="t-h3 mt-3 text-balance text-ink">
+          <p className="t-meta-sm text-muted">{loc(program.category, locale)}</p>
+          <h3 className="t-h3 mt-3 text-balance text-ink transition-colors duration-200 group-hover:text-accent">
             {loc(program.title, locale)}
           </h3>
           <p className="t-small mt-3 flex-1 text-muted">

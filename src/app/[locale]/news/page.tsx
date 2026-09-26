@@ -39,7 +39,11 @@ export default async function NewsPage({
           {/* Two columns at most, matching the reference index: at a 1200px
               cap that gives roughly 570px per item, enough for the title to
               carry the row. */}
-          <div className="grid gap-x-10 gap-y-14 sm:grid-cols-2 md:gap-y-16">
+          {/* Row gap: the reference's own CSS says 40px, but that is the
+              column margin alone — its cards carry another 28px of inner
+              bottom margin, so the rendered gap between one card's date and
+              the next card's image measures ~74px at 1440. Ours matches. */}
+          <div className="grid gap-x-10 gap-y-14 sm:grid-cols-2 md:gap-y-[4.5rem]">
             {articles.map((article) => (
               <NewsCard
                 key={article.id}
