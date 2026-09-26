@@ -44,7 +44,7 @@ export function Logo({
       <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            "font-display text-[15px] font-semibold tracking-[0.2em]",
+            "font-display text-[16px] font-semibold tracking-[0.2em]",
             invert ? "text-on-dark" : "text-ink",
           )}
         >
@@ -53,7 +53,7 @@ export function Logo({
         {compact ? null : (
           <span
             className={cn(
-              "mt-1.5 hidden max-w-[11rem] text-[10px] leading-snug tracking-[0.04em] sm:block xl:hidden 2xl:block",
+              "mt-1.5 hidden max-w-[11rem] text-[11px] leading-snug tracking-[0.04em] sm:block xl:hidden 2xl:block",
               invert ? "text-on-dark/60" : "text-muted",
             )}
           >

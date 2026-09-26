@@ -20,7 +20,9 @@ export function Header() {
       <div aria-hidden="true" className="h-0.5 w-full bg-ink" />
       <Container
         width="wide"
-        className="flex min-h-[5.35rem] items-center justify-between gap-5"
+        // Old: min-h-[5.35rem] gap-5. The masthead gets the same extra air the
+        // sections get, and a little more room between nav, language and CTA.
+        className="flex min-h-[4.9rem] items-center justify-between gap-5 md:min-h-[6.1rem] md:gap-7"
       >
         <Link href="/" className="shrink-0 rounded-sm" aria-label="ASCEL">
           <Logo compact />

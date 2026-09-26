@@ -198,14 +198,20 @@ export function MobileMenu() {
                       aria-current={active ? "page" : undefined}
                       onClick={() => close()}
                       className={cn(
-                        "t-h2 flex min-h-12 items-center justify-between gap-4 py-3 transition-colors sm:min-h-14",
-                        active ? "text-accent" : "text-ink hover:text-accent",
+                        // The label stays ink in both states; the bronze moves
+                        // to the index mark beside it, so the accent appears
+                        // once per row instead of colouring a whole heading.
+                        "t-h2 flex min-h-12 items-center justify-between gap-4 py-3.5 transition-colors sm:min-h-14",
+                        "text-ink",
                       )}
                     >
                       <span className="min-w-0">{t(item.key)}</span>
                       <span
                         aria-hidden="true"
-                        className="t-meta-sm shrink-0 text-line-strong"
+                        className={cn(
+                        "t-meta-sm shrink-0 transition-colors",
+                        active ? "text-accent" : "text-line-strong",
+                      )}
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
@@ -230,9 +236,7 @@ export function MobileMenu() {
             }}
           >
             <div>
-              <p className="t-meta-sm text-muted">
-                {t("language")}
-              </p>
+              <p className="t-meta-sm text-muted">{t("language")}</p>
               <div className="mt-3">
                 <LanguageSwitcher compact />
               </div>

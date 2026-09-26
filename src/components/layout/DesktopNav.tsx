@@ -29,8 +29,12 @@ export function DesktopNav() {
                 className={cn(
                   // Sizing stays uniform across desktop widths: the container is
                   // capped, so a larger step would only overflow.
-                  "group relative inline-flex min-h-11 items-center whitespace-nowrap px-2.5 text-[0.88rem] font-semibold transition-colors",
-                  active ? "text-ink" : "text-body hover:text-ink",
+                  // Weight drops 600 -> 500: at this size semibold made the row
+                  // read as seven small buttons rather than as a line of links.
+                  // Size is held at 0.88rem — the Armenian labels already fill
+                  // the masthead, and a larger step would clip.
+                  "group relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[0.88rem] font-medium transition-colors",
+                  active ? "text-ink" : "text-muted hover:text-ink",
                 )}
                 aria-current={active ? "page" : undefined}
               >
@@ -40,7 +44,7 @@ export function DesktopNav() {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "pointer-events-none absolute inset-x-2.5 bottom-2 h-px origin-left bg-ink transition-transform duration-200",
+                    "pointer-events-none absolute inset-x-3 bottom-2 h-px origin-left bg-ink transition-transform duration-200",
                     active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                   )}
                 />

@@ -23,7 +23,9 @@ export function buttonClassName(
   className?: string,
 ) {
   return cn(
-    "inline-flex min-h-[2.7rem] items-center justify-center gap-2 rounded-sm px-[1.15rem] text-center text-[0.9rem] font-semibold tracking-[0.02em] transition-colors duration-200",
+    // Sized against the 18px body: a 14.4px label on a 43px control read as a
+    // chip next to it. Old: min-h-[2.7rem] px-[1.15rem] text-[0.9rem].
+    "inline-flex min-h-[2.95rem] items-center justify-center gap-2 rounded-sm px-[1.4rem] text-center text-[0.95rem] font-semibold tracking-[0.02em] transition-colors duration-200",
     variants[variant],
     className,
   );
