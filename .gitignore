@@ -43,4 +43,6 @@ next-env.d.ts
 
 # local build archives
 *.zip
-data/
+# Anchored to the repo root: an unanchored `data/` also matched src/data/,
+# which silently kept project.ts and founders.ts out of version control.
+/data/
