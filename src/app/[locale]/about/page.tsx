@@ -85,8 +85,8 @@ export default async function AboutPage({
           <h2 className="t-h2 text-balance text-ink">{t("timelineTitle")}</h2>
           <ol className="mt-10 border-l border-line-strong">
             <li className="relative pl-8 pb-2">
-              <span className="absolute -left-[4.5px] top-2 h-2 w-2 rounded-full bg-accent" />
-              <p className="t-meta-sm text-accent">{t("timelineItem1Date")}</p>
+              <span className="absolute -left-[4.5px] top-2 h-2 w-2 rounded-full bg-ink" />
+              <p className="t-meta-sm text-muted">{t("timelineItem1Date")}</p>
               <h3 className="t-h4 mt-3 text-ink">{t("timelineItem1Title")}</h3>
               <p className="t-small mt-3 text-muted">{t("timelineItem1Body")}</p>
             </li>

@@ -70,7 +70,7 @@ export default async function ContactPage({
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="capitalize text-accent underline-offset-4 hover:underline"
+                        className="capitalize text-ink underline underline-offset-4 transition-colors hover:text-accent"
                       >
                         {name}
                       </a>

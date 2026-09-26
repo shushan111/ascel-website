@@ -12,11 +12,13 @@ const tones: Record<SectionTone, string> = {
   ink: "bg-ink text-on-dark",
 };
 
-// One vertical rhythm for the whole site.
+// One vertical rhythm for the whole site, from the --spacing-band tokens.
+// The reference leaves roughly three times as much air between a section and
+// the next as this did; old values were py-12/16, py-16/[4.6rem], py-20/28.
 const spaces: Record<SectionSpace, string> = {
-  compact: "py-12 md:py-16",
-  default: "py-16 md:py-[4.6rem]",
-  spacious: "py-20 md:py-28",
+  compact: "py-14 md:py-band-compact",
+  default: "py-16 md:py-band",
+  spacious: "py-20 md:py-band-wide",
 };
 
 export function Section({

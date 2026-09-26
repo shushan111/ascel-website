@@ -47,7 +47,7 @@ export async function ProgramProfile({
           <dl className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
             {detail.facts.map((fact) => (
               <div key={fact.label.en}>
-                <dt className="t-meta-sm text-accent">
+                <dt className="t-meta-sm text-muted">
                   {loc(fact.label, locale)}
                 </dt>
                 <dd className="mt-2 text-base font-medium leading-6 text-ink">
@@ -101,7 +101,7 @@ export async function ProgramProfile({
                 >
                   <span
                     aria-hidden="true"
-                    className="font-display text-sm font-semibold tabular-nums text-accent"
+                    className="font-display text-sm font-semibold tabular-nums text-muted"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -166,7 +166,7 @@ export async function ProgramProfile({
             {detail.audience.groups.map((group, index) => (
               <li key={group.title.en} className="h-full">
                 <FadeIn delay={index * 0.06} className="h-full">
-                  <div className="flex h-full flex-col border-t-2 border-accent bg-paper pt-5">
+                  <div className="flex h-full flex-col border-t-2 border-ink bg-paper pt-5">
                     <h3 className="t-h4 text-ink">
                       {loc(group.title, locale)}
                     </h3>
@@ -234,7 +234,7 @@ export async function ProgramProfile({
               <li key={milestone.title.en}>
                 <FadeIn delay={Math.min(index, 4) * 0.05}>
                   <div className="grid gap-3 border-t border-line py-7 md:grid-cols-12 md:gap-8">
-                    <p className="t-meta-sm tabular-nums text-accent md:col-span-3 md:pt-1">
+                    <p className="t-meta tabular-nums text-muted md:col-span-3 md:pt-1">
                       {loc(milestone.date, locale)}
                     </p>
                     <div className="md:col-span-9">

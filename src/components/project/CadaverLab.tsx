@@ -32,7 +32,7 @@ export async function CadaverLab() {
           <h2 className="t-h2 text-balance text-ink">{t("title")}</h2>
           <p className="t-body mt-6 text-muted">{t("body")}</p>
           <p className="t-body mt-5 text-muted">{t("bodySecond")}</p>
-          <p className="t-small mt-8 border-l-2 border-accent pl-5 text-muted">
+          <p className="t-small mt-8 border-l-2 border-line-strong pl-5 text-muted">
             {t("note")}
           </p>
         </FadeIn>

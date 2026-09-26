@@ -350,7 +350,8 @@ figcaption {
     width: 5px;
     height: 5px;
     border-radius: 9999px;
-    background: var(--color-accent);
+    /* The bronze is reserved for eyebrows and hover; a list marker is neither. */
+    background: var(--color-muted);
   }
 
   .prose-ascel ol {

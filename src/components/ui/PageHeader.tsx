@@ -41,7 +41,7 @@ export function PageHeader({
           ) : null}
           <h1 className="t-display text-balance text-ink">{title}</h1>
           {intro ? (
-            <p className="t-lead mt-6 max-w-[36rem] text-muted">{intro}</p>
+            <p className="t-lead mt-6 max-w-(--measure) text-muted">{intro}</p>
           ) : null}
         </div>
         {aside ? <div className="shrink-0">{aside}</div> : null}

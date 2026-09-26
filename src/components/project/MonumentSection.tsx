@@ -68,8 +68,8 @@ export async function MonumentSection({ locale }: { locale: string }) {
                 <span className="t-meta-sm mr-2 text-ink">{t("nowLabel")}</span>
                 {loc(condition.now, locale)}
               </p>
-              <p className="t-small mt-3 border-l-2 border-accent pl-4 text-body">
-                <span className="t-meta-sm mr-2 text-accent">
+              <p className="t-small mt-3 border-l-2 border-line-strong pl-4 text-body">
+                <span className="t-meta-sm mr-2 text-muted">
                   {t("afterLabel")}
                 </span>
                 {loc(condition.after, locale)}

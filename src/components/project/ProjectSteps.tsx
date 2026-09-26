@@ -21,7 +21,7 @@ export async function ProjectSteps({ locale }: { locale: string }) {
         <ol className="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
           {projectSteps.map((step) => (
             <li key={step.no} className="border-t border-line-strong pt-4">
-              <p className="t-meta-sm text-accent tabular-nums">{step.no}</p>
+              <p className="t-meta-sm text-muted tabular-nums">{step.no}</p>
               <p className="mt-2 text-sm leading-6 text-ink">
                 {loc(step.title, locale)}
               </p>

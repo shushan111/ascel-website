@@ -9,7 +9,7 @@ export default async function NotFound() {
   return (
     <section className="py-28 md:py-36">
       <Container className="max-w-xl text-center">
-        <p className="t-meta-sm text-accent">404</p>
+        <p className="t-meta-sm text-muted">404</p>
         <h1 className="t-h1 mt-4 text-balance text-ink">{t("title")}</h1>
         <p className="t-body mt-5 text-muted">{t("body")}</p>
         <Link href="/" className={buttonClassName("primary", "mt-9")}>

@@ -47,9 +47,8 @@ export async function ProjectHero({ locale }: { locale: string }) {
           {/* Was `t-lead max-w-xl`: five sentences at 20.8px in a 576px
               column ran to nine lines on desktop and thirteen at 375. A hero
               paragraph this long is body copy, not a lead, so it takes the
-              body size and a wider column — ~62 characters, near the 66 that
-              --measure sets. The local cap folds into Container later. */}
-          <p className="t-body mt-7 max-w-[38rem] text-on-dark/85">
+              body size and the site measure. */}
+          <p className="t-body mt-7 max-w-(--measure) text-on-dark/85">
             {t("supporting")}
           </p>
           <div className="mt-10 flex flex-wrap gap-3.5">

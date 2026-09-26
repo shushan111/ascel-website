@@ -126,7 +126,7 @@ async function ProgramSummary({
           <h2 className="t-h2 text-balance text-ink">{t("overview")}</h2>
           <p className="t-body mt-5 text-muted">{loc(program.overview, locale)}</p>
           {program.relationshipNote ? (
-            <p className="t-small mt-7 border-l-2 border-accent pl-5 text-ink">
+            <p className="t-small mt-7 border-l-2 border-line-strong pl-5 text-ink">
               {loc(program.relationshipNote, locale)}
             </p>
           ) : null}

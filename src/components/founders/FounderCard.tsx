@@ -36,7 +36,7 @@ export function FounderCard({
         />
         <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
           {founder.role ? (
-            <p className="t-meta-sm text-accent-light">
+            <p className="t-meta-sm text-on-dark/60">
               {loc(founder.role, locale)}
             </p>
           ) : null}
