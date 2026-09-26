@@ -33,6 +33,7 @@ export default async function NewsPage({
 
   return (
     <>
+      {/* DRAFT — պատվիրատուի հաստատման կարիք ունի (intro) */}
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} intro={t("intro")} />
       <Section>
         <Container>

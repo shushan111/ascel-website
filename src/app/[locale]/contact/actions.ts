@@ -37,6 +37,7 @@ export async function submitContact(
   if (!siteConfig.contactFormEndpoint) {
     return {
       status: "pending",
+      // DRAFT — պատվիրատուի հաստատման կարիք ունի (success)
       message: t("success"),
       errors: {},
     };

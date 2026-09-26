@@ -92,6 +92,8 @@ export async function Footer({ locale }: { locale: string }) {
               </Link>
             </li>
           </ul>
+          {/* No "[Content to be provided]" fallback: an empty slot in the
+              footer reads as an unfinished site, not as a pending detail. */}
           {social.length > 0 ? (
             <ul className="mt-7 flex flex-wrap gap-x-4 gap-y-2" aria-label={t("social")}>
               {social.map(([name, url]) => (
@@ -108,11 +110,7 @@ export async function Footer({ locale }: { locale: string }) {
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="mt-8 text-[0.98rem] text-on-dark/60">
-              {common("contentPending")}
-            </p>
-          )}
+          ) : null}
         </div>
       </Container>
       <div className="border-t border-on-dark/15">

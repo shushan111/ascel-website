@@ -38,6 +38,7 @@ export default async function ContactPage({
 
   return (
     <>
+      {/* DRAFT — պատվիրատուի հաստատման կարիք ունի (intro) */}
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} intro={t("intro")} />
       <Section>
         <Container className="grid gap-14 lg:grid-cols-12 lg:gap-16">
@@ -80,6 +81,7 @@ export default async function ContactPage({
               ) : null}
             </dl>
             <div className="mt-8 flex min-h-56 items-center justify-center rounded-md border border-dashed border-line-strong bg-canvas p-6 text-center">
+              {/* DRAFT — պատվիրատուի հաստատման կարիք ունի (mapPending) */}
               <p className="t-small max-w-xs text-muted">{t("mapPending")}</p>
             </div>
           </aside>

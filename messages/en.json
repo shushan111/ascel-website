@@ -148,7 +148,7 @@
   "CoursesPage": {
     "eyebrow": "Education",
     "title": "Courses & Training",
-    "intro": "Course cards are driven by structured data so listings can later come from a CMS or API. Sample courses are clearly marked.",
+    "intro": "Hands-on courses held in Gyumri for physicians and operating room nurses.",
     "date": "Date",
     "location": "Location",
     "type": "Type",
@@ -160,7 +160,7 @@
   "NewsPage": {
     "eyebrow": "News",
     "title": "News & Updates",
-    "intro": "Articles are stored as structured records (`slug`, date, category, body) so this section can later connect to a CMS, database, or API."
+    "intro": "Project progress, courses, and announcements from the center."
   },
   "DonatePage": {
     "eyebrow": "Support",
@@ -172,7 +172,7 @@
   "ContactPage": {
     "eyebrow": "Contact",
     "title": "Get in touch",
-    "intro": "Use the form to reach the center. Email, phone and the detailed address will replace the placeholder fields once provided.",
+    "intro": "Write to us about the project, supporting it, or working together.",
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
@@ -184,8 +184,8 @@
     "phoneLabel": "Phone",
     "locationLabel": "Location",
     "mapTitle": "Map",
-    "mapPending": "An interactive map will be embedded here when a confirmed address is available.",
-    "success": "Thank you. Your message was validated. A form endpoint has not been connected yet, so the message was not forwarded. Please use the published email address when it is provided.",
+    "mapPending": "20-22 Myasnikyan St., Gyumri. A map will be added.",
+    "success": "Thank you. This form does not send messages yet — the connection is still being set up. Please write to us directly by email.",
     "forwarded": "Thank you. Your message has been sent.",
     "error": "Please correct the highlighted fields and try again.",
     "required": "This field is required.",
