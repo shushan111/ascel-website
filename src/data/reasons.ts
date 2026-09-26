@@ -9,9 +9,9 @@ import type { LocalizedString } from "@/types";
  * Control (ACDCS) programme and its 2024–2025 figure from src/data/metrics.ts,
  * the Gyumri course history in data/gos/, and the regional-hub framing in
  * AboutPage.whoBody / visionBody. No new fact, number or name is introduced.
- * The third reason argues from the others rather than citing a statistic,
- * because no brain-drain figure exists anywhere in this project — if the
- * client has one, it belongs here.
+ * The third reason was an argument about specialists leaving, with no figure
+ * behind it. It is now the operating room nurses school — six editions in
+ * data/gos/ — which makes a point that is just as strong and is evidenced.
  */
 export interface Reason {
   id: string;
@@ -62,19 +62,23 @@ export const reasons: Reason[] = [
     },
   },
   {
-    id: "retention",
+    id: "whole-team",
     title: {
-      hy: "Պատրաստությունը պահում է մասնագետին",
-      en: "Training is what keeps a specialist",
-      ru: "Подготовка удерживает специалиста",
+      hy: "Վիրահատությունը թիմային աշխատանք է",
+      en: "Surgery is teamwork",
+      ru: "Операция — командная работа",
     },
     body: {
-      hy: "Երբ առաջադեմ վերապատրաստումը հասանելի չէ տեղում, մասնագետը գնում է այնտեղ, որտեղ այն կա։ Կենտրոնը կառուցվում է, որպեսզի այդ պատրաստությունը լինի Հայաստանում։",
-      en: "When advanced training is not available at home, specialists go where it is. The center is being built so that this training exists in Armenia.",
-      ru: "Когда продвинутая подготовка недоступна дома, специалист уезжает туда, где она есть. Центр строится, чтобы такая подготовка была в Армении.",
+      hy: "Վիրահատարանի բուժքույրերի դպրոցն անցկացվել է վեց անգամ՝ 2019-ից 2026 թթ.։ Վիրաբույժը մենակ չի վիրահատում, և կենտրոնը պատրաստում է ամբողջ թիմը՝ ոչ միայն բժշկին։",
+      en: "The operating room nurses school has run six times between 2019 and 2026. A surgeon does not operate alone, and the center trains the whole team, not only the doctor.",
+      ru: "Школа операционных сестёр проведена шесть раз с 2019 по 2026 год. Хирург не оперирует один, и центр готовит всю команду, а не только врача.",
     },
-    figure: null,
-    figureLabel: null,
+    figure: "6",
+    figureLabel: {
+      hy: "անգամ, 2019–2026",
+      en: "times, 2019–2026",
+      ru: "раза, 2019–2026",
+    },
   },
 ];
 

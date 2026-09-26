@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 import { ProjectHero } from "@/components/project/ProjectHero";
+import { WhyNow } from "@/components/sections/WhyNow";
 import { Intro } from "@/components/sections/Intro";
 import { SupportSection } from "@/components/sections/SupportSection";
 import { ActivePrograms } from "@/components/sections/ActivePrograms";
@@ -44,6 +45,10 @@ export default async function HomePage({
   return (
     <>
       <ProjectHero locale={locale} />
+      {/* Why this matters comes before what the center is: a donor decides in
+          the first screens, and the institutional introduction does not
+          answer "why now". Full re-ordering lands in a later commit. */}
+      <WhyNow locale={locale} />
       <Intro locale={locale} />
       <SupportSection locale={locale} />
       <ActivePrograms locale={locale} />

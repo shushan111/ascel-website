@@ -38,17 +38,19 @@ export async function ProjectHero({ locale }: { locale: string }) {
       <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/40 to-ink/10 lg:bg-linear-to-r lg:from-ink/75 lg:via-ink/35 lg:to-ink/5" />
       <Container className="relative py-20 md:py-24">
         <div className="max-w-2xl">
+          {/* The address only. "Sketch design · 2026" told a donor the plan
+              is not final yet, which is not what this screen is for. */}
           <p className="t-eyebrow text-accent-light">
-            {loc(projectMeta.addressLine, locale)} · {t("eyebrowStage")}
+            {loc(projectMeta.addressLine, locale)}
           </p>
           <h1 className="t-display mt-6 text-balance text-on-dark">
             {t("headline")}
           </h1>
-          {/* Was `t-lead max-w-xl`: five sentences at 20.8px in a 576px
-              column ran to nine lines on desktop and thirteen at 375. A hero
-              paragraph this long is body copy, not a lead, so it takes the
-              body size and the site measure. */}
-          <p className="t-body mt-7 max-w-(--measure) text-on-dark/85">
+          {/* DRAFT — պատվիրատուի հաստատման կարիք ունի (supporting, CTAs).
+              Two sentences, not five: what is being built and how it is paid
+              for. The condition of the roof, the blocked windows and the
+              build sequence belong to the building section further down. */}
+          <p className="t-lead mt-7 max-w-(--measure) text-on-dark/85">
             {t("supporting")}
           </p>
           <div className="mt-10 flex flex-wrap gap-3.5">

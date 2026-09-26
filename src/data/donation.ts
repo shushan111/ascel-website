@@ -11,8 +11,12 @@ import type { DonationOption } from "@/types";
  * may have a different order, and only they know it.
  *
  * `amount` is null everywhere. No cost figure exists anywhere in this project,
- * and a fundraising page is the last place to estimate one. `FundingPriorities`
- * renders the list without prices until real figures arrive.
+ * and a fundraising page is the last place to estimate one.
+ *
+ * `amount` and `status` are not rendered at all while every option carries the
+ * same value: six identical "cost being confirmed / planned" labels are not
+ * information, they are a row of six signs telling a donor nothing is ready.
+ * `FundingPriorities` shows them only once `hasDonationAmounts()` is true.
  */
 export const donationOptions: DonationOption[] = [
   {

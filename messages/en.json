@@ -205,9 +205,9 @@
   "ProjectHero": {
     "eyebrowStage": "Sketch design · 2026",
     "headline": "An abandoned monument in Gyumri becomes a medical training center",
-    "supporting": "The 19th-century house at 20-22 Myasnikyan Street has stood for years with its windows bricked up and its roof collapsing. The project restores it and creates 713.92 m² of teaching space inside and beneath it: an operating room, a cadaver lab, study rooms and a library. Construction depends on donations.",
-    "primaryCta": "Donate to the project",
-    "secondaryCta": "See the whole project",
+    "supporting": "The 19th-century monument at 20-22 Myasnikyan Street is being restored into 713.92 m² of teaching space, with an operating room and a cadaver lab. The building is being built with donations.",
+    "primaryCta": "Support the construction",
+    "secondaryCta": "See the project",
     "imageAlt": "The restored monument facade seen from Myasnikyan Street, under its new wave roof",
     "credit": "Sketch design by {architects}."
   },
@@ -306,7 +306,7 @@
   },
   "Trust": {
     "eyebrow": "Trust",
-    "title": "Who you are trusting with the money",
+    "title": "Who is accountable for the money",
     "subtitle": "Legal status, who controls the funds, and how spending is reported.",
     "pending": "These details will be published once the legal set-up is complete."
   },
