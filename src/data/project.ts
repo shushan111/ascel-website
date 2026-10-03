@@ -74,7 +74,7 @@ export const projectFigures: ProjectFigure[] = [
     id: "levels",
     value: "3",
     label: {
-      hy: "Հարկ՝ նկուղ, մուտք, վերնահարկ",
+      hy: "Հարկ՝ նկուղային, առաջին և վերին",
       ru: "Уровня: подвал, вход, верхний этаж",
       en: "Levels: basement, ground, upper",
     },
@@ -112,7 +112,7 @@ export const projectLevels: ProjectLevel[] = [
       en: "Working level",
     },
     summary: {
-      hy: "Փակ, կլիմայավերահսկվող հարկ՝ վիրահատարանով և կադավեր (վետ-) լաբորատորիայով։ Շենքի բարձրությունը կրճատվել է հենց այս մութ գոտիները հողի տակ տանելու համար՝ փողոցից շենքը մնում է ցածրահարկ։",
+      hy: "Փակ հարկ՝ կլիմայական հսկողությամբ, որտեղ տեղակայված են վիրահատարանը և կադավեր (վետ-) լաբորատորիան։ Շենքը հենց այն պատճառով է իջեցվել, որ առանց բնական լույսի այս գոտիները տեղավորվեն գետնի տակ, իսկ փողոցից շենքը մնա ցածրահարկ։",
       ru: "Закрытый климат-контролируемый уровень с операционной и кадавер-лабораторией. Высота здания снижена именно ради того, чтобы увести эти «тёмные» зоны под землю.",
       en: "A closed, climate-controlled level holding the operating room and the cadaver lab. The building was lowered precisely so these dark zones could go underground.",
     },
@@ -147,10 +147,10 @@ export const projectLevels: ProjectLevel[] = [
     },
     total: "312,42",
     rooms: [
-      { no: "01", name: { hy: "Ախոռներ", ru: "Боксы", en: "Boxes" }, area: "14,95" },
-      { no: "02", name: { hy: "Ուսումնական սենք", ru: "Учебная комната", en: "Study room" }, area: "26,96" },
-      { no: "03", name: { hy: "Ուսումնական սենք", ru: "Учебная комната", en: "Study room" }, area: "29,00" },
-      { no: "04", name: { hy: "Ուսումնական սենք", ru: "Учебная комната", en: "Study room" }, area: "22,74" },
+      { no: "01", name: { hy: "Խցիկներ", ru: "Боксы", en: "Boxes" }, area: "14,95" },
+      { no: "02", name: { hy: "Ուսումնական սենյակ", ru: "Учебная комната", en: "Study room" }, area: "26,96" },
+      { no: "03", name: { hy: "Ուսումնական սենյակ", ru: "Учебная комната", en: "Study room" }, area: "29,00" },
+      { no: "04", name: { hy: "Ուսումնական սենյակ", ru: "Учебная комната", en: "Study room" }, area: "22,74" },
       { no: "06", name: { hy: "Գրասենյակային տարածք", ru: "Офисная зона", en: "Office area" }, area: "40,54" },
       { no: "07", name: { hy: "Ընդունարան", ru: "Приёмная", en: "Reception" }, area: "21,30" },
       { no: "08", name: { hy: "Սրճարան", ru: "Кафе", en: "Café" }, area: "26,92" },
@@ -179,7 +179,7 @@ export const projectLevels: ProjectLevel[] = [
     },
     total: "215,33",
     rooms: [
-      { no: "01", name: { hy: "Հանգստի զոնա", ru: "Зона отдыха", en: "Rest area" }, area: "25,75" },
+      { no: "01", name: { hy: "Հանգստի գոտի", ru: "Зона отдыха", en: "Rest area" }, area: "25,75" },
       { no: "03", name: { hy: "Սրահ", ru: "Зал", en: "Hall" }, area: "93,01" },
       { no: "04", name: { hy: "Տերաս", ru: "Терраса", en: "Terrace" }, area: "11,90" },
       { no: "05", name: { hy: "Միջանցքներ", ru: "Коридоры", en: "Circulation" }, area: "42,07" },
@@ -204,7 +204,7 @@ export const projectSteps: ProjectStep[] = [
   {
     no: "01",
     title: {
-      hy: "Տարածք և գոյություն ունեցող շենք",
+      hy: "Տարածքը և առկա շենքը",
       ru: "Участок и существующее здание",
       en: "Site and existing building",
     },
@@ -236,7 +236,7 @@ export const projectSteps: ProjectStep[] = [
   {
     no: "05",
     title: {
-      hy: "Տանիքի տեղադրում և տանիքածածկի իրականացում",
+      hy: "Տանիքի կառուցում և տանիքածածկի տեղադրում",
       ru: "Монтаж кровли и кровельного покрытия",
       en: "Installing the roof and its covering",
     },
@@ -244,7 +244,7 @@ export const projectSteps: ProjectStep[] = [
   {
     no: "06",
     title: {
-      hy: "Երկրորդ հարկի հավելում՝ փողոցից չտեսանելի ծավալ",
+      hy: "Երկրորդ հարկի հավելում՝ փողոցից չերևացող ծավալ",
       ru: "Добавление второго этажа — объём, не видимый с улицы",
       en: "Adding the second floor — a volume unseen from the street",
     },
@@ -267,7 +267,7 @@ export const projectConditions: ProjectCondition[] = [
       en: "Every window opening is bricked up with tuff blocks.",
     },
     after: {
-      hy: "Բոլոր լուսամուտախորշերը վերաբացվում են և ստանում սպիտակ ներկված փայտե շրջանակներ՝ 19-20-րդ դարի Գյումրու տներին բնորոշ։",
+      hy: "Բոլոր լուսամուտախորշերը վերաբացվում են և ստանում սպիտակ ներկված փայտե շրջանակներ՝ 19–20-րդ դարերի Գյումրու տներին բնորոշ։",
       ru: "Все проёмы раскрываются и получают белые деревянные рамы, характерные для гюмрийских домов XIX-XX веков.",
       en: "Every opening is reopened and given the white-painted wooden frames typical of 19th-20th century Gyumri houses.",
     },

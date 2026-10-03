@@ -27,7 +27,7 @@ export function SectionHeader({
           <p
             className={cn(
               "t-eyebrow mb-3",
-              invert ? "text-accent-light" : "text-accent",
+              invert ? "text-accent-light" : "text-accent-ink",
             )}
           >
             {eyebrow}

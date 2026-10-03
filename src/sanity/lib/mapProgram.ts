@@ -257,7 +257,7 @@ function mapProfile(
 export function mapSanityProgram(doc: SanityProgramDocument): Program {
   const slug = doc.slug ?? doc._id;
   const title = toLocalizedString(doc.title);
-  const image = buildImageUrl(doc.image, "/images/capability-simulation.webp");
+  const image = buildImageUrl(doc.image, "");
   const shortTitle = doc.shortTitle?.en
     ? toLocalizedString(doc.shortTitle)
     : title;

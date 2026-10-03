@@ -37,7 +37,8 @@ type SanityNewsDocument = {
   gallery?: SanityImage[] | null;
 };
 
-const fallbackNewsImage = "/images/hero-simulation.webp";
+// No stock fallback — see MediaFallback.
+const fallbackNewsImage = "";
 
 function toLocalizedString(value: SanityLocalizedValue | null | undefined): LocalizedString {
   return {

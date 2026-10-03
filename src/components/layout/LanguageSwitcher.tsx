@@ -43,7 +43,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
           className={cn(
             // Old: text-[0.68rem] (10.9px). Armenian capitals need more than
             // that; this matches the new .t-meta-sm floor of 12.5px.
-            "min-h-9 px-2.5 text-[0.78rem] font-bold uppercase tracking-[0.08em] transition-colors",
+            "min-h-9 px-2.5 text-[0.78rem] font-medium uppercase tracking-[0.08em] transition-colors",
             locale === code
               ? "border-b-2 border-ink text-ink"
               : "border-b-2 border-transparent text-muted hover:text-ink",

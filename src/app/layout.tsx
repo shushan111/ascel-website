@@ -1,40 +1,29 @@
-import {
-  Noto_Sans,
-  Noto_Sans_Armenian,
-  Noto_Serif,
-  Noto_Serif_Armenian,
-} from "next/font/google";
+import { Google_Sans, Noto_Sans, Noto_Sans_Armenian } from "next/font/google";
 import { getLocale } from "next-intl/server";
 
-// Serif headings over a sans body is what gives the reference design its
-// editorial voice. Noto's serif and sans share metrics and both ship Armenian
-// and Cyrillic, so hy and ru read in the same voice as en.
-const notoSerif = Noto_Serif({
-  subsets: ["latin", "latin-ext", "cyrillic"],
-  variable: "--font-noto-serif",
+// Option B — Premium medical. Google Sans carries headings and figures: it is
+// one of only two sans families on Google Fonts with properly drawn Armenian,
+// and it ships Cyrillic too, so hy, ru and en headings share one design.
+// Noto Sans (+ its Armenian companion) carries everything read at length.
+const googleSans = Google_Sans({
+  subsets: ["latin", "latin-ext", "cyrillic", "armenian"],
+  variable: "--font-google-sans",
   display: "swap",
-  weight: ["400", "600", "700"],
-});
-
-const notoSerifArmenian = Noto_Serif_Armenian({
-  subsets: ["armenian"],
-  variable: "--font-noto-serif-armenian",
-  display: "swap",
-  weight: ["400", "600", "700"],
+  weight: ["400", "500"],
 });
 
 const notoSans = Noto_Sans({
   subsets: ["latin", "latin-ext", "cyrillic"],
   variable: "--font-noto-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
 });
 
 const notoSansArmenian = Noto_Sans_Armenian({
   subsets: ["armenian"],
   variable: "--font-noto-sans-armenian",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
 });
 
 export default async function RootLayout({
@@ -47,7 +36,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${notoSerif.variable} ${notoSerifArmenian.variable} ${notoSans.variable} ${notoSansArmenian.variable} h-full antialiased`}
+      className={`${googleSans.variable} ${notoSans.variable} ${notoSansArmenian.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-canvas font-sans text-body">
         {children}

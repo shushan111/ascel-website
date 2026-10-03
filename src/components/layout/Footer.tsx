@@ -21,11 +21,11 @@ export async function Footer({ locale }: { locale: string }) {
   const social = Object.entries(siteConfig.social).filter(([, url]) => url);
 
   return (
-    <footer className="bg-ink text-on-dark/70">
+    <footer className="border-t border-on-dark/10 bg-night text-on-dark/70">
       {/* band-compact rather than the full band: the last section already
           ends with 112px of its own, and two full bands stacked read as a
           gap rather than as a close. Old: py-16 md:py-20. */}
-      <Container className="grid gap-12 py-16 md:grid-cols-2 md:py-band-compact lg:grid-cols-12 lg:gap-10">
+      <Container width="wide" className="grid gap-12 py-16 md:grid-cols-2 md:py-band-compact lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
           <Logo invert />
           <p className="mt-6 max-w-[22rem] text-[0.98rem] leading-7 text-on-dark/70">
@@ -36,7 +36,7 @@ export async function Footer({ locale }: { locale: string }) {
            the legal column carries "Գաղտնիության քաղաքականություն", which
            broke across three lines in a 2-column track. */}
         <div className="lg:col-span-2">
-          <p className="t-meta-sm text-on-dark">{t("navigation")}</p>
+          <p className="text-[0.95rem] font-medium text-on-dark">{t("navigation")}</p>
           <ul className="mt-6 space-y-3">
             {footerNav.map((item) => (
               <li key={item.key}>
@@ -48,7 +48,7 @@ export async function Footer({ locale }: { locale: string }) {
           </ul>
         </div>
         <div className="lg:col-span-3">
-          <p className="t-meta-sm text-on-dark">{t("programs")}</p>
+          <p className="text-[0.95rem] font-medium text-on-dark">{t("programs")}</p>
           <ul className="mt-6 space-y-3">
             {programs.map((program) => {
               const target = getProgramHref(program);
@@ -79,7 +79,7 @@ export async function Footer({ locale }: { locale: string }) {
           </ul>
         </div>
         <div className="lg:col-span-3">
-          <p className="t-meta-sm text-on-dark">{t("legal")}</p>
+          <p className="text-[0.95rem] font-medium text-on-dark">{t("legal")}</p>
           <ul className="mt-6 space-y-3">
             <li>
               <Link href="/privacy" className={linkClass}>
@@ -114,7 +114,7 @@ export async function Footer({ locale }: { locale: string }) {
         </div>
       </Container>
       <div className="border-t border-on-dark/15">
-        <Container className="flex flex-col gap-2 py-7 text-[0.82rem] leading-6 text-on-dark/60 sm:flex-row sm:justify-between">
+        <Container width="wide" className="flex flex-col gap-2 py-7 text-[0.82rem] leading-6 text-on-dark/60 sm:flex-row sm:justify-between">
           <p>
             © {year} {t("copyright")}
           </p>

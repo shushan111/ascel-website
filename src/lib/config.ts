@@ -32,15 +32,16 @@ export const donationConfig = {
   providerName: process.env.NEXT_PUBLIC_DONATION_PROVIDER ?? "",
 };
 
+// The path a visitor is offered: who we are → the work → the project →
+// support. Home is the logo; donate is the separate CTA.
 export const navItems = [
-  { href: "/", key: "home" },
   { href: "/about", key: "about" },
   { href: "/programs", key: "programs" },
   { href: "/courses", key: "courses" },
-  { href: "/simulation-center", key: "simulation" },
   { href: "/news", key: "news" },
-  { href: "/donate", key: "donate" },
+  { href: "/simulation-center", key: "simulation" },
   { href: "/contact", key: "contact" },
+  { href: "/donate", key: "donate" },
 ] as const;
 
 // Donate is surfaced as a dedicated CTA in the mobile menu, so it is dropped

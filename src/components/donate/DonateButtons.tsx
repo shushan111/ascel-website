@@ -12,14 +12,10 @@ export async function DonateButtons({
   const donateHref = donationConfig.providerUrl || "/donate";
   const donateExternal = Boolean(donationConfig.providerUrl);
 
-  const donateClass = invert
-    ? buttonClassName("onDark")
-    : buttonClassName("primary");
+  // The give action is bronze wherever it appears, so it is recognisable.
+  const donateClass = buttonClassName("support");
   const supportClass = invert
-    ? buttonClassName(
-        "secondary",
-        "border-on-dark/40 text-on-dark hover:border-on-dark hover:bg-on-dark/12 hover:text-on-dark",
-      )
+    ? buttonClassName("outlineDark")
     : buttonClassName("secondary");
 
   return (

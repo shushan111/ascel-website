@@ -20,7 +20,6 @@ const FOCUSABLE_SELECTOR =
 
 export function MobileMenu() {
   const t = useTranslations("Nav");
-  const headerT = useTranslations("Header");
   const pathname = usePathname();
 
   const [mounted, setMounted] = useState(false);
@@ -158,7 +157,7 @@ export function MobileMenu() {
             <button
               ref={closeRef}
               type="button"
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-sm border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper"
               aria-label={t("closeMenu")}
               onClick={() => close({ restoreFocus: true })}
             >
@@ -210,7 +209,7 @@ export function MobileMenu() {
                         aria-hidden="true"
                         className={cn(
                         "t-meta-sm shrink-0 transition-colors",
-                        active ? "text-accent" : "text-line-strong",
+                        active ? "text-accent-ink" : "text-line-strong",
                       )}
                       >
                         {String(index + 1).padStart(2, "0")}
@@ -245,11 +244,11 @@ export function MobileMenu() {
               href="/donate"
               onClick={() => close()}
               className={cn(
-                buttonClassName("primary"),
+                buttonClassName("support"),
                 "mt-6 w-full sm:mt-0 sm:w-auto sm:min-w-[13rem]",
               )}
             >
-              {headerT("donate")}
+              {t("donate")}
             </Link>
           </div>
         </div>
@@ -262,7 +261,7 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper min-[1280px]:hidden"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper min-[1280px]:hidden"
         aria-label={t("openMenu")}
         aria-expanded={mounted}
         aria-controls={MENU_ID}

@@ -1,305 +1,239 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import type { ProgramDetailContent } from "@/types";
-import { cn, loc } from "@/lib/utils";
+import type { Course, ProgramDetailContent } from "@/types";
+import type { WorkPhoto } from "@/data/work";
+import { Link } from "@/i18n/navigation";
+import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 import { ExternalIcon } from "@/components/ui/ExternalIcon";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { ImageReveal } from "@/components/motion/ImageReveal";
+import { getPhotoCaption } from "@/lib/courseIndex";
 
-function SectionTitle({
+/** Heading left, text right: the page's one recurring editorial unit. */
+function Block({
+  title,
+  body,
+  locale,
   children,
-  invert = false,
 }: {
-  children: React.ReactNode;
-  invert?: boolean;
+  title: string;
+  body: { en?: string; ru: string; hy?: string }[];
+  locale: string;
+  children?: React.ReactNode;
 }) {
   return (
-    <h2
-      className={cn(
-        "t-h2 text-balance",
-        invert ? "text-on-dark" : "text-ink",
-      )}
-    >
-      {children}
-    </h2>
+    <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
+      <FadeIn className="lg:col-span-4">
+        <h2 className="t-h2 text-balance text-ink">{title}</h2>
+      </FadeIn>
+      <div className="lg:col-span-7 lg:col-start-6">
+        <FadeIn className="space-y-5">
+          {body.map((paragraph, index) => (
+            <p key={index} className={index === 0 ? "t-lead text-body" : "t-body text-muted"}>
+              {loc(paragraph, locale)}
+            </p>
+          ))}
+        </FadeIn>
+        {children}
+      </div>
+    </div>
   );
 }
 
 /**
- * Long-form body for a program that has a full profile in `Program.detail`.
- * Rendered below the shared program hero.
+ * Long-form body for a programme with a full profile, read in the order a
+ * donor asks: what it is, what it does, who it is for, what it has achieved.
+ * Real course photographs break the text where the programme has them.
  */
 export async function ProgramProfile({
   detail,
   locale,
+  photos = [],
+  coursesHeld = [],
 }: {
   detail: ProgramDetailContent;
   locale: string;
+  photos?: WorkPhoto[];
+  coursesHeld?: Course[];
 }) {
   const common = await getTranslations("Common");
+  const t = await getTranslations("ProgramsPage");
+  const home = await getTranslations("Home");
+  const coursesT = await getTranslations("CoursesHome");
   const sourceNote = loc(detail.sourceNote, locale);
+  const captions = await Promise.all(photos.map((photo) => getPhotoCaption(photo.course, locale)));
+  const [lead, ...rest] = photos;
 
   return (
     <>
-      <section className="border-y border-line bg-canvas py-10 md:py-12">
-        <Container>
-          <dl className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
-            {detail.facts.map((fact) => (
-              <div key={fact.label.en}>
-                <dt className="t-meta-sm text-muted">
-                  {loc(fact.label, locale)}
-                </dt>
-                <dd className="mt-2 text-base font-medium leading-6 text-ink">
-                  {loc(fact.value, locale)}
-                </dd>
-              </div>
-            ))}
-          </dl>
+      {/* What it is. */}
+      <section className="bg-canvas py-20 md:py-28">
+        <Container width="wide">
+          <Block title={loc(detail.about.title, locale)} body={detail.about.body} locale={locale} />
+          <div className="mt-20 md:mt-28">
+            <Block title={loc(detail.mission.title, locale)} body={detail.mission.body} locale={locale}>
+              <ol className="mt-10 border-t border-line">
+                {detail.mission.points.map((point, index) => (
+                  <li key={index} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-5">
+                    <span className="t-meta text-muted tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+                    <p className="t-body text-ink">{loc(point, locale)}</p>
+                  </li>
+                ))}
+              </ol>
+            </Block>
+          </div>
         </Container>
       </section>
 
-      <Section tone="paper">
-        <Container>
-          <FadeIn className="max-w-3xl">
-            <SectionTitle>{loc(detail.about.title, locale)}</SectionTitle>
-            <div className="mt-6 space-y-5">
-              {detail.about.body.map((paragraph) => (
-                <p
-                  key={paragraph.en}
-                  className="t-body text-muted"
-                >
-                  {loc(paragraph, locale)}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-        </Container>
-      </Section>
-
-      <Section tone="paper">
-        <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <FadeIn className="lg:col-span-6">
-            <SectionTitle>{loc(detail.mission.title, locale)}</SectionTitle>
-            <div className="mt-6 space-y-5">
-              {detail.mission.body.map((paragraph) => (
-                <p
-                  key={paragraph.en}
-                  className="t-body text-muted"
-                >
-                  {loc(paragraph, locale)}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.08} className="lg:col-span-6">
-            <ol className="space-y-4">
-              {detail.mission.points.map((point, index) => (
-                <li
-                  key={point.en}
-                  className="flex gap-5 border-t border-line pt-5"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="font-display text-sm font-semibold tabular-nums text-muted"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="t-small text-ink">
-                    {loc(point, locale)}
-                  </span>
+      {/* What it does. */}
+      <section className="bg-paper py-20 md:py-28">
+        <Container width="wide">
+          <Block title={loc(detail.education.title, locale)} body={detail.education.body} locale={locale}>
+            <ol className="mt-10 border-t border-line">
+              {detail.education.formats.map((format, index) => (
+                <li key={index} className="grid gap-2 border-b border-line py-5 sm:grid-cols-[3rem_1fr] sm:gap-4">
+                  <span className="t-meta text-muted tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="t-h4 text-ink">{loc(format.title, locale)}</h3>
+                    <p className="t-small mt-1.5 text-muted">{loc(format.description, locale)}</p>
+                  </div>
                 </li>
               ))}
             </ol>
-          </FadeIn>
+          </Block>
         </Container>
-      </Section>
 
-      <Section tone="paper">
-        <Container>
-          <FadeIn className="max-w-3xl">
-            <SectionTitle>{loc(detail.education.title, locale)}</SectionTitle>
-            <div className="mt-6 space-y-5">
-              {detail.education.body.map((paragraph) => (
-                <p
-                  key={paragraph.en}
-                  className="t-body text-muted"
-                >
-                  {loc(paragraph, locale)}
-                </p>
+        {lead ? (
+          <div className="mx-auto mt-20 grid max-w-[100rem] gap-6 md:mt-28 md:grid-cols-12 md:px-8">
+            <figure className="md:col-span-8">
+              <ImageReveal>
+                <div className="relative aspect-[3/2] bg-mist">
+                  <Image src={lead.src} alt={captions[0] ?? ""} fill className="object-cover" sizes="(min-width: 768px) 64vw, 100vw" />
+                </div>
+              </ImageReveal>
+              {captions[0] ? <figcaption className="mt-3 px-5 text-[0.82rem] text-muted sm:px-6 md:px-0">{captions[0]}</figcaption> : null}
+            </figure>
+            <div className="grid gap-6 px-5 sm:grid-cols-2 sm:px-6 md:col-span-4 md:grid-cols-1 md:px-0">
+              {rest.slice(0, 2).map((photo, index) => (
+                <figure key={photo.src}>
+                  <ImageReveal>
+                    <div className="relative aspect-[3/2] bg-mist">
+                      <Image src={photo.src} alt={captions[index + 1] ?? ""} fill className="object-cover" sizes="(min-width: 768px) 30vw, 50vw" />
+                    </div>
+                  </ImageReveal>
+                  {captions[index + 1] ? <figcaption className="mt-3 text-[0.82rem] text-muted">{captions[index + 1]}</figcaption> : null}
+                </figure>
               ))}
             </div>
-          </FadeIn>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {detail.education.formats.map((format, index) => (
-              <FadeIn key={format.title.en} delay={index * 0.06}>
-                <article className="flex h-full flex-col rounded-md border border-line bg-paper p-6 transition-colors duration-300 hover:border-ink">
-                  <h3 className="t-h4 text-ink">
-                    {loc(format.title, locale)}
-                  </h3>
-                  <p className="t-small mt-3 text-muted">
-                    {loc(format.description, locale)}
-                  </p>
-                </article>
-              </FadeIn>
-            ))}
+          </div>
+        ) : null}
+      </section>
+
+      {/* Who it is for, and in which fields. */}
+      <section className="bg-canvas py-20 md:py-28">
+        <Container width="wide">
+          <Block title={loc(detail.audience.title, locale)} body={detail.audience.body} locale={locale}>
+            <ul className="mt-10 grid gap-x-8 border-t border-line sm:grid-cols-2">
+              {detail.audience.groups.map((group, index) => (
+                <li key={index} className="border-b border-line py-5">
+                  <h3 className="t-h4 text-ink">{loc(group.title, locale)}</h3>
+                  <p className="t-small mt-1.5 text-muted">{loc(group.description, locale)}</p>
+                </li>
+              ))}
+            </ul>
+          </Block>
+
+          <div className="mt-20 md:mt-28">
+            <Block title={loc(detail.focusAreas.title, locale)} body={detail.focusAreas.body} locale={locale}>
+              <ul className="mt-10 flex flex-wrap gap-x-2 gap-y-2">
+                {detail.focusAreas.areas.map((area, index) => (
+                  <li key={index} className="border border-line px-3.5 py-2 text-[0.95rem] text-ink" title={loc(area.description, locale)}>
+                    {loc(area.title, locale)}
+                  </li>
+                ))}
+              </ul>
+            </Block>
           </div>
         </Container>
-      </Section>
+      </section>
 
-      <Section tone="paper">
-        <Container>
-          <FadeIn className="max-w-3xl">
-            <SectionTitle>{loc(detail.audience.title, locale)}</SectionTitle>
-            <div className="mt-6 space-y-5">
-              {detail.audience.body.map((paragraph) => (
-                <p
-                  key={paragraph.en}
-                  className="t-body text-muted"
-                >
-                  {loc(paragraph, locale)}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {detail.audience.groups.map((group, index) => (
-              <li key={group.title.en} className="h-full">
-                <FadeIn delay={index * 0.06} className="h-full">
-                  <div className="flex h-full flex-col border-t-2 border-ink bg-paper pt-5">
-                    <h3 className="t-h4 text-ink">
-                      {loc(group.title, locale)}
-                    </h3>
-                    <p className="t-small mt-3 text-muted">
-                      {loc(group.description, locale)}
-                    </p>
-                  </div>
-                </FadeIn>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
-      <Section tone="paper">
-        <Container>
-          <FadeIn className="max-w-3xl">
-            <SectionTitle>{loc(detail.focusAreas.title, locale)}</SectionTitle>
-            <div className="mt-6 space-y-5">
-              {detail.focusAreas.body.map((paragraph) => (
-                <p
-                  key={paragraph.en}
-                  className="t-body text-muted"
-                >
-                  {loc(paragraph, locale)}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {detail.focusAreas.areas.map((area, index) => (
-              <li key={area.title.en} className="h-full">
-                <FadeIn delay={index * 0.05} className="h-full">
-                  <div className="flex h-full flex-col rounded-md border border-line bg-canvas p-6 transition-colors duration-300 hover:border-ink">
-                    <h3 className="t-h4 text-ink">
-                      {loc(area.title, locale)}
-                    </h3>
-                    <p className="t-small mt-3 text-muted">
-                      {loc(area.description, locale)}
-                    </p>
-                  </div>
-                </FadeIn>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
-      {/* Was a second full-width dark slab. A milestone list reads better on a
-          light ground anyway, and the page no longer carries two dark blocks. */}
-      <Section tone="paper">
-        <Container>
-          <FadeIn className="max-w-3xl">
-            <SectionTitle>{loc(detail.highlights.title, locale)}</SectionTitle>
-            <div className="mt-6 space-y-5">
-              {detail.highlights.body.map((paragraph) => (
-                <p key={paragraph.en} className="t-body text-muted">
-                  {loc(paragraph, locale)}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-          <ol className="mt-12 space-y-0">
-            {detail.highlights.milestones.map((milestone, index) => (
-              <li key={milestone.title.en}>
-                <FadeIn delay={Math.min(index, 4) * 0.05}>
-                  <div className="grid gap-3 border-t border-line py-7 md:grid-cols-12 md:gap-8">
-                    <p className="t-meta tabular-nums text-muted md:col-span-3 md:pt-1">
-                      {loc(milestone.date, locale)}
-                    </p>
-                    <div className="md:col-span-9">
-                      <h3 className="t-h3 text-balance text-ink">
-                        {loc(milestone.title, locale)}
-                      </h3>
-                      <p className="t-small mt-3 max-w-3xl text-muted">
-                        {loc(milestone.description, locale)}
-                      </p>
+      {/* What it has achieved: the milestones, then the course archive. */}
+      <section className="bg-paper py-20 md:py-28">
+        <Container width="wide">
+          <Block title={loc(detail.highlights.title, locale)} body={detail.highlights.body} locale={locale}>
+            <ol className="mt-10 border-t border-line">
+              {detail.highlights.milestones.map((milestone, index) => (
+                <li key={index}>
+                  <FadeIn delay={Math.min(index, 4) * 0.05}>
+                    <div className="grid gap-2 border-b border-line py-6 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                      <p className="t-meta text-muted tabular-nums">{loc(milestone.date, locale)}</p>
+                      <div>
+                        <h3 className="t-h4 text-balance text-ink">{loc(milestone.title, locale)}</h3>
+                        <p className="t-small mt-2 text-muted">{loc(milestone.description, locale)}</p>
+                      </div>
                     </div>
-                  </div>
-                </FadeIn>
-              </li>
-            ))}
-          </ol>
+                  </FadeIn>
+                </li>
+              ))}
+            </ol>
+          </Block>
+
+          {coursesHeld.length ? (
+            <div className="mt-20 grid gap-6 md:mt-28 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-4">
+                <h2 className="t-h2 text-ink">{home("workListTitle")}</h2>
+                <p className="t-small mt-3 text-muted">{t("results")} · {coursesHeld.length}</p>
+              </div>
+              <div className="lg:col-span-7 lg:col-start-6">
+                <ul className="border-t border-line">
+                  {coursesHeld.map((course) => (
+                    <li key={course.id} className="border-b border-line">
+                      <Link href={`/courses/${course.slug}`} className="group grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
+                        <span className="t-meta text-muted">{loc(course.date, locale)}</span>
+                        <span className="text-[1.02rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent-ink">
+                          {loc(course.title, locale)}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <ArrowLink href="/courses" className="mt-6">{coursesT("viewAll")}</ArrowLink>
+              </div>
+            </div>
+          ) : null}
         </Container>
-      </Section>
+      </section>
 
       {detail.cta || sourceNote ? (
-        <Section tone="paper">
-          <Container>
-            <FadeIn>
-              <div className="rounded-md border border-line bg-paper px-6 py-14 text-center sm:px-10 md:py-20">
-                {detail.cta ? (
-                  <>
-                    <p className="t-meta-sm text-accent">
-                      {loc(detail.cta.eyebrow, locale)}
-                    </p>
-                    <h2 className="t-h2 mx-auto mt-4 max-w-2xl text-balance text-ink">
-                      {loc(detail.cta.title, locale)}
-                    </h2>
-                    <p className="t-body mx-auto mt-5 max-w-xl text-muted">
-                      {loc(detail.cta.body, locale)}
-                    </p>
-                    <div className="mt-9 flex justify-center">
-                      <a
-                        href={detail.cta.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={buttonClassName(
-                          "primary",
-                          "w-full min-h-12 sm:w-auto sm:px-8",
-                        )}
-                      >
-                        {loc(detail.cta.label, locale)}
-                        <ExternalIcon />
-                        <span className="sr-only">{common("externalLink")}</span>
-                      </a>
-                    </div>
-                  </>
-                ) : null}
-                {sourceNote ? (
-                  <p
-                    className={cn(
-                      "mx-auto max-w-2xl text-xs leading-6 text-muted",
-                      detail.cta ? "mt-10 border-t border-line pt-7" : "",
-                    )}
-                  >
-                    {sourceNote}
-                  </p>
-                ) : null}
+        <section className="bg-canvas py-20 md:py-24">
+          <Container width="wide" className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+            {detail.cta ? (
+              <div className="lg:col-span-7">
+                <p className="t-small text-muted">{loc(detail.cta.eyebrow, locale)}</p>
+                <h2 className="t-h2 mt-3 text-balance text-ink">{loc(detail.cta.title, locale)}</h2>
+                <p className="t-body mt-5 max-w-xl text-muted">{loc(detail.cta.body, locale)}</p>
+                <a
+                  href={detail.cta.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonClassName("secondary", "mt-8")}
+                >
+                  {loc(detail.cta.label, locale)}
+                  <ExternalIcon />
+                  <span className="sr-only">{common("externalLink")}</span>
+                </a>
               </div>
-            </FadeIn>
+            ) : null}
+            {sourceNote ? (
+              <p className="text-[0.85rem] leading-6 text-muted lg:col-span-4 lg:col-start-9 lg:self-end">
+                {sourceNote}
+              </p>
+            ) : null}
           </Container>
-        </Section>
+        </section>
       ) : null}
     </>
   );

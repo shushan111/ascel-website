@@ -22,7 +22,7 @@ export function FounderCard({
 
   return (
     <FadeIn delay={Math.min(index, 4) * 0.07}>
-      <article className="group relative aspect-[3/4] overflow-hidden rounded-md bg-mist">
+      <article className="group relative aspect-[3/4] overflow-hidden bg-mist">
         <Image
           src={founder.photo}
           alt={name}
@@ -36,7 +36,7 @@ export function FounderCard({
         />
         <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
           {founder.role ? (
-            <p className="t-meta-sm text-on-dark/60">
+            <p className="text-[0.85rem] text-on-dark/70">
               {loc(founder.role, locale)}
             </p>
           ) : null}

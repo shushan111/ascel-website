@@ -23,6 +23,23 @@ export interface FundraisingState {
   lastUpdated: string | null;
 }
 
+/**
+ * Currencies offered in the donation form, first one is the default.
+ * DRAFT — պատվիրատուի հաստատման կարիք ունի: whether USD/EUR are accepted
+ * depends on the bank account (see CLIENT-CHECKLIST, section 3).
+ */
+export const donationCurrencies = ["AMD", "USD", "EUR"] as const;
+export type DonationCurrency = (typeof donationCurrencies)[number];
+
+/**
+ * Quick-pick amounts under the amount field, per currency. They only fill
+ * the field; a currency with no entry shows no presets.
+ * DRAFT — պատվիրատուի հաստատման կարիք ունի (values suggested in review).
+ */
+export const donationPresets: Partial<Record<DonationCurrency, number[]>> = {
+  AMD: [10000, 25000, 50000, 100000],
+};
+
 export const fundraising: FundraisingState = {
   showProgress: false,
   goal: null,

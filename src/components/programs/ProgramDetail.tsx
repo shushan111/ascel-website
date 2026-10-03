@@ -10,6 +10,8 @@ import { ExternalIcon } from "@/components/ui/ExternalIcon";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ProgramProfile } from "@/components/programs/ProgramProfile";
+import { programPhotos } from "@/data/work";
+import { getCoursesByDate } from "@/lib/courseIndex";
 
 export async function ProgramDetail({
   program,
@@ -26,77 +28,80 @@ export async function ProgramDetail({
       ? common("officialWebsite")
       : common(program.ctaLabel);
 
+  const photos = programPhotos[program.slug] ?? [];
+  // Every course in the archive is a Gyumri Orthopedic School course.
+  const coursesHeld =
+    program.slug === "gyumri-orthopedic-school"
+      ? (await getCoursesByDate()).filter((course) => course.status === "past")
+      : [];
+  const t = await getTranslations("ProgramsPage");
+
   return (
     <>
-      {/* Same light opening as news articles and the simulation centre, so
-          every inner page enters the same way. */}
-      <header className="bg-canvas pt-10 pb-14 md:pt-14 md:pb-16">
-        <Container>
+      <header className="bg-canvas pb-12 pt-10 md:pb-16 md:pt-14">
+        <Container width="wide">
           <Link
             href="/programs"
-            className="inline-flex min-h-9 items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
+            className="inline-flex min-h-9 items-center gap-2 text-[0.92rem] text-muted transition-colors hover:text-ink"
           >
-            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="m7.3 3.3.8.8L4.8 7.4h8.7v1.2H4.8l3.3 3.3-.8.8L2.6 8 7.3 3.3Z"
-              />
-            </svg>
+            <span aria-hidden="true">←</span>
             {common("backToPrograms")}
           </Link>
 
-          <div className="mt-8 max-w-2xl">
-            <p className="t-eyebrow text-accent">
-              {loc(program.category, locale)}
-            </p>
-            <h1 className="t-display mt-4 text-balance text-ink">
-              {loc(program.title, locale)}
-            </h1>
-            <p className="t-lead mt-6 text-muted">
-              {loc(detail ? detail.tagline : program.description, locale)}
-            </p>
-          </div>
-
-          {/* Programs with a full profile surface their external CTA at the
-              foot of the page instead, so the opening stays uncluttered. */}
-          {detail ? null : (
-            <div className="mt-8">
-              {cta.external ? (
-                <a
-                  href={cta.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonClassName("primary")}
-                >
-                  {ctaLabel}
-                  <ExternalIcon />
-                  <span className="sr-only">{common("externalLink")}</span>
-                </a>
-              ) : (
-                <Link href={cta.href} className={buttonClassName("primary")}>
-                  {ctaLabel}
-                </Link>
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-7">
+              <p className="t-eyebrow text-muted">{loc(program.category, locale)}</p>
+              <h1 className="t-display mt-5 text-balance text-ink">{loc(program.title, locale)}</h1>
+              <p className="t-lead mt-7 max-w-[38rem] text-muted">
+                {loc(detail ? detail.tagline : program.description, locale)}
+              </p>
+              {detail ? null : (
+                <div className="mt-8">
+                  {cta.external ? (
+                    <a href={cta.href} target="_blank" rel="noopener noreferrer" className={buttonClassName("secondary")}>
+                      {ctaLabel}
+                      <ExternalIcon />
+                      <span className="sr-only">{common("externalLink")}</span>
+                    </a>
+                  ) : (
+                    <Link href={cta.href} className={buttonClassName("secondary")}>
+                      {ctaLabel}
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
-          )}
+            {/* The programme's facts beside the title: dates and scale first. */}
+            {detail?.facts.length ? (
+              <dl className="self-end border-t border-ink/70 lg:col-span-4 lg:col-start-9">
+                <p className="sr-only">{t("keyFacts")}</p>
+                {detail.facts.map((fact, index) => (
+                  <div key={index} className="flex justify-between gap-6 border-b border-line py-3.5">
+                    <dt className="text-[0.92rem] text-muted">{loc(fact.label, locale)}</dt>
+                    <dd className="text-right text-[0.98rem] text-ink">{loc(fact.value, locale)}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+          </div>
         </Container>
       </header>
 
-      <Container className="mt-10 md:mt-14">
-        <div className="relative aspect-[4/3] sm:aspect-[2/1] lg:aspect-[21/9] overflow-hidden rounded-md bg-mist">
+      <div className="mx-auto max-w-[100rem] md:px-8">
+        <div className="relative aspect-[4/3] bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
           <Image
             src={program.image}
             alt={loc(program.title, locale)}
             fill
             priority
             className="object-cover"
-            sizes="(min-width: 1200px) 1136px, 100vw"
+            sizes="100vw"
           />
         </div>
-      </Container>
+      </div>
 
       {detail ? (
-        <ProgramProfile detail={detail} locale={locale} />
+        <ProgramProfile detail={detail} locale={locale} photos={photos} coursesHeld={coursesHeld} />
       ) : (
         <ProgramSummary program={program} locale={locale} />
       )}
@@ -121,12 +126,12 @@ async function ProgramSummary({
 
   return (
     <Section>
-      <Container>
+      <Container width="wide">
         <FadeIn className="max-w-3xl">
           <h2 className="t-h2 text-balance text-ink">{t("overview")}</h2>
           <p className="t-body mt-5 text-muted">{loc(program.overview, locale)}</p>
           {program.relationshipNote ? (
-            <p className="t-small mt-7 border-l-2 border-line-strong pl-5 text-ink">
+            <p className="t-small mt-7 border-t border-line pt-5 text-muted">
               {loc(program.relationshipNote, locale)}
             </p>
           ) : null}

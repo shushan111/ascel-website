@@ -133,7 +133,10 @@
     "timelineItem1Date": "2025",
     "timelineItem1Title": "Public project presentation",
     "timelineItem1Body": "The center was presented as a healthcare education project working towards a medical training center in Gyumri, including as a featured project at AMWC 2025.",
-    "imageAlt": "Academic conversation in a medical education setting"
+    "imageAlt": "Academic conversation in a medical education setting",
+    "historyTitle": "History",
+    "peopleTitle": "The people behind the work",
+    "nextTitle": "What comes next"
   },
   "ProgramsPage": {
     "eyebrow": "Programs",
@@ -143,7 +146,10 @@
     "objectives": "Objectives",
     "activities": "Activities",
     "impact": "Impact",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "whatItDoes": "What it does",
+    "keyFacts": "Key facts",
+    "results": "Results so far"
   },
   "CoursesPage": {
     "eyebrow": "Education",
@@ -155,7 +161,11 @@
     "instructor": "Instructor",
     "upcoming": "Upcoming",
     "past": "Past",
-    "programme": "Programme"
+    "programme": "Programme",
+    "completed": "Completed courses",
+    "completedIntro": "Every course below has already been held in Gyumri. Open one to see its programme and photographs.",
+    "photos": "{count} photos",
+    "faculty": "Faculty"
   },
   "NewsPage": {
     "eyebrow": "News",
@@ -167,7 +177,18 @@
     "title": "Support the Gyumri Medical Training Center",
     "intro": "The monument at 20-22 Myasnikyan Street has a finished design and no construction budget. Your support is what turns the design into a building.",
     "trust": "No donation is processed on this page. Once a payment provider is chosen it will be connected through the site configuration. Until then, please use the contact form to discuss support.",
-    "contactCta": "Contact us about support"
+    "contactCta": "Contact us about support",
+    "howTitle": "How to support",
+    "whoTitle": "Who is behind the project",
+    "trustTitle": "Accountability",
+    "beneficiary": "Beneficiary",
+    "iban": "IBAN",
+    "swift": "SWIFT",
+    "bank": "Bank",
+    "raised": "Raised",
+    "goal": "Goal",
+    "updated": "Updated {date}",
+    "areaUnit": "m²"
   },
   "ContactPage": {
     "eyebrow": "Contact",
@@ -269,7 +290,14 @@
     "factPlot": "Land parcel",
     "factStage": "Design stage",
     "factArchitects": "Architects",
-    "closing": "The design is ready; what is missing is the money to build. Support of any size goes to a specific piece of work — from a single window to the whole roof."
+    "closing": "The design is ready; what is missing is the money to build. Support of any size goes to a specific piece of work — from a single window to the whole roof.",
+    "interiorAlt": "Inside the monument today",
+    "chapterNow": "Current state",
+    "chapterVision": "Architectural vision",
+    "chapterInside": "What will happen inside",
+    "impactTitle": "The building is for the training",
+    "impactBody": "Since 2019 the courses have been held in Gyumri. The center gives them a permanent home, with an operating room and a cadaver lab.",
+    "seeCourses": "See the courses already held"
   },
   "WhyNow": {
     "eyebrow": "Why now",
@@ -323,5 +351,57 @@
     "contactTitle": "Talk about supporting the project",
     "contactBody": "For a major gift, a partnership or targeted funding, write to us directly.",
     "contactCta": "Get in touch"
+  },
+  "Home": {
+    "heroEyebrow": "Gyumri, Armenia · since 2019",
+    "heroHeadline": "Hands-on medical training, taught in Gyumri",
+    "heroSupporting": "Since 2019 our courses have trained surgeons and operating-room nurses alongside international faculty. Now we are building them a permanent home: a medical training center inside a restored 19th-century monument.",
+    "heroCtaWork": "Discover our work",
+    "heroCtaSupport": "Support the center",
+    "proofEyebrow": "Our work in numbers",
+    "proofTitle": "The training is already happening",
+    "whatEyebrow": "What we do",
+    "whatTitle": "Programmes that teach by doing",
+    "workEyebrow": "Proven experience",
+    "workTitle": "What we have already done",
+    "workIntro": "Every photograph here was taken at a course held in Gyumri.",
+    "workListTitle": "Courses held",
+    "nextLine": "Years of training and experience have led to the next step.",
+    "buildingEyebrow": "The next step",
+    "mattersEyebrow": "Why it matters",
+    "mattersTitle": "The building is the means, not the goal",
+    "chainBuilding": "The building",
+    "chainBuildingBody": "A permanent operating room, cadaver lab and study rooms.",
+    "chainTraining": "Training",
+    "chainTrainingBody": "Hands-on courses for surgeons and operating-room nurses.",
+    "chainProfessionals": "Medical professionals",
+    "chainProfessionalsBody": "Doctors and nurses who train where they work.",
+    "chainCare": "Better care",
+    "chainCareBody": "Patients treated by better-prepared teams.",
+    "supportEyebrow": "Support",
+    "activityEyebrow": "Activity",
+    "nextCourse": "Next course",
+    "partnerLabel": "Partner",
+    "coursesCount": "{count, plural, one {# course} other {# courses}}",
+    "earlierYears": "Earlier years"
+  },
+  "DonateForm": {
+    "amountTitle": "Donation amount",
+    "amountLabel": "Amount",
+    "currencyLabel": "Currency",
+    "detailsTitle": "Your details",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "submit": "Donate",
+    "required": "Required",
+    "invalidAmount": "Enter an amount greater than zero",
+    "invalidEmail": "Enter a valid email address",
+    "cardNote": "Card details are entered on the bank's secure payment page, not on this site.",
+    "pendingTitle": "Online payment is not connected yet",
+    "pendingBody": "Thank you. Your details have not been sent and no payment was made. Until online donations are connected, please contact us and we will arrange your support.",
+    "intro": "Your support goes to building the medical training center at 20-22 Myasnikyan Street.",
+    "amountPlaceholder": "Amount",
+    "presetsLabel": "Suggested amounts"
   }
 }

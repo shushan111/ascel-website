@@ -30,7 +30,7 @@ function ProgrammeTable({ value }: { value: TableValue }) {
                 <th
                   key={i}
                   scope="col"
-                  className="t-meta-sm px-4 py-3 align-top font-semibold text-muted"
+                  className="t-meta-sm px-4 py-3 align-top font-medium text-muted"
                 >
                   {first[i] ?? ""}
                 </th>
@@ -57,7 +57,7 @@ function ProgrammeTable({ value }: { value: TableValue }) {
                     className={cn(
                       "px-4 py-3 align-top leading-6",
                       c === 0 && "whitespace-nowrap tabular-nums text-muted",
-                      isDivider && "font-semibold text-ink",
+                      isDivider && "font-medium text-ink",
                     )}
                   >
                     {cells[c] ?? ""}

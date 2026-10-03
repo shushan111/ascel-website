@@ -1,21 +1,25 @@
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "onDark";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "onDark" | "support" | "outlineDark";
 
 const variants: Record<ButtonVariant, string> = {
-  // Ink fill, white text. The only filled control on a light page — the bronze
-  // accent is reserved for small marks and never becomes a background.
+  // Ink fill — the default filled control on a light ground.
   primary:
-    "border border-ink bg-ink text-white hover:border-ink-hover hover:bg-ink-hover",
-  // Bordered and transparent. Hover firms the border to ink rather than
-  // introducing a second colour.
+    "border border-ink bg-ink text-on-dark hover:border-ink-hover hover:bg-ink-hover",
+  // Hairline and transparent; hover firms the line to ink.
   secondary:
-    "border border-line-strong bg-transparent text-ink hover:border-ink hover:bg-paper",
-  ghost:
-    "border border-transparent bg-transparent text-ink hover:bg-paper",
-  // On ink blocks and photo scrims the strongest action is the light one.
+    "border border-ink/25 bg-transparent text-ink hover:border-ink",
+  ghost: "border border-transparent bg-transparent text-ink hover:bg-paper",
+  // The light action on dark grounds and photo scrims.
   onDark:
-    "border border-paper bg-paper text-ink hover:border-canvas hover:bg-canvas",
+    "border border-on-dark bg-on-dark text-ink hover:border-paper hover:bg-paper",
+  outlineDark:
+    "border border-on-dark/40 bg-transparent text-on-dark hover:border-on-dark",
+  // The support action. Bronze is spent here and almost nowhere else, so the
+  // way to give is recognisable on every page without shouting. Ink on
+  // bronze is 5.6:1.
+  support:
+    "border border-accent bg-accent text-ink hover:border-accent-hover hover:bg-accent-hover",
 };
 
 export function buttonClassName(
@@ -23,9 +27,7 @@ export function buttonClassName(
   className?: string,
 ) {
   return cn(
-    // Sized against the 18px body: a 14.4px label on a 43px control read as a
-    // chip next to it. Old: min-h-[2.7rem] px-[1.15rem] text-[0.9rem].
-    "inline-flex min-h-[2.95rem] items-center justify-center gap-2 rounded-sm px-[1.4rem] text-center text-[0.95rem] font-semibold tracking-[0.02em] transition-colors duration-200",
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-sm px-6 text-center text-[0.96875rem] font-medium tracking-[0.005em] transition-colors duration-300",
     variants[variant],
     className,
   );

@@ -35,7 +35,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-ink">
+      <label htmlFor={id} className="mb-2 block text-[0.95rem] text-ink">
         {label}
       </label>
       {children}
@@ -49,14 +49,14 @@ function Field({
 }
 
 const inputClass =
-  "w-full min-h-11 rounded-md border border-line-strong bg-paper px-3.5 text-sm text-ink transition-colors placeholder:text-muted/70 hover:border-muted/50 focus:border-ink aria-[invalid=true]:border-danger";
+  "w-full min-h-12 rounded-none border-0 border-b border-line-strong bg-transparent px-0 text-[1rem] text-ink transition-colors placeholder:text-muted/70 hover:border-muted focus:border-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink aria-[invalid=true]:border-danger";
 
 export function ContactForm() {
   const t = useTranslations("ContactPage");
   const [state, action] = useActionState(submitContact, initialState);
 
   return (
-    <form action={action} className="space-y-6" noValidate>
+    <form action={action} className="space-y-8" noValidate>
       <Field id="name" label={t("name")} error={state.errors.name}>
         <input
           id="name"
@@ -107,7 +107,7 @@ export function ContactForm() {
           required
           aria-invalid={Boolean(state.errors.message)}
           aria-describedby={state.errors.message ? "message-error" : undefined}
-          className={`${inputClass} py-3 leading-7`}
+          className={`${inputClass} border border-line-strong px-3.5 py-3 leading-7`}
         />
       </Field>
       {state.message ? (

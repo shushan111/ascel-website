@@ -18,7 +18,7 @@ export function ArrowLink({
         // Ink at rest, bronze on hover. As a standing bronze link this
         // appeared in every section header and was a third of the accent
         // budget on its own.
-        "group inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-medium text-ink transition-colors duration-200 hover:text-accent",
+        "group inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-medium text-ink transition-colors duration-200 hover:text-accent-ink",
         className,
       )}
     >

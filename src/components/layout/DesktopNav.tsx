@@ -33,7 +33,7 @@ export function DesktopNav() {
                   // read as seven small buttons rather than as a line of links.
                   // Size is held at 0.88rem — the Armenian labels already fill
                   // the masthead, and a larger step would clip.
-                  "group relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[0.88rem] font-medium transition-colors",
+                  "group relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[0.9375rem] font-normal transition-colors",
                   active ? "text-ink" : "text-muted hover:text-ink",
                 )}
                 aria-current={active ? "page" : undefined}

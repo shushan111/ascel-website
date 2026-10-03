@@ -1,10 +1,14 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Course } from "@/types";
 import { loc } from "@/lib/utils";
-import { buttonClassName } from "@/components/ui/buttonStyles";
+import { courseCover, splitGallery } from "@/lib/media";
+import { CoverImage } from "@/components/ui/CoverImage";
 
+/**
+ * A completed course as a piece of evidence: its photograph, its name, its
+ * date and how many photographs its gallery holds. The whole tile is the link.
+ */
 export async function CourseCard({
   course,
   locale,
@@ -13,81 +17,29 @@ export async function CourseCard({
   locale: string;
 }) {
   const t = await getTranslations("CoursesPage");
-  const common = await getTranslations("Common");
-
-  const rows = [
-    [t("date"), loc(course.date, locale)],
-    [t("location"), loc(course.location, locale)],
-    [t("instructor"), loc(course.instructor, locale)],
-  ] as const;
-
-  const href = `/courses/${course.slug}`;
+  const title = loc(course.title, locale);
+  const photos = splitGallery(course.gallery).events.length;
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-colors duration-300 hover:border-ink">
-      <Link
-        href={href}
-        tabIndex={-1}
-        aria-hidden="true"
-        className="relative block aspect-[16/10] overflow-hidden bg-mist"
-      >
-        <Image
-          src={course.image}
-          alt={loc(course.title, locale)}
-          fill
-          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+    <article className="group relative">
+      <div className="relative aspect-[4/3] overflow-hidden bg-mist">
+        <CoverImage
+          src={courseCover(course)}
+          alt=""
+          label={title}
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+          className="transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
-        {course.isPlaceholder ? (
-          <span className="t-meta-sm absolute left-3 top-3 rounded-sm bg-paper/95 px-2 py-1 text-ink">
-            {common("sample")}
-          </span>
-        ) : null}
-      </Link>
-      <div className="flex flex-1 flex-col p-6">
-        <p className="t-meta-sm flex flex-wrap items-center gap-x-2.5 text-muted">
-          <span>{course.status === "upcoming" ? t("upcoming") : t("past")}</span>
-          {loc(course.type, locale) ? (
-            <>
-              <span aria-hidden="true" className="text-line-strong">
-                /
-              </span>
-              <span className="text-muted">{loc(course.type, locale)}</span>
-            </>
-          ) : null}
-        </p>
-        <h3 className="t-h4 mt-3 text-balance text-ink transition-colors duration-200 group-hover:text-accent">
-          <Link href={href}>{loc(course.title, locale)}</Link>
-        </h3>
-        {/* Dates and places read as data, so they take .t-meta and its
-            tabular figures rather than a 14px catch-all. */}
-        <dl className="t-meta mt-5 space-y-2.5">
-          {rows.map(([label, value]) => (
-            <div key={label} className="flex flex-wrap gap-x-2">
-              <dt className="min-w-0 shrink-0 text-muted">{label}:</dt>
-              <dd className="min-w-0 text-ink">{value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="t-small mt-5 flex-1 text-muted">
-          {loc(course.description, locale)}
-        </p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Link href={href} className={buttonClassName("secondary")}>
-            {common("learnMore")}
-          </Link>
-          {course.registrationUrl ? (
-            <a
-              href={course.registrationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonClassName("primary")}
-            >
-              {common("register")}
-            </a>
-          ) : null}
-        </div>
       </div>
+      <h3 className="t-h4 mt-4 text-balance text-ink transition-colors duration-300 group-hover:text-accent-ink">
+        <Link href={`/courses/${course.slug}`} className="after:absolute after:inset-0">
+          {title}
+        </Link>
+      </h3>
+      <p className="t-meta mt-2 text-muted">
+        {loc(course.date, locale)}
+        {photos ? ` · ${t("photos", { count: photos })}` : ""}
+      </p>
     </article>
   );
 }

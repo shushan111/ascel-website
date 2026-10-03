@@ -13,7 +13,7 @@ export function Logo({
     <span className={cn("inline-flex items-center gap-3", className)}>
       <svg
         viewBox="0 0 40 40"
-        className={cn("h-10 w-10 shrink-0", invert ? "text-on-dark" : "text-accent")}
+        className={cn("h-10 w-10 shrink-0", invert ? "text-on-dark" : "text-accent-ink")}
         aria-hidden="true"
       >
         <rect
@@ -44,7 +44,7 @@ export function Logo({
       <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            "font-display text-[16px] font-semibold tracking-[0.2em]",
+            "font-display text-[16px] font-medium tracking-[0.18em]",
             invert ? "text-on-dark" : "text-ink",
           )}
         >

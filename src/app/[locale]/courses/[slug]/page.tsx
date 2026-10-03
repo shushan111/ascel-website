@@ -8,6 +8,8 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { RichText } from "@/components/ui/RichText";
 import { Gallery } from "@/components/ui/Gallery";
+import { FacultyStrip } from "@/components/courses/FacultyStrip";
+import { courseCover, splitGallery } from "@/lib/media";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 
 export async function generateStaticParams() {
@@ -56,82 +58,95 @@ export default async function CourseDetailPage({
     [t("instructor"), loc(course.instructor, locale)],
   ].filter(([, value]) => Boolean(value));
 
+  const upcoming = course.status === "upcoming";
+  const { events, faculty } = splitGallery(course.gallery);
+  const cover = courseCover(course);
+  // The cover already shows one frame; the gallery need not repeat it.
+  const galleryImages = events.filter((image) => image.url !== cover);
+  const gallery = (
+    <Gallery images={galleryImages} locale={locale} title={common("gallery")} />
+  );
+
   return (
     <article>
-      <header className="bg-canvas pt-10 pb-14 md:pt-14 md:pb-16">
-        <Container>
+      <header className="bg-canvas pb-12 pt-10 md:pb-16 md:pt-14">
+        <Container width="wide">
           <Link
             href="/courses"
-            className="inline-flex min-h-9 items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
+            className="inline-flex min-h-9 items-center gap-2 text-[0.92rem] text-muted transition-colors hover:text-ink"
           >
-            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="m7.3 3.3.8.8L4.8 7.4h8.7v1.2H4.8l3.3 3.3-.8.8L2.6 8 7.3 3.3Z"
-              />
-            </svg>
+            <span aria-hidden="true">←</span>
             {common("backToCourses")}
           </Link>
 
-          <div className="mt-8 max-w-2xl">
-            <p className="t-eyebrow text-accent">
-              {course.status === "upcoming" ? t("upcoming") : t("past")}
-              {loc(course.type, locale) ? ` / ${loc(course.type, locale)}` : ""}
-            </p>
-            <h1 className="t-display mt-4 text-balance text-ink">
-              {loc(course.title, locale)}
-            </h1>
-            <p className="t-lead mt-6 text-muted">
-              {loc(course.description, locale)}
-            </p>
-          </div>
-
-          {course.registrationUrl ? (
-            <div className="mt-8">
-              <a
-                href={course.registrationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonClassName("primary")}
-              >
-                {common("register")}
-              </a>
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-7">
+              {/* Upcoming is the one state that earns the accent. */}
+              <p className="flex items-center gap-3 text-[0.95rem] text-muted">
+                {upcoming ? <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" /> : null}
+                <span className={upcoming ? "text-ink" : undefined}>{upcoming ? t("upcoming") : t("past")}</span>
+                {loc(course.type, locale) ? <span>· {loc(course.type, locale)}</span> : null}
+              </p>
+              <h1 className="t-display mt-5 text-balance text-ink">{loc(course.title, locale)}</h1>
+              {loc(course.description, locale) ? (
+                <p className="t-lead mt-7 max-w-[38rem] text-muted">{loc(course.description, locale)}</p>
+              ) : null}
+              {course.registrationUrl ? (
+                <a
+                  href={course.registrationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonClassName("primary", "mt-8")}
+                >
+                  {common("register")}
+                </a>
+              ) : null}
             </div>
-          ) : null}
+            {facts.length > 0 ? (
+              <dl className="self-end border-t border-ink/70 lg:col-span-4 lg:col-start-9">
+                {facts.map(([label, value]) => (
+                  <div key={label} className="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-3.5">
+                    <dt className="text-[0.92rem] text-muted">{label}</dt>
+                    <dd className="text-[0.98rem] text-ink">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+          </div>
         </Container>
       </header>
 
-      <Container className="mt-10 md:mt-14">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
-          <Image
-            src={course.image}
-            alt={loc(course.imageAlt, locale) || loc(course.title, locale)}
-            fill
-            priority
-            className="object-cover"
-            sizes="(min-width: 1200px) 1136px, 100vw"
-          />
+      {cover ? (
+        <div className="mx-auto max-w-[100rem] md:px-8">
+          <div className="relative aspect-[4/3] bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
+            <Image
+              src={cover}
+              alt={loc(course.imageAlt, locale) || loc(course.title, locale)}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
         </div>
-      </Container>
-
-      {facts.length > 0 ? (
-        <Container className="mt-10">
-          <dl className="grid gap-x-8 gap-y-6 border-y border-line py-6 sm:grid-cols-3">
-            {facts.map(([label, value]) => (
-              <div key={label}>
-                <dt className="t-meta-sm text-muted">{label}</dt>
-                <dd className="mt-2 text-sm leading-6 text-ink">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </Container>
       ) : null}
 
-      <Container className="pt-12 pb-20 md:pt-14 md:pb-28">
-        <RichText value={body} />
-        <Gallery images={course.gallery} locale={locale} title={common("gallery")} />
+      {/* A completed course leads with its photographs — the record of what
+          happened; an upcoming one leads with its programme. */}
+      {!upcoming && galleryImages.length ? (
+        <Container width="wide" className="pt-16 md:pt-24">{gallery}</Container>
+      ) : null}
 
-        <div className="mt-14 border-t border-line pt-8">
+      <Container width="wide" className="pb-20 pt-16 md:pb-28 md:pt-24">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-8 lg:col-start-3">
+            <RichText value={body} />
+          </div>
+        </div>
+        {upcoming && galleryImages.length ? <div className="mt-16">{gallery}</div> : null}
+        <FacultyStrip images={faculty} locale={locale} className="mt-16 md:mt-24" />
+
+        <div className="mt-16 border-t border-line pt-8">
           <Link href="/courses" className={buttonClassName("secondary")}>
             {common("backToCourses")}
           </Link>

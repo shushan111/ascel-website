@@ -59,54 +59,39 @@ export default async function NewsArticlePage({
         <Container width="text">
           <Link
             href="/news"
-            className="inline-flex min-h-9 items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent"
+            className="inline-flex min-h-9 items-center gap-2 text-[0.92rem] text-muted transition-colors hover:text-ink"
           >
-            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="m7.3 3.3.8.8L4.8 7.4h8.7v1.2H4.8l3.3 3.3-.8.8L2.6 8 7.3 3.3Z"
-              />
-            </svg>
+            <span aria-hidden="true">←</span>
             {common("backToNews")}
           </Link>
 
-          <p className="t-meta-sm mt-8 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-muted">
-            <span>{loc(article.category, locale)}</span>
-            <span aria-hidden="true" className="text-line-strong">
-              /
-            </span>
-            <time dateTime={article.date} className="text-muted">
-              {loc(article.dateLabel, locale)}
-            </time>
-            {article.isPlaceholder ? (
-              <>
-                <span aria-hidden="true" className="text-line-strong">
-                  /
-                </span>
-                <span className="text-muted">{common("sample")}</span>
-              </>
-            ) : null}
-          </p>
-
-          <h1 className="t-display mt-5 text-balance text-ink">
+          <h1 className="t-display mt-10 text-balance text-ink">
             {loc(article.title, locale)}
           </h1>
-          <p className="t-lead mt-6 text-muted">{loc(article.excerpt, locale)}</p>
+          {loc(article.excerpt, locale) ? (
+            <p className="t-lead mt-6 text-muted">{loc(article.excerpt, locale)}</p>
+          ) : null}
+          <p className="t-meta mt-6 text-muted">
+            <time dateTime={article.date}>{loc(article.dateLabel, locale)}</time>
+            {article.isPlaceholder ? <span> · {common("sample")}</span> : null}
+          </p>
         </Container>
       </header>
 
-      <Container className="mt-10 md:mt-14">
-        <figure className="relative aspect-[16/10] overflow-hidden rounded-md bg-mist">
-          <Image
-            src={article.image}
-            alt={loc(article.imageAlt, locale)}
-            fill
-            priority
-            className="object-cover"
-            sizes="(min-width: 1200px) 1136px, 100vw"
-          />
-        </figure>
-      </Container>
+      {article.image ? (
+        <div className="mx-auto max-w-[100rem] md:px-8">
+          <figure className="relative aspect-[3/2] bg-mist sm:aspect-[2/1]">
+            <Image
+              src={article.image}
+              alt={loc(article.imageAlt, locale)}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </figure>
+        </div>
+      ) : null}
 
       <Container width="text" className="pt-12 pb-20 md:pt-16 md:pb-28">
         {richBody ? (
@@ -119,7 +104,7 @@ export default async function NewsArticlePage({
           </Prose>
         )}
 
-        <Gallery images={article.gallery} locale={locale} title={common("gallery")} />
+        <Gallery images={article.gallery} locale={locale} title={common("gallery")} className="mt-16" />
 
         <div className="mt-14 border-t border-line pt-8">
           <Link href="/news" className={buttonClassName("secondary")}>

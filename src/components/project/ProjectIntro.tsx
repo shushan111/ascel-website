@@ -15,7 +15,7 @@ export async function ProjectIntro({ locale }: { locale: string }) {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>
-            <p className="t-eyebrow mb-4 text-accent">{t("eyebrow")}</p>
+            <p className="t-eyebrow mb-4 text-accent-ink">{t("eyebrow")}</p>
             <h2 className="t-h2 text-balance text-ink">{t("title")}</h2>
             <p className="t-body mt-6 max-w-xl text-muted">{t("body")}</p>
             <p className="t-body mt-5 max-w-xl text-muted">{t("bodySecond")}</p>

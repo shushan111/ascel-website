@@ -26,7 +26,9 @@ type SanityCourseDocument = {
   gallery?: SanityImage[] | null;
 };
 
-const fallbackCourseImage = "/images/capability-simulation.webp";
+// No stock fallback: a course without a photograph renders a typographic
+// tile (MediaFallback) rather than an image that is not of that course.
+const fallbackCourseImage = "";
 
 export function mapSanityCourse(doc: SanityCourseDocument): Course {
   return {

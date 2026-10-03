@@ -35,7 +35,7 @@ export async function ProgramCard({
         </div>
         <div className="flex flex-1 flex-col p-6 md:p-7">
           <p className="t-meta-sm text-muted">{loc(program.category, locale)}</p>
-          <h3 className="t-h3 mt-3 text-balance text-ink transition-colors duration-200 group-hover:text-accent">
+          <h3 className="t-h3 mt-3 text-balance text-ink transition-colors duration-200 group-hover:text-accent-ink">
             {loc(program.title, locale)}
           </h3>
           <p className="t-small mt-3 flex-1 text-muted">

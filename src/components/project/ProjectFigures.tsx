@@ -25,13 +25,22 @@ export function ProjectFigures({
         <div
           key={figure.id}
           className={cn(
-            "border-t pt-5",
-            invert ? "border-on-dark/25" : "border-line-strong",
+            // dt first for screen readers; the figure still reads first.
+            "flex flex-col-reverse border-t pt-5",
+            invert ? "border-on-dark/25" : "border-line",
           )}
         >
+          <dt
+            className={cn(
+              "mt-3 text-sm leading-6",
+              invert ? "text-on-dark/75" : "text-muted",
+            )}
+          >
+            {loc(figure.label, locale)}
+          </dt>
           <dd
             className={cn(
-              "font-display text-[2rem] leading-none font-semibold tabular-nums",
+              "font-display text-[2.4rem] leading-none font-normal tracking-[-0.02em] tabular-nums",
               invert ? "text-on-dark" : "text-ink",
             )}
           >
@@ -43,18 +52,11 @@ export function ProjectFigures({
                   invert ? "text-on-dark/65" : "text-muted",
                 )}
               >
-                {figure.unit}
+                {/* The drawings label areas in Armenian; other locales get m². */}
+                {locale === "hy" ? figure.unit : "m²"}
               </span>
             ) : null}
           </dd>
-          <dt
-            className={cn(
-              "mt-3 text-sm leading-6",
-              invert ? "text-on-dark/75" : "text-muted",
-            )}
-          >
-            {loc(figure.label, locale)}
-          </dt>
         </div>
       ))}
     </dl>

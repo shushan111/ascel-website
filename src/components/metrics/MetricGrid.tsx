@@ -39,7 +39,7 @@ export function MetricGrid({
           </dt>
           <dd
             className={cn(
-              "font-display mt-3 text-[1.7rem] font-semibold tracking-[-0.03em] tabular-nums",
+              "font-display mt-3 text-[1.7rem] font-normal tracking-[-0.03em] tabular-nums",
               invert ? "text-on-dark" : "text-ink",
             )}
           >

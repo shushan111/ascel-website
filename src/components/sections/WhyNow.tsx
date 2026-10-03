@@ -38,7 +38,7 @@ export async function WhyNow({ locale }: { locale: string }) {
                       without one still lines up: the row keeps its height. */}
                   {reason.figure ? (
                     <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="font-display text-[2.6rem] leading-none font-semibold tabular-nums text-ink">
+                      <span className="font-display text-[2.6rem] leading-none font-normal tabular-nums text-ink">
                         {reason.figure}
                       </span>
                       {reason.figureLabel ? (
