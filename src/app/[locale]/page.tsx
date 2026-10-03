@@ -1,15 +1,14 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
-import { Hero } from "@/components/sections/Hero";
+import { ProjectHero } from "@/components/project/ProjectHero";
 import { Intro } from "@/components/sections/Intro";
+import { SupportSection } from "@/components/sections/SupportSection";
 import { ActivePrograms } from "@/components/sections/ActivePrograms";
-import { SimulationPreview } from "@/components/sections/SimulationPreview";
 import { CoursesPreview } from "@/components/sections/CoursesPreview";
 import { UpcomingEvents } from "@/components/sections/UpcomingEvents";
 import { NewsPreview } from "@/components/sections/NewsPreview";
-import { SupportSection } from "@/components/sections/SupportSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
-import { ImpactSection } from "@/components/sections/ImpactSection";
+import { FoundersSection } from "@/components/sections/FoundersSection";
 
 export async function generateMetadata({
   params,
@@ -23,9 +22,17 @@ export async function generateMetadata({
     description: t("homeDescription"),
     path: "/",
     locale,
+    image: "/images/project/facade-after.webp",
   });
 }
 
+/**
+ * The home page makes the project's case in short: what is being built, and
+ * then the ask. The detail — the monument's condition, the build sequence,
+ * the room-by-room brief, the lab and the renderings — lives on the center
+ * page, which the hero links to. Programs, courses and news follow
+ * underneath as supporting evidence, not as the headline.
+ */
 export default async function HomePage({
   params,
 }: {
@@ -36,16 +43,15 @@ export default async function HomePage({
 
   return (
     <>
-      <Hero />
+      <ProjectHero locale={locale} />
       <Intro locale={locale} />
+      <SupportSection locale={locale} />
       <ActivePrograms locale={locale} />
-      <SimulationPreview />
       <CoursesPreview locale={locale} />
       <UpcomingEvents locale={locale} />
       <NewsPreview locale={locale} />
-      <SupportSection locale={locale} />
+      <FoundersSection locale={locale} />
       <PartnersSection />
-      <ImpactSection locale={locale} />
     </>
   );
 }

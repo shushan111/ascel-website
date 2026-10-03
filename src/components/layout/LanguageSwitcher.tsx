@@ -28,10 +28,12 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
   }
 
   return (
+    // Underlined rather than boxed: the reference rules the group off along
+    // the bottom and marks the active language with a heavier rule.
     <div
       role="group"
       aria-label={t("language")}
-      className="inline-flex shrink-0 items-center border border-line text-[11px] font-medium tracking-[0.12em] uppercase"
+      className="inline-flex shrink-0 items-center border-b border-line"
     >
       {routing.locales.map((code) => (
         <button
@@ -39,11 +41,11 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
           type="button"
           onClick={() => switchTo(code)}
           className={cn(
-            "min-h-9 min-w-10 px-2 transition-colors",
+            "min-h-9 px-2 text-[0.68rem] font-bold uppercase tracking-[0.08em] transition-colors",
             locale === code
-              ? "bg-navy text-white"
-              : "text-muted hover:text-navy",
-            compact && "min-h-11 min-w-14 px-3 text-[12px]",
+              ? "border-b-2 border-ink text-ink"
+              : "border-b-2 border-transparent text-muted hover:text-ink",
+            compact && "min-h-11 px-3 text-[0.78rem]",
           )}
           aria-pressed={locale === code}
           aria-label={names[code]}

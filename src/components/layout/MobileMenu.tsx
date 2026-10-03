@@ -12,9 +12,9 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const MENU_ID = "mobile-navigation";
 const EXIT_DURATION_MS = 240;
-// The desktop row only fits every locale's labels once the 1200px container is
+// The desktop row only fits every locale's labels once the container is
 // fully available, so the full-screen menu covers everything below that.
-const DESKTOP_MEDIA_QUERY = "(min-width: 1200px)";
+const DESKTOP_MEDIA_QUERY = "(min-width: 1280px)";
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -134,7 +134,7 @@ export function MobileMenu() {
       aria-modal="true"
       aria-label={t("mainNav")}
       className={cn(
-        "fixed inset-0 z-100 h-[100vh] w-full bg-white transition-opacity duration-300 ease-out supports-[height:100dvh]:h-[100dvh] min-[1200px]:hidden",
+        "fixed inset-0 z-100 h-[100vh] w-full bg-paper transition-opacity duration-300 ease-out supports-[height:100dvh]:h-[100dvh] min-[1280px]:hidden",
         entered ? "opacity-100" : "opacity-0",
       )}
     >
@@ -145,8 +145,8 @@ export function MobileMenu() {
           entered ? "scale-100" : "scale-[0.98]",
         )}
       >
-        <div className="mx-auto flex min-h-full w-full max-w-[1200px] flex-col px-5 pb-10 pt-4 sm:px-8">
-          <div className="flex h-[72px] shrink-0 items-center justify-between gap-4">
+        <div className="mx-auto flex min-h-full w-full max-w-[72rem] flex-col px-4 pb-10 pt-4 sm:px-6">
+          <div className="flex h-[76px] shrink-0 items-center justify-between gap-4">
             <Link
               href="/"
               aria-label="ASCEL"
@@ -158,7 +158,7 @@ export function MobileMenu() {
             <button
               ref={closeRef}
               type="button"
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border border-line text-navy transition-colors hover:border-navy"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper"
               aria-label={t("closeMenu")}
               onClick={() => close({ restoreFocus: true })}
             >
@@ -198,14 +198,14 @@ export function MobileMenu() {
                       aria-current={active ? "page" : undefined}
                       onClick={() => close()}
                       className={cn(
-                        "flex min-h-12 items-center justify-between gap-4 py-2 text-2xl font-semibold tracking-tight transition-colors sm:min-h-14 sm:text-[1.75rem]",
-                        active ? "text-accent" : "text-navy hover:text-accent",
+                        "t-h2 flex min-h-12 items-center justify-between gap-4 py-3 transition-colors sm:min-h-14",
+                        active ? "text-accent" : "text-ink hover:text-accent",
                       )}
                     >
                       <span className="min-w-0">{t(item.key)}</span>
                       <span
                         aria-hidden="true"
-                        className="shrink-0 text-[11px] font-medium tracking-[0.18em] text-muted/70"
+                        className="t-meta-sm shrink-0 text-line-strong"
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
@@ -230,7 +230,7 @@ export function MobileMenu() {
             }}
           >
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
+              <p className="t-meta-sm text-muted">
                 {t("language")}
               </p>
               <div className="mt-3">
@@ -241,7 +241,7 @@ export function MobileMenu() {
               href="/donate"
               onClick={() => close()}
               className={cn(
-                buttonClassName("donate"),
+                buttonClassName("primary"),
                 "mt-6 w-full sm:mt-0 sm:w-auto sm:min-w-[13rem]",
               )}
             >
@@ -258,7 +258,7 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center border border-line text-navy transition-colors hover:border-navy min-[1200px]:hidden"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper min-[1280px]:hidden"
         aria-label={t("openMenu")}
         aria-expanded={mounted}
         aria-controls={MENU_ID}

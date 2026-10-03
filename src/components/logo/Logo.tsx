@@ -13,7 +13,7 @@ export function Logo({
     <span className={cn("inline-flex items-center gap-3", className)}>
       <svg
         viewBox="0 0 40 40"
-        className={cn("h-10 w-10 shrink-0", invert ? "text-white" : "text-navy")}
+        className={cn("h-10 w-10 shrink-0", invert ? "text-on-dark" : "text-accent")}
         aria-hidden="true"
       >
         <rect
@@ -21,7 +21,7 @@ export function Logo({
           y="1.25"
           width="37.5"
           height="37.5"
-          rx="3"
+          rx="4"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.25"
@@ -44,8 +44,8 @@ export function Logo({
       <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            "text-[15px] font-semibold tracking-[0.22em]",
-            invert ? "text-white" : "text-navy",
+            "font-display text-[15px] font-semibold tracking-[0.2em]",
+            invert ? "text-on-dark" : "text-ink",
           )}
         >
           ASCEL
@@ -53,11 +53,11 @@ export function Logo({
         {compact ? null : (
           <span
             className={cn(
-              "mt-1 hidden max-w-[11rem] text-[10px] leading-snug tracking-[0.04em] sm:block xl:hidden 2xl:block",
-              invert ? "text-white/60" : "text-muted",
+              "mt-1.5 hidden max-w-[11rem] text-[10px] leading-snug tracking-[0.04em] sm:block xl:hidden 2xl:block",
+              invert ? "text-on-dark/60" : "text-muted",
             )}
           >
-            Armenian Simulation Center
+            Medical Training Center
           </span>
         )}
       </span>

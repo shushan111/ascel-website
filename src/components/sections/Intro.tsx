@@ -17,13 +17,11 @@ export async function Intro({ locale }: { locale: string }) {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>
-            <h2 className="text-3xl font-semibold tracking-tight text-navy text-balance sm:text-4xl">
-              {t("title")}
-            </h2>
-            <p className="mt-6 text-base leading-7 text-muted">{t("body")}</p>
+            <h2 className="t-h2 text-balance text-ink">{t("title")}</h2>
+            <p className="t-body mt-6 max-w-xl text-muted">{t("body")}</p>
           </FadeIn>
           <ImageReveal>
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-mist">
               <Image
                 src="/images/about-intro.webp"
                 alt={t("imageAlt")}
@@ -34,9 +32,11 @@ export async function Intro({ locale }: { locale: string }) {
             </div>
           </ImageReveal>
         </div>
-        <div className="mt-14">
+        <div className="mt-16 md:mt-20">
           <MetricGrid metrics={metrics} locale={locale} />
-          <p className="mt-4 text-xs text-muted">{common("placeholderMetricsNote")}</p>
+          <p className="mt-5 text-xs leading-5 text-muted">
+            {common("placeholderMetricsNote")}
+          </p>
         </div>
       </Container>
     </Section>

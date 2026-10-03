@@ -1,9 +1,23 @@
 export type LocaleCode = "en" | "hy" | "ru";
 
 export interface LocalizedString {
-  en: string;
-  hy: string;
   ru: string;
+  hy?: string;
+  en?: string;
+}
+
+/** A Portable Text array, or the embedded table block the courses use. */
+export type PortableBlock = Record<string, unknown>;
+
+export interface LocalizedPortableText {
+  ru?: PortableBlock[];
+  hy?: PortableBlock[];
+  en?: PortableBlock[];
+}
+
+export interface GalleryImage {
+  url: string;
+  alt: LocalizedString;
 }
 
 /** A short label/value pair shown in a program's summary strip. */
@@ -45,7 +59,8 @@ export interface ProgramDetailContent {
   audience: ProgramNarrative & { groups: ProgramTopic[] };
   focusAreas: ProgramNarrative & { areas: ProgramTopic[] };
   highlights: ProgramNarrative & { milestones: ProgramMilestone[] };
-  cta: {
+  /** Optional: programs without their own website simply omit the closing CTA. */
+  cta?: {
     eyebrow: LocalizedString;
     title: LocalizedString;
     body: LocalizedString;
@@ -53,6 +68,17 @@ export interface ProgramDetailContent {
     url: string;
   };
   sourceNote: LocalizedString;
+}
+
+/** A person shown in the Founders section. Photo is always present: the
+ * query drops entries without one. */
+export interface Founder {
+  id: string;
+  firstName: LocalizedString;
+  lastName: LocalizedString;
+  role?: LocalizedString;
+  bio?: LocalizedString;
+  photo: string;
 }
 
 export interface Program {
@@ -64,19 +90,21 @@ export interface Program {
   overview: LocalizedString;
   category: LocalizedString;
   image: string;
-  gallery: string[];
   objectives: LocalizedString[];
   activities: LocalizedString[];
   impact: LocalizedString[];
   relationshipNote?: LocalizedString;
   detail?: ProgramDetailContent;
-  externalUrlKey: "gyumriOrthopedicSchool" | "damageControlCourses" | "eternalNation";
+  /** When true, program cards link to the on-site profile page. */
+  hasOnSiteProfile?: boolean;
+  externalUrlKey?: "gyumriOrthopedicSchool" | "damageControlCourses" | "eternalNation";
   ctaLabel: "visitWebsite" | "exploreCourses" | "learnMore";
 }
 
 export interface Course {
   id: string;
   slug: string;
+  status: "upcoming" | "past";
   title: LocalizedString;
   date: LocalizedString;
   location: LocalizedString;
@@ -84,6 +112,10 @@ export interface Course {
   instructor: LocalizedString;
   description: LocalizedString;
   image: string;
+  imageAlt: LocalizedString;
+  gallery: GalleryImage[];
+  body: LocalizedPortableText;
+  sourceUrl: string;
   registrationUrl: string;
   isPlaceholder: boolean;
 }
@@ -105,7 +137,12 @@ export interface NewsArticle {
   slug: string;
   title: LocalizedString;
   excerpt: LocalizedString;
+  /** Kept for the hand-authored articles that predate the import. */
   body: LocalizedString[];
+  /** Portable Text, used by everything imported from the archive. */
+  richBody: LocalizedPortableText;
+  gallery: GalleryImage[];
+  sourceUrl: string;
   date: string;
   dateLabel: LocalizedString;
   category: LocalizedString;

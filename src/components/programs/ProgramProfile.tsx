@@ -17,8 +17,8 @@ function SectionTitle({
   return (
     <h2
       className={cn(
-        "text-2xl font-semibold tracking-tight text-balance sm:text-3xl",
-        invert ? "text-white" : "text-navy",
+        "t-h2 text-balance",
+        invert ? "text-on-dark" : "text-ink",
       )}
     >
       {children}
@@ -38,18 +38,19 @@ export async function ProgramProfile({
   locale: string;
 }) {
   const common = await getTranslations("Common");
+  const sourceNote = loc(detail.sourceNote, locale);
 
   return (
     <>
-      <section className="border-b border-line bg-canvas py-10 md:py-12">
+      <section className="border-y border-line bg-canvas py-10 md:py-12">
         <Container>
           <dl className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
             {detail.facts.map((fact) => (
               <div key={fact.label.en}>
-                <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
+                <dt className="t-meta-sm text-accent">
                   {loc(fact.label, locale)}
                 </dt>
-                <dd className="mt-2 text-base font-medium leading-6 text-navy">
+                <dd className="mt-2 text-base font-medium leading-6 text-ink">
                   {loc(fact.value, locale)}
                 </dd>
               </div>
@@ -58,7 +59,7 @@ export async function ProgramProfile({
         </Container>
       </section>
 
-      <Section tone="white">
+      <Section tone="paper">
         <Container>
           <FadeIn className="max-w-3xl">
             <SectionTitle>{loc(detail.about.title, locale)}</SectionTitle>
@@ -66,7 +67,7 @@ export async function ProgramProfile({
               {detail.about.body.map((paragraph) => (
                 <p
                   key={paragraph.en}
-                  className="text-base leading-7 text-muted"
+                  className="t-body text-muted"
                 >
                   {loc(paragraph, locale)}
                 </p>
@@ -76,7 +77,7 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="canvas">
+      <Section tone="paper">
         <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <FadeIn className="lg:col-span-6">
             <SectionTitle>{loc(detail.mission.title, locale)}</SectionTitle>
@@ -84,7 +85,7 @@ export async function ProgramProfile({
               {detail.mission.body.map((paragraph) => (
                 <p
                   key={paragraph.en}
-                  className="text-base leading-7 text-muted"
+                  className="t-body text-muted"
                 >
                   {loc(paragraph, locale)}
                 </p>
@@ -96,15 +97,15 @@ export async function ProgramProfile({
               {detail.mission.points.map((point, index) => (
                 <li
                   key={point.en}
-                  className="flex gap-4 border-t border-line pt-4"
+                  className="flex gap-5 border-t border-line pt-5"
                 >
                   <span
                     aria-hidden="true"
-                    className="text-sm font-semibold tabular-nums text-accent"
+                    className="font-display text-sm font-semibold tabular-nums text-accent"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm leading-6 text-ink">
+                  <span className="t-small text-ink">
                     {loc(point, locale)}
                   </span>
                 </li>
@@ -114,7 +115,7 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="white">
+      <Section tone="paper">
         <Container>
           <FadeIn className="max-w-3xl">
             <SectionTitle>{loc(detail.education.title, locale)}</SectionTitle>
@@ -122,7 +123,7 @@ export async function ProgramProfile({
               {detail.education.body.map((paragraph) => (
                 <p
                   key={paragraph.en}
-                  className="text-base leading-7 text-muted"
+                  className="t-body text-muted"
                 >
                   {loc(paragraph, locale)}
                 </p>
@@ -132,11 +133,11 @@ export async function ProgramProfile({
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {detail.education.formats.map((format, index) => (
               <FadeIn key={format.title.en} delay={index * 0.06}>
-                <article className="flex h-full flex-col border border-line bg-white p-6 transition-colors duration-300 hover:border-navy/25">
-                  <h3 className="text-base font-semibold tracking-tight text-navy">
+                <article className="flex h-full flex-col rounded-md border border-line bg-paper p-6 transition-colors duration-300 hover:border-ink">
+                  <h3 className="t-h4 text-ink">
                     {loc(format.title, locale)}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-muted">
+                  <p className="t-small mt-3 text-muted">
                     {loc(format.description, locale)}
                   </p>
                 </article>
@@ -146,7 +147,7 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="canvas">
+      <Section tone="paper">
         <Container>
           <FadeIn className="max-w-3xl">
             <SectionTitle>{loc(detail.audience.title, locale)}</SectionTitle>
@@ -154,7 +155,7 @@ export async function ProgramProfile({
               {detail.audience.body.map((paragraph) => (
                 <p
                   key={paragraph.en}
-                  className="text-base leading-7 text-muted"
+                  className="t-body text-muted"
                 >
                   {loc(paragraph, locale)}
                 </p>
@@ -165,11 +166,11 @@ export async function ProgramProfile({
             {detail.audience.groups.map((group, index) => (
               <li key={group.title.en} className="h-full">
                 <FadeIn delay={index * 0.06} className="h-full">
-                  <div className="flex h-full flex-col border-t-2 border-accent bg-white p-6">
-                    <h3 className="text-base font-semibold tracking-tight text-navy">
+                  <div className="flex h-full flex-col border-t-2 border-accent bg-paper pt-5">
+                    <h3 className="t-h4 text-ink">
                       {loc(group.title, locale)}
                     </h3>
-                    <p className="mt-3 text-sm leading-6 text-muted">
+                    <p className="t-small mt-3 text-muted">
                       {loc(group.description, locale)}
                     </p>
                   </div>
@@ -180,7 +181,7 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="white">
+      <Section tone="paper">
         <Container>
           <FadeIn className="max-w-3xl">
             <SectionTitle>{loc(detail.focusAreas.title, locale)}</SectionTitle>
@@ -188,7 +189,7 @@ export async function ProgramProfile({
               {detail.focusAreas.body.map((paragraph) => (
                 <p
                   key={paragraph.en}
-                  className="text-base leading-7 text-muted"
+                  className="t-body text-muted"
                 >
                   {loc(paragraph, locale)}
                 </p>
@@ -199,11 +200,11 @@ export async function ProgramProfile({
             {detail.focusAreas.areas.map((area, index) => (
               <li key={area.title.en} className="h-full">
                 <FadeIn delay={index * 0.05} className="h-full">
-                  <div className="flex h-full flex-col border border-line bg-canvas p-6 transition-transform duration-300 hover:-translate-y-1">
-                    <h3 className="text-base font-semibold tracking-tight text-navy">
+                  <div className="flex h-full flex-col rounded-md border border-line bg-canvas p-6 transition-colors duration-300 hover:border-ink">
+                    <h3 className="t-h4 text-ink">
                       {loc(area.title, locale)}
                     </h3>
-                    <p className="mt-3 text-sm leading-6 text-muted">
+                    <p className="t-small mt-3 text-muted">
                       {loc(area.description, locale)}
                     </p>
                   </div>
@@ -214,18 +215,15 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="navy">
+      {/* Was a second full-width dark slab. A milestone list reads better on a
+          light ground anyway, and the page no longer carries two dark blocks. */}
+      <Section tone="paper">
         <Container>
           <FadeIn className="max-w-3xl">
-            <SectionTitle invert>
-              {loc(detail.highlights.title, locale)}
-            </SectionTitle>
+            <SectionTitle>{loc(detail.highlights.title, locale)}</SectionTitle>
             <div className="mt-6 space-y-5">
               {detail.highlights.body.map((paragraph) => (
-                <p
-                  key={paragraph.en}
-                  className="text-base leading-7 text-white/70"
-                >
+                <p key={paragraph.en} className="t-body text-muted">
                   {loc(paragraph, locale)}
                 </p>
               ))}
@@ -235,15 +233,15 @@ export async function ProgramProfile({
             {detail.highlights.milestones.map((milestone, index) => (
               <li key={milestone.title.en}>
                 <FadeIn delay={Math.min(index, 4) * 0.05}>
-                  <div className="grid gap-3 border-t border-white/15 py-7 md:grid-cols-12 md:gap-8">
-                    <p className="text-sm font-medium tabular-nums text-white/80 md:col-span-3">
+                  <div className="grid gap-3 border-t border-line py-7 md:grid-cols-12 md:gap-8">
+                    <p className="t-meta-sm tabular-nums text-accent md:col-span-3 md:pt-1">
                       {loc(milestone.date, locale)}
                     </p>
                     <div className="md:col-span-9">
-                      <h3 className="text-lg font-semibold tracking-tight text-white text-balance">
+                      <h3 className="t-h3 text-balance text-ink">
                         {loc(milestone.title, locale)}
                       </h3>
-                      <p className="mt-2 max-w-3xl text-sm leading-6 text-white/65">
+                      <p className="t-small mt-3 max-w-3xl text-muted">
                         {loc(milestone.description, locale)}
                       </p>
                     </div>
@@ -255,41 +253,54 @@ export async function ProgramProfile({
         </Container>
       </Section>
 
-      <Section tone="canvas">
-        <Container>
-          <FadeIn>
-            <div className="border border-line bg-white px-6 py-12 text-center sm:px-10 md:py-16">
-              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-accent">
-                {loc(detail.cta.eyebrow, locale)}
-              </p>
-              <h2 className="mx-auto mt-4 max-w-2xl text-2xl font-semibold tracking-tight text-navy text-balance sm:text-3xl">
-                {loc(detail.cta.title, locale)}
-              </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted">
-                {loc(detail.cta.body, locale)}
-              </p>
-              <div className="mt-9 flex justify-center">
-                <a
-                  href={detail.cta.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonClassName(
-                    "donate",
-                    "w-full min-h-12 sm:w-auto sm:px-8",
-                  )}
-                >
-                  {loc(detail.cta.label, locale)}
-                  <ExternalIcon />
-                  <span className="sr-only">{common("externalLink")}</span>
-                </a>
+      {detail.cta || sourceNote ? (
+        <Section tone="paper">
+          <Container>
+            <FadeIn>
+              <div className="rounded-md border border-line bg-paper px-6 py-14 text-center sm:px-10 md:py-20">
+                {detail.cta ? (
+                  <>
+                    <p className="t-meta-sm text-accent">
+                      {loc(detail.cta.eyebrow, locale)}
+                    </p>
+                    <h2 className="t-h2 mx-auto mt-4 max-w-2xl text-balance text-ink">
+                      {loc(detail.cta.title, locale)}
+                    </h2>
+                    <p className="t-body mx-auto mt-5 max-w-xl text-muted">
+                      {loc(detail.cta.body, locale)}
+                    </p>
+                    <div className="mt-9 flex justify-center">
+                      <a
+                        href={detail.cta.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={buttonClassName(
+                          "primary",
+                          "w-full min-h-12 sm:w-auto sm:px-8",
+                        )}
+                      >
+                        {loc(detail.cta.label, locale)}
+                        <ExternalIcon />
+                        <span className="sr-only">{common("externalLink")}</span>
+                      </a>
+                    </div>
+                  </>
+                ) : null}
+                {sourceNote ? (
+                  <p
+                    className={cn(
+                      "mx-auto max-w-2xl text-xs leading-6 text-muted",
+                      detail.cta ? "mt-10 border-t border-line pt-7" : "",
+                    )}
+                  >
+                    {sourceNote}
+                  </p>
+                ) : null}
               </div>
-              <p className="mx-auto mt-9 max-w-2xl border-t border-line pt-7 text-xs leading-6 text-muted">
-                {loc(detail.sourceNote, locale)}
-              </p>
-            </div>
-          </FadeIn>
-        </Container>
-      </Section>
+            </FadeIn>
+          </Container>
+        </Section>
+      ) : null}
     </>
   );
 }

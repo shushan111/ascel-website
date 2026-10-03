@@ -18,41 +18,38 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between",
+        "mb-12 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between md:gap-10",
         className,
       )}
     >
-      <div className="max-w-3xl">
+      <div className="max-w-2xl">
         {eyebrow ? (
           <p
             className={cn(
-              "mb-3 text-xs font-medium uppercase tracking-[0.22em]",
-              invert ? "text-white/55" : "text-accent",
+              "t-eyebrow mb-3",
+              invert ? "text-accent-light" : "text-accent",
             )}
           >
             {eyebrow}
           </p>
         ) : null}
         <h2
-          className={cn(
-            "text-3xl font-semibold tracking-tight text-balance sm:text-4xl",
-            invert ? "text-white" : "text-navy",
-          )}
+          className={cn("t-h2 text-balance", invert ? "text-on-dark" : "text-ink")}
         >
           {title}
         </h2>
         {subtitle ? (
           <p
             className={cn(
-              "mt-4 max-w-2xl text-base leading-7",
-              invert ? "text-white/70" : "text-muted",
+              "t-body mt-4 max-w-xl",
+              invert ? "text-on-dark/75" : "text-muted",
             )}
           >
             {subtitle}
           </p>
         ) : null}
       </div>
-      {action}
+      {action ? <div className="shrink-0">{action}</div> : null}
     </div>
   );
 }

@@ -12,9 +12,14 @@ export async function DonateButtons({
   const donateHref = donationConfig.providerUrl || "/donate";
   const donateExternal = Boolean(donationConfig.providerUrl);
 
-  const donateClass = invert ? buttonClassName("donate") : buttonClassName("primary");
+  const donateClass = invert
+    ? buttonClassName("onDark")
+    : buttonClassName("primary");
   const supportClass = invert
-    ? buttonClassName("secondary", "border-white/30 text-white hover:bg-white/10 hover:border-white")
+    ? buttonClassName(
+        "secondary",
+        "border-on-dark/40 text-on-dark hover:border-on-dark hover:bg-on-dark/12 hover:text-on-dark",
+      )
     : buttonClassName("secondary");
 
   return (
@@ -33,7 +38,7 @@ export async function DonateButtons({
           {t("donateNow")}
         </Link>
       )}
-      <Link href="/programs" className={supportClass}>
+      <Link href="/simulation-center" className={supportClass}>
         {t("supportPrograms")}
       </Link>
     </div>

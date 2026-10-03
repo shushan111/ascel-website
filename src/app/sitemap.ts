@@ -16,9 +16,11 @@ const staticPaths = [
   "/contact",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const programPaths = getPrograms().map((program) => `/programs/${program.slug}`);
-  const newsPaths = getNewsArticles().map((article) => `/news/${article.slug}`);
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const programPaths = (await getPrograms()).map(
+    (program) => `/programs/${program.slug}`,
+  );
+  const newsPaths = (await getNewsArticles()).map((article) => `/news/${article.slug}`);
   const paths = [...staticPaths, ...programPaths, ...newsPaths];
 
   return paths.flatMap((path) => {

@@ -1,58 +1,87 @@
 import type { DonationOption } from "@/types";
 
+/**
+ * Support is directed at the building, not at abstractions: each option maps
+ * to a part of the sketch design for the Medical Training Center at
+ * Myasnikyan 20-22, so a donor can see what their money becomes.
+ */
 export const donationOptions: DonationOption[] = [
   {
-    id: "education",
-    title: { en: "Medical Education", hy: "Բժշկական կրթություն", ru: "Медицинское образование" },
+    id: "restoration",
+    title: {
+      en: "Restoring the monument",
+      hy: "Հուշարձանի վերականգնում",
+      ru: "Восстановление памятника",
+    },
     description: {
-      en: "Help expand structured learning for doctors and students.",
-      hy: "Օգնեք ընդլայնել կառուցվածքային ուսուցումը բժիշկների և ուսանողների համար։",
-      ru: "Помогите расширить структурированное обучение для врачей и студентов.",
+      en: "Reopening the bricked-up windows, restoring the cornices and sills, and cleaning the tuff facade by gentle methods.",
+      hy: "Տուֆի բլոկներով փակված պատուհանների վերաբացում, քիվերի ու պատուհանագոգերի վերականգնում և ճակատի նուրբ մաքրում։",
+      ru: "Раскрытие заложенных окон, восстановление карнизов и подоконников, бережная очистка туфового фасада.",
     },
   },
   {
-    id: "simulation",
-    title: { en: "Simulation Training", hy: "Սիմուլյացիոն ուսուցում", ru: "Симуляционная подготовка" },
+    id: "roof",
+    title: {
+      en: "The new roof",
+      hy: "Նոր տանիք",
+      ru: "Новая кровля",
+    },
     description: {
-      en: "Support simulation-based practice in a controlled educational environment.",
-      hy: "Աջակցեք սիմուլյացիայի վրա հիմնված պարապմունքին վերահսկվող կրթական միջավայրում։",
-      ru: "Поддержите симуляционную практику в контролируемой образовательной среде.",
+      en: "20% of the roof covering is gone and the rafters are almost entirely damaged. The replacement stands on its own steel structure.",
+      hy: "Տանիքի ծածկի 20%-ը բացակայում է, ծպեղնաոտերը գրեթե ամբողջությամբ վնասված են։ Նորը հենվում է սեփական մետաղյա կոնստրուկցիայի վրա։",
+      ru: "20% кровли отсутствует, стропила повреждены почти полностью. Новая кровля опирается на собственную металлическую конструкцию.",
+    },
+  },
+  {
+    id: "lab",
+    title: {
+      en: "Operating room & cadaver lab",
+      hy: "Վիրահատարան և կադավեր լաբորատորիա",
+      ru: "Операционная и кадавер-лаборатория",
+    },
+    description: {
+      en: "The 93 m² operating room, the 34 m² lab and the cold storage on the −3.900 level — the technical heart of the center.",
+      hy: "93 քմ վիրահատարանը, 34 քմ լաբորատորիան և սառնարանը −3.900 նիշում՝ կենտրոնի տեխնիկական սիրտը։",
+      ru: "Операционная 93 м², лаборатория 34 м² и холодильная камера на отметке −3.900 — техническое сердце центра.",
+    },
+  },
+  {
+    id: "teaching",
+    title: {
+      en: "Study rooms & library",
+      hy: "Ուսումնական սենյակներ և գրադարան",
+      ru: "Учебные комнаты и библиотека",
+    },
+    description: {
+      en: "Three study rooms and a 54 m² library on the monument's own floor, where the reopened windows let daylight back in.",
+      hy: "Երեք ուսումնական սենյակ և 54 քմ գրադարան հուշարձանի հարկում, որտեղ վերաբացված պատուհաններով վերադառնում է ցերեկային լույսը։",
+      ru: "Три учебные комнаты и библиотека 54 м² на этаже памятника, куда через раскрытые окна возвращается дневной свет.",
     },
   },
   {
     id: "equipment",
-    title: { en: "Equipment", hy: "Սարքավորումներ", ru: "Оборудование" },
+    title: {
+      en: "Training equipment",
+      hy: "Ուսուցման սարքավորումներ",
+      ru: "Учебное оборудование",
+    },
     description: {
-      en: "Contribute to training equipment and learning infrastructure as needs are confirmed.",
-      hy: "Նպաստեք ուսուցման սարքավորումներին և ենթակառուցվածքին՝ ըստ հաստատված կարիքների։",
-      ru: "Внесите вклад в учебное оборудование и инфраструктуру по мере подтверждения потребностей.",
+      en: "Surgical instruments, lab equipment and the fit-out that turns finished rooms into a working teaching environment.",
+      hy: "Վիրաբուժական գործիքներ, լաբորատոր սարքավորումներ և կահավորում, որոնք ավարտված սենյակները դարձնում են գործող ուսումնական միջավայր։",
+      ru: "Хирургические инструменты, лабораторное оборудование и оснащение, превращающее готовые помещения в рабочую учебную среду.",
     },
   },
   {
-    id: "scholarships",
-    title: { en: "Scholarships", hy: "Կրթաթոշակներ", ru: "Стипендии" },
-    description: {
-      en: "A future category for expanding access to professional courses.",
-      hy: "Ապագա ուղղություն՝ մասնագիտական դասընթացների հասանելիությունն ընդլայնելու համար։",
-      ru: "Будущее направление для расширения доступа к профессиональным курсам.",
+    id: "courtyard",
+    title: {
+      en: "Courtyard & green terrace",
+      hy: "Բակ և կանաչապատ տերաս",
+      ru: "Двор и озеленённая терраса",
     },
-  },
-  {
-    id: "research",
-    title: { en: "Research", hy: "Հետազոտություն", ru: "Исследования" },
     description: {
-      en: "Support educational research connected to simulation and experimental learning.",
-      hy: "Աջակցեք սիմուլյացիայի և փորձարարական ուսուցման հետ կապված կրթական հետազոտությանը։",
-      ru: "Поддержите образовательные исследования, связанные с симуляцией и экспериментальным обучением.",
-    },
-  },
-  {
-    id: "community",
-    title: { en: "Community Programs", hy: "Համայնքային ծրագրեր", ru: "Общественные программы" },
-    description: {
-      en: "Help related community and healthcare education initiatives as they are defined.",
-      hy: "Աջակցեք հարակից համայնքային և առողջապահական կրթական նախաձեռնություններին՝ ըստ դրանց սահմանման։",
-      ru: "Поддержите смежные общественные и образовательные инициативы в сфере здравоохранения по мере их определения.",
+      en: "336 m² of planting, the inner courtyard and the roof terrace — the part of the site that also gives something back to the neighbourhood.",
+      hy: "336 քմ կանաչապատում, ներքին բակը և տանիքի տերասը՝ նախագծի այն մասը, որը տալիս է նաև թաղամասին։",
+      ru: "336 м² озеленения, внутренний двор и кровельная терраса — часть проекта, которая работает и на квартал.",
     },
   },
 ];

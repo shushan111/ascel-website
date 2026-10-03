@@ -35,7 +35,7 @@ export function buildMetadata({
   description,
   path = "/",
   locale = "en",
-  image = "/images/hero-simulation.webp",
+  image = "/images/project/facade-after.webp",
   noIndex = false,
 }: BuildMetadataInput): Metadata {
   const url = absoluteUrl(path, locale);

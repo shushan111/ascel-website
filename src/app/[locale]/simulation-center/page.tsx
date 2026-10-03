@@ -1,18 +1,19 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
+import { projectMeta } from "@/data/project";
+import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { ImageReveal } from "@/components/motion/ImageReveal";
-
-const areaKeys = [
-  "medicalSimulation",
-  "surgicalTraining",
-  "emergencyScenarios",
-  "teamTraining",
-  "proceduralSkills",
-  "experimentalLearning",
-] as const;
+import { PageHeader } from "@/components/ui/PageHeader";
+import { buttonClassName } from "@/components/ui/buttonStyles";
+import { ProjectFigures } from "@/components/project/ProjectFigures";
+import { MonumentSection } from "@/components/project/MonumentSection";
+import { ProjectSteps } from "@/components/project/ProjectSteps";
+import { ProjectLevels } from "@/components/project/ProjectLevels";
+import { CadaverLab } from "@/components/project/CadaverLab";
+import { ProjectGallery } from "@/components/project/ProjectGallery";
 
 export async function generateMetadata({
   params,
@@ -26,81 +27,88 @@ export async function generateMetadata({
     description: t("simulationDescription"),
     path: "/simulation-center",
     locale,
-    image: "/images/simulation-center.webp",
+    image: "/images/project/facade-after.webp",
   });
 }
 
-export default async function SimulationCenterPage({
+/**
+ * The project in full. The route is unchanged so existing links keep
+ * working; everything the visitor reads now names the Medical Training
+ * Center.
+ */
+export default async function MedicalTrainingCenterPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("SimulationPage");
-  const home = await getTranslations("SimulationHome");
+  const t = await getTranslations("CenterPage");
+
+  const facts = [
+    { label: t("factAddress"), value: loc(projectMeta.addressLine, locale) },
+    { label: t("factPlot"), value: projectMeta.landPlot },
+    { label: t("factStage"), value: loc(projectMeta.stage, locale) },
+    {
+      label: t("factArchitects"),
+      value: loc(projectMeta.architects, locale),
+    },
+  ];
 
   return (
     <>
-      <section className="relative min-h-[48vh] overflow-hidden bg-navy">
-        <Image
-          src="/images/simulation-center.webp"
-          alt={home("imageAlt")}
-          fill
-          priority
-          className="object-cover opacity-40"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-navy/55" />
-        <Container className="relative flex min-h-[48vh] flex-col justify-end py-16">
-          <p className="text-xs font-medium uppercase tracking-[0.22em] text-white/60">
-            {t("eyebrow")}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-white text-balance md:text-5xl">
-            {t("title")}
-          </h1>
-        </Container>
-      </section>
+      <PageHeader
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        intro={t("intro")}
+        aside={
+          <Link href="/donate" className={buttonClassName("primary")}>
+            {t("donateCta")}
+          </Link>
+        }
+      />
+
+      <Container className="mt-10 md:mt-14">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
+          <Image
+            src="/images/project/facade-after.webp"
+            alt={t("imageAlt")}
+            fill
+            priority
+            className="object-cover"
+            sizes="(min-width: 1200px) 1136px, 100vw"
+          />
+        </div>
+      </Container>
+
       <Section>
-        <Container className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <p className="text-base leading-7 text-muted">{t("intro")}</p>
-            <h2 className="mt-10 text-2xl font-semibold tracking-tight text-navy">
-              {t("areasTitle")}
-            </h2>
-            <ul className="mt-6 grid gap-px bg-line sm:grid-cols-2">
-              {areaKeys.map((key) => (
-                <li key={key} className="bg-white px-4 py-4 text-sm text-navy">
-                  {home(key)}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 text-sm leading-6 text-muted">{t("note")}</p>
-          </div>
-          <div className="grid gap-4">
-            <ImageReveal>
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src="/images/capability-simulation.webp"
-                  alt={home("medicalSimulation")}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                />
+        <Container>
+          <ProjectFigures locale={locale} />
+          <dl className="mt-14 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+            {facts.map((fact) => (
+              <div key={fact.label} className="border-t border-line pt-4">
+                <dt className="t-meta-sm text-muted">{fact.label}</dt>
+                <dd className="mt-2 text-sm leading-6 text-ink">
+                  {fact.value}
+                </dd>
               </div>
-            </ImageReveal>
-            <ImageReveal>
-              <div className="relative aspect-[16/10]">
-                <Image
-                  src="/images/capability-team.webp"
-                  alt={home("teamTraining")}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                />
-              </div>
-            </ImageReveal>
-          </div>
+            ))}
+          </dl>
+        </Container>
+      </Section>
+
+      <MonumentSection locale={locale} />
+      <ProjectSteps locale={locale} />
+      <ProjectLevels locale={locale} />
+      <CadaverLab />
+      <ProjectGallery locale={locale} />
+
+      <Section tone="paper" space="compact">
+        <Container>
+          <p className="t-body max-w-2xl text-body">{t("closing")}</p>
+          <Link href="/donate" className={buttonClassName("primary", "mt-8")}>
+            {t("donateCta")}
+          </Link>
         </Container>
       </Section>
     </>

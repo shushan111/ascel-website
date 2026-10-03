@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import { Prose } from "@/components/ui/Prose";
 
 export async function generateMetadata({
   params,
@@ -29,11 +29,11 @@ export default async function PrivacyPage({
   const t = await getTranslations("Legal");
 
   return (
-    <Section>
-      <Container className="max-w-3xl">
-        <h1 className="text-4xl font-semibold tracking-tight text-navy">{t("privacyTitle")}</h1>
-        <p className="mt-6 text-base leading-7 text-muted">{t("privacyBody")}</p>
-      </Container>
-    </Section>
+    <Container width="text" className="pt-16 pb-24 md:pt-20 md:pb-32">
+      <h1 className="t-h1 text-balance text-ink">{t("privacyTitle")}</h1>
+      <Prose className="mt-8 border-t border-line pt-8">
+        <p>{t("privacyBody")}</p>
+      </Prose>
+    </Container>
   );
 }

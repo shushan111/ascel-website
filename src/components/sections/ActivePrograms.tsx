@@ -7,10 +7,10 @@ import { ProgramCard } from "@/components/programs/ProgramCard";
 
 export async function ActivePrograms({ locale }: { locale: string }) {
   const t = await getTranslations("ProgramsHome");
-  const programs = getPrograms();
+  const programs = await getPrograms();
 
   return (
-    <Section tone="canvas" id="programs">
+    <Section tone="paper" id="programs">
       <Container>
         <SectionHeader title={t("title")} subtitle={t("subtitle")} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

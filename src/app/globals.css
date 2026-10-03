@@ -1,29 +1,60 @@
 @import "tailwindcss";
 
-:root {
-  --navy: #0b1f3a;
-  --navy-deep: #071525;
-  --medical: #2563a8;
-  --accent: #0f766e;
-  --accent-hover: #0d9488;
-  --canvas: #f4f6f8;
-  --ink: #1a2332;
-  --muted: #5c6778;
-  --line: #e2e6eb;
-  --white: #ffffff;
+/*
+ * Design system — warm editorial
+ * ------------------------------------------------------------------
+ * Ported from the gyumri-orthopedic-school-vivid reference build. The system
+ * is near-monochrome and warm: a beige page, warm-white surfaces, near-black
+ * ink, and a single bronze accent. There is no blue anywhere.
+ *
+ * Single source of truth — components never hold a hex. Declared in `@theme`
+ * so every token is also emitted as a real `:root` custom property.
+ */
+@theme {
+  /* Surfaces — warm neutrals. */
+  --color-canvas: #f4f2ed; /* page base */
+  --color-paper: #fcfbf8; /* surfaces: cards, header, tinted bands */
+  --color-mist: #ece8e1; /* deeper warm: image beds, quiet fills */
+
+  /* Ink — the dark end. Doubles as the fill for buttons and dark blocks. */
+  --color-ink: #12151a; /* headings, buttons, footer   16.4:1 on canvas */
+  --color-ink-hover: #2a313a; /* the one step a filled button takes on hover */
+  --color-body: #3a4049; /* long-form body               9.3:1 */
+  --color-muted: #5e666f; /* metadata                     5.2:1 */
+
+  /* Warm taupe hairlines. */
+  --color-line: #d7d2c8;
+  --color-line-strong: #c4beb3;
+
+  /* Bronze — the only chromatic value, and only ever at small sizes. */
+  --color-accent: #6e5a3a; /* eyebrows, labels, link hover  5.9:1 */
+  --color-accent-hover: #55452c; /* 8.2:1 */
+  --color-accent-light: #c4b394; /* the bronze for dark grounds   8.9:1 on ink */
+
+  /* Text on the dark blocks — warm off-white, never pure white. */
+  --color-on-dark: #edeee8; /* 15.7:1 on ink */
+
+  --color-ok: #2f5d46;
+  --color-danger: #8a2f32;
+
+  /* Geometry — corners are almost square. */
+  --radius-xs: 0.1rem;
+  --radius-sm: 0.18rem;
+  --radius-md: 0.28rem;
+  --radius-lg: 0.4rem;
+
+  /* Serif carries every heading; the sans carries everything read at length.
+     Noto Sans/Serif Armenian keep hy in the same voice as en and ru. */
+  --font-display: var(--font-noto-serif), var(--font-noto-serif-armenian),
+    Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-noto-sans), var(--font-noto-sans-armenian),
+    ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-navy: var(--navy);
-  --color-navy-deep: var(--navy-deep);
-  --color-medical: var(--medical);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-canvas: var(--canvas);
-  --color-ink: var(--ink);
-  --color-muted: var(--muted);
-  --color-line: var(--line);
-  --font-sans: var(--font-plus-jakarta), var(--font-noto-armenian), var(--font-noto-cyrillic), ui-sans-serif, system-ui, sans-serif;
+:root {
+  /* Photography is pulled back so it sits inside the warm palette rather than
+     fighting it. Applied to every content image. */
+  --photo: grayscale(0.18) contrast(1.05) saturate(0.82);
 }
 
 html {
@@ -45,23 +76,252 @@ html {
 }
 
 body {
-  background: var(--white);
-  color: var(--ink);
+  background: var(--color-canvas);
+  color: var(--color-body);
   font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 18%, white);
-  color: var(--navy);
+  background: var(--color-mist);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--color-ink);
   outline-offset: 3px;
+  border-radius: 1px;
 }
 
 a,
 button {
   -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  /* Keeps CMS images from ever pushing a page into horizontal scroll. */
+  max-width: 100%;
+  filter: var(--photo);
+}
+
+/* Armenian and Russian compounds are long enough to overflow a narrow column
+   at display sizes, so every text node is allowed to break. */
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+dd,
+dt,
+a,
+figcaption {
+  overflow-wrap: break-word;
+}
+
+/*
+ * Type scale
+ * ------------------------------------------------------------------
+ * Headings are serif, body is sans — the split that gives the reference its
+ * editorial voice. Declared in the components layer so plain Tailwind
+ * utilities still win when one instance needs to deviate. Colour is
+ * deliberately left out: these only set size, weight, leading and tracking.
+ */
+@layer components {
+  .t-display,
+  .t-h1,
+  .t-h2,
+  .t-h3,
+  .t-h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .t-display {
+    font-size: clamp(2rem, 4.4vw, 3.35rem);
+    line-height: 1.14;
+    letter-spacing: -0.022em;
+  }
+
+  .t-h1 {
+    font-size: clamp(1.85rem, 3.6vw, 2.8rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+
+  .t-h2 {
+    font-size: clamp(1.55rem, 2.6vw, 2.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+  }
+
+  .t-h3 {
+    font-size: 1.18rem;
+    line-height: 1.34;
+    letter-spacing: -0.015em;
+  }
+
+  .t-h4 {
+    font-size: 1.05rem;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+  }
+
+  .t-lead {
+    font-size: 1.16rem;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .t-body {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .t-small {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  /* Dates, categories, chips. Pair with a muted or accent colour. */
+  .t-meta-sm {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Section and page eyebrows. The short leading rule is the reference's
+     signature mark, so it belongs to the token rather than to each caller. */
+  .t-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .t-eyebrow::before {
+    content: "";
+    flex: none;
+    width: 1.55rem;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+/*
+ * Editorial body copy for CMS-authored articles. Scoped to `.prose-ascel` so
+ * it can never leak into the chrome around it.
+ */
+@layer components {
+  .prose-ascel {
+    color: var(--color-body);
+    font-size: 1.08rem;
+    line-height: 1.78;
+  }
+
+  .prose-ascel > * + * {
+    margin-top: 1.5em;
+  }
+
+  .prose-ascel h2 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.016em;
+    color: var(--color-ink);
+    margin-top: 2.5em;
+  }
+
+  .prose-ascel h3 {
+    font-family: var(--font-display);
+    font-size: 1.22rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-ink);
+    margin-top: 2em;
+  }
+
+  .prose-ascel h2 + *,
+  .prose-ascel h3 + * {
+    margin-top: 0.75em;
+  }
+
+  .prose-ascel strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .prose-ascel a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .prose-ascel a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .prose-ascel ul,
+  .prose-ascel ol {
+    padding-left: 1.25rem;
+  }
+
+  .prose-ascel ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .prose-ascel ul > li {
+    position: relative;
+    padding-left: 1.375rem;
+  }
+
+  .prose-ascel ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0.125rem;
+    top: 0.8em;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: var(--color-accent);
+  }
+
+  .prose-ascel ol {
+    list-style: decimal;
+  }
+
+  .prose-ascel li + li {
+    margin-top: 0.6em;
+  }
+
+  .prose-ascel blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25rem;
+    color: var(--color-ink);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .prose-ascel img {
+    border-radius: var(--radius-md);
+  }
+
+  .prose-ascel hr {
+    border: 0;
+    border-top: 1px solid var(--color-line);
+    margin-top: 2.5em;
+  }
 }

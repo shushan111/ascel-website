@@ -1,10 +1,25 @@
 import type { LocaleCode, LocalizedString } from "@/types";
 import { externalLinks } from "./config";
 
+/**
+ * Imported archive content is Russian-first, so a missing Armenian or English
+ * field must not render as an empty string. The chain is: the current locale,
+ * then Russian (the original), then English.
+ */
 export function loc(value: LocalizedString, locale: string): string {
-  if (locale === "hy") return value.hy;
-  if (locale === "ru") return value.ru;
-  return value.en;
+  const order: Array<keyof LocalizedString> =
+    locale === "hy" ? ["hy", "ru", "en"] : locale === "ru" ? ["ru", "en", "hy"] : ["en", "ru", "hy"];
+  for (const key of order) {
+    const candidate = value?.[key];
+    if (candidate) return candidate;
+  }
+  return "";
+}
+
+/** True when the shown text is not in the requested language. */
+export function isFallback(value: LocalizedString, locale: string): boolean {
+  const key = locale === "hy" ? "hy" : locale === "ru" ? "ru" : "en";
+  return Boolean(loc(value, locale)) && !value?.[key];
 }
 
 export function isAppLocale(value: string): value is LocaleCode {

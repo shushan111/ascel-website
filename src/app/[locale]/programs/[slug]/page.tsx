@@ -5,8 +5,9 @@ import { loc } from "@/lib/utils";
 import { buildMetadata } from "@/lib/seo";
 import { ProgramDetail } from "@/components/programs/ProgramDetail";
 
-export function generateStaticParams() {
-  return getPrograms().map((program) => ({ slug: program.slug }));
+export async function generateStaticParams() {
+  const programs = await getPrograms();
+  return programs.map((program) => ({ slug: program.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const program = getProgramBySlug(slug);
+  const program = await getProgramBySlug(slug);
   if (!program) return {};
   const description = program.detail?.seoDescription ?? program.description;
   return buildMetadata({
@@ -34,7 +35,7 @@ export default async function ProgramDetailPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const program = getProgramBySlug(slug);
+  const program = await getProgramBySlug(slug);
   if (!program) notFound();
 
   return <ProgramDetail program={program} locale={locale} />;
