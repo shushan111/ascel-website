@@ -1,7 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
-import { Container } from "@/components/ui/Container";
-import { Prose } from "@/components/ui/Prose";
+import { LegalPage } from "@/components/ui/LegalPage";
 
 export async function generateMetadata({
   params,
@@ -28,12 +27,5 @@ export default async function TermsPage({
   setRequestLocale(locale);
   const t = await getTranslations("Legal");
 
-  return (
-    <Container width="text" className="pt-16 pb-24 md:pt-20 md:pb-32">
-      <h1 className="t-h1 text-balance text-ink">{t("termsTitle")}</h1>
-      <Prose className="mt-8 border-t border-line pt-8">
-        <p>{t("termsBody")}</p>
-      </Prose>
-    </Container>
-  );
+  return <LegalPage title={t("termsTitle")} body={t("termsBody")} />;
 }

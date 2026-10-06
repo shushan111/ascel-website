@@ -17,22 +17,29 @@ export async function FundraisingProgress({ locale }: { locale: string }) {
     }).format(value);
 
   return (
-    <div className="mt-10">
-      <div className="h-1 w-full bg-line" role="progressbar" aria-valuenow={percent} aria-valuemin={0} aria-valuemax={100}>
-        <div className="h-full bg-accent" style={{ width: `${percent}%` }} />
-      </div>
-      <dl className="mt-4 flex flex-wrap justify-between gap-4 text-[0.95rem]">
+    <div className="card mt-8 p-5 sm:p-6">
+      <dl className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <dt className="text-muted">{t("raised")}</dt>
-          <dd className="font-display text-[1.6rem] text-ink">{format(fundraising.raised as number)}</dd>
+          <dt className="t-small text-muted">{t("raised")}</dt>
+          <dd className="t-figure-sm mt-1 text-ink">{format(fundraising.raised as number)}</dd>
         </div>
         <div className="text-right">
-          <dt className="text-muted">{t("goal")}</dt>
-          <dd className="font-display text-[1.6rem] text-ink">{format(fundraising.goal as number)}</dd>
+          <dt className="t-small text-muted">{t("goal")}</dt>
+          <dd className="mt-1 font-display text-[1.25rem] text-muted">{format(fundraising.goal as number)}</dd>
         </div>
       </dl>
+      <div
+        className="mt-4 h-2 w-full overflow-hidden rounded-full bg-mist"
+        role="progressbar"
+        aria-valuenow={percent}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={t("raised")}
+      >
+        <div className="h-full rounded-full bg-accent" style={{ width: `${percent}%` }} />
+      </div>
       {fundraising.lastUpdated ? (
-        <p className="mt-2 text-[0.85rem] text-muted">
+        <p className="t-caption mt-3 text-muted">
           {t("updated", {
             date: new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(fundraising.lastUpdated)),
           })}

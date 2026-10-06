@@ -26,7 +26,7 @@ export async function FoundersSection({
     <Section tone={tone} id="founders">
       <Container width="wide">
         <SectionHeader title={t("title")} />
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-14 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
           {founders.map((founder, index) => (
             <li key={founder.id}>
               <FounderCard founder={founder} locale={locale} index={index} />

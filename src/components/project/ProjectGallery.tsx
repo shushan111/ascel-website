@@ -2,6 +2,8 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { projectGallery, projectMeta } from "@/data/project";
 import { loc } from "@/lib/utils";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { InfoIcon } from "@/components/ui/icons";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 
 /**
@@ -22,28 +24,26 @@ export async function ProjectGallery({
 
   return (
     <div>
-      <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between md:gap-10">
-        <h3 className="t-h2 text-ink">{t("title")}</h3>
-        <p className="t-small max-w-md text-muted">{t("subtitle")}</p>
-      </div>
-      <div className="mt-10 grid items-start gap-6 md:grid-cols-2">
+      <SectionHeader title={t("title")} intro={t("subtitle")} layout="split" as="h3" />
+      <div className="mt-8 grid items-start gap-4 md:grid-cols-2 lg:gap-6">
         {items.map((item) => (
           <figure key={item.src}>
-            <ImageReveal>
+            <ImageReveal className="media">
               <Image
                 src={item.src}
                 alt={loc(item.alt, locale)}
                 width={item.width}
                 height={item.height}
-                className="h-auto w-full bg-mist"
+                className="h-auto w-full"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
             </ImageReveal>
-            <figcaption className="t-small mt-3 text-muted">{loc(item.alt, locale)}</figcaption>
+            <figcaption className="t-caption mt-2.5 text-muted">{loc(item.alt, locale)}</figcaption>
           </figure>
         ))}
       </div>
-      <p className="mt-8 text-[0.85rem] leading-6 text-muted">
+      <p className="t-caption mt-6 flex gap-2 text-muted">
+        <InfoIcon className="mt-0.5 h-3.5 w-3.5" />
         {t("credit", {
           architects: loc(projectMeta.architects, locale),
           stage: loc(projectMeta.stage, locale),

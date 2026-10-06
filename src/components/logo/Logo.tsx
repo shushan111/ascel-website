@@ -6,6 +6,7 @@ export function Logo({
   invert = false,
 }: {
   className?: string;
+  /** Mark and wordmark only, never the descriptor line. */
   compact?: boolean;
   invert?: boolean;
 }) {
@@ -13,7 +14,7 @@ export function Logo({
     <span className={cn("inline-flex items-center gap-3", className)}>
       <svg
         viewBox="0 0 40 40"
-        className={cn("h-10 w-10 shrink-0", invert ? "text-on-dark" : "text-accent-ink")}
+        className={cn("h-9 w-9 shrink-0 md:h-10 md:w-10", invert ? "text-accent-light" : "text-accent-ink")}
         aria-hidden="true"
       >
         <rect
@@ -21,7 +22,7 @@ export function Logo({
           y="1.25"
           width="37.5"
           height="37.5"
-          rx="4"
+          rx="6"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.25"
@@ -33,27 +34,24 @@ export function Logo({
           strokeWidth="1.5"
           strokeLinejoin="round"
         />
-        <path
-          d="M14.5 21.5h11"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
+        <path d="M14.5 21.5h11" fill="none" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="20" cy="16.2" r="1.6" fill="currentColor" />
       </svg>
       <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            "font-display text-[16px] font-medium tracking-[0.18em]",
+            "font-display text-[15px] font-medium tracking-[0.2em] md:text-[16px]",
             invert ? "text-on-dark" : "text-ink",
           )}
         >
           ASCEL
         </span>
         {compact ? null : (
+          // The descriptor shows where the header has room for it: beside the
+          // menu button on a tablet, and on wide desktops beside the nav.
           <span
             className={cn(
-              "mt-1.5 hidden max-w-[11rem] text-[11px] leading-snug tracking-[0.04em] sm:block xl:hidden 2xl:block",
+              "mt-1.5 hidden max-w-[11rem] text-[11px] leading-snug tracking-[0.04em] sm:block lg:hidden 2xl:block",
               invert ? "text-on-dark/60" : "text-muted",
             )}
           >

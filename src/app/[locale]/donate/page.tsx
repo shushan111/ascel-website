@@ -6,12 +6,16 @@ import { workPhotos } from "@/data/work";
 import { buildMetadata } from "@/lib/seo";
 import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { DonationCategories } from "@/components/donate/DonationCategories";
 import { HowToGive } from "@/components/donate/HowToGive";
 import { FundraisingProgress } from "@/components/donate/FundraisingProgress";
 import { TrustPanel } from "@/components/donate/TrustPanel";
 import { ImpactChain } from "@/components/impact/ImpactChain";
+import { ImageReveal } from "@/components/motion/ImageReveal";
 
 export async function generateMetadata({
   params,
@@ -32,9 +36,10 @@ export async function generateMetadata({
 /**
  * The simplest page on the site, answering four questions in order:
  * what am I supporting, why does it matter, who is behind it, how do I give.
- * The "how" sits beside the opening so nobody has to scroll to find it.
- * Progress, payment details and the legal panel are wired to data that is
- * still null; each appears on its own once the client supplies it.
+ * The "how" sits beside the opening — and stays there as the page scrolls on
+ * desktop — so nobody has to look for it. Progress, payment details and the
+ * legal panel are wired to data that is still null; each appears on its own
+ * once the client supplies it.
  */
 export default async function DonatePage({
   params,
@@ -54,92 +59,89 @@ export default async function DonatePage({
   return (
     <>
       {/* What — and how, beside it. */}
-      <section className="bg-canvas pb-16 pt-14 md:pb-24 md:pt-24">
-        <Container width="wide" className="grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-6">
-            <p className="t-eyebrow text-muted">{t("eyebrow")}</p>
-            <h1 className="t-display mt-5 text-balance text-ink">{t("title")}</h1>
-            <p className="t-lead mt-7 max-w-[36rem] text-muted">{t("intro")}</p>
-            <FundraisingProgress locale={locale} />
-          </div>
-          {/* On a phone the way to give follows the intro directly; on
-              desktop it holds its column beside the text and the image. */}
-          <div className="min-w-0 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
-            <div className="lg:sticky lg:top-28">
-              <HowToGive />
+      <section className="bg-canvas pb-14 pt-4 md:pb-band md:pt-6">
+        <Container width="wide">
+          <Breadcrumbs items={[{ label: nav("donate") }]} />
+          <div className="mt-6 grid gap-10 md:mt-10 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-6">
+              <p className="t-eyebrow text-muted">{t("eyebrow")}</p>
+              <h1 className="t-display mt-5 text-balance text-ink">{t("title")}</h1>
+              <p className="t-lead mt-6 max-w-[36rem] text-muted">{t("intro")}</p>
+              <FundraisingProgress locale={locale} />
+              <figure className="mt-10 hidden lg:block">
+                <div className="media relative aspect-[16/10]">
+                  <Image
+                    src="/images/project/facade-after.webp"
+                    alt={center("imageAlt")}
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="48vw"
+                  />
+                </div>
+              </figure>
+            </div>
+            {/* On a phone the way to give follows the intro directly; on
+                desktop it holds its column beside the text and the image. */}
+            <div className="min-w-0 lg:col-span-5 lg:col-start-8">
+              <div className="lg:sticky lg:top-[calc(var(--header-h)+1.5rem)]">
+                <HowToGive />
+              </div>
             </div>
           </div>
-          <figure className="lg:col-span-6 lg:row-start-2">
-            <div className="relative aspect-[16/9] bg-mist">
-              <Image
-                src="/images/project/facade-after.webp"
-                alt={center("imageAlt")}
-                fill
-                priority
-                className="object-cover"
-                sizes="(min-width: 1024px) 48vw, 100vw"
-              />
-            </div>
-          </figure>
         </Container>
       </section>
 
       {/* What exactly the support builds. */}
-      <section className="bg-paper py-20 md:py-28">
+      <Section tone="paper">
         <Container width="wide">
-          <div className="flex flex-col gap-4 md:flex-row md:items-baseline md:justify-between md:gap-10">
-            <h2 className="t-h2 text-ink">{donateHome("categoriesTitle")}</h2>
-            <p className="t-small max-w-md text-muted">{donateHome("bodySecond")}</p>
+          <SectionHeader
+            title={donateHome("categoriesTitle")}
+            intro={donateHome("bodySecond")}
+            action={<ArrowLink href="/simulation-center">{donateHome("supportPrograms")}</ArrowLink>}
+          />
+          <div className="mt-10 md:mt-12">
+            <DonationCategories options={options} locale={locale} />
           </div>
-          <div className="mt-10">
-            <DonationCategories options={options} locale={locale} showTitle={false} />
-          </div>
-          <ArrowLink href="/simulation-center" className="mt-8">
-            {donateHome("supportPrograms")}
-          </ArrowLink>
         </Container>
-      </section>
+      </Section>
 
       {/* Why it matters. */}
-      <section className="bg-canvas py-20 md:py-28">
+      <Section>
         <Container width="wide">
-          <h2 className="t-h2 max-w-xl text-balance text-ink">{home("mattersTitle")}</h2>
-          <ImpactChain surface="canvas" className="mt-12 md:mt-16" />
+          <SectionHeader eyebrow={home("mattersEyebrow")} title={home("mattersTitle")} />
+          <ImpactChain className="mt-10 md:mt-14" />
         </Container>
-      </section>
+      </Section>
 
       {/* Who is behind it: the track record, briefly, with the way to read more. */}
-      <section className="bg-paper py-20 md:py-28">
-        <Container width="wide" className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+      <Section tone="paper">
+        <Container width="wide" className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-10">
           <div className="lg:col-span-6">
-            <h2 className="t-h2 text-balance text-ink">{t("whoTitle")}</h2>
-            <p className="t-body mt-6 text-body">{home("heroSupporting")}</p>
-            <dl className="mt-10 grid grid-cols-1 gap-6 border-t border-line pt-8 sm:grid-cols-2">
+            <h2 className="t-h1 text-balance text-ink">{t("whoTitle")}</h2>
+            <p className="t-body mt-5 text-body">{home("heroSupporting")}</p>
+            <dl className="mt-8 grid grid-cols-2 gap-6">
               {metrics.map((metric) => (
-                <div key={metric.id} className="flex flex-col-reverse">
+                <div key={metric.id} className="flex flex-col-reverse border-l border-line-strong pl-4">
                   <dt className="t-small mt-2 text-muted">{loc(metric.label, locale)}</dt>
-                  <dd className="font-display text-[2.6rem] font-normal leading-none text-ink">{metric.display}</dd>
+                  <dd className="t-figure-sm text-ink">{metric.display}</dd>
                 </div>
               ))}
             </dl>
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-2">
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-1">
               <ArrowLink href="/about">{nav("about")}</ArrowLink>
               <ArrowLink href="/programs">{nav("programs")}</ArrowLink>
               <ArrowLink href="/courses">{nav("courses")}</ArrowLink>
             </div>
           </div>
-          <div className="relative aspect-[3/2] bg-mist lg:col-span-5 lg:col-start-8">
-            <Image
-              src={workPhotos.exfixTeam.src}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-            />
-          </div>
+          <ImageReveal className="media lg:col-span-5 lg:col-start-8">
+            <div className="relative aspect-[3/2]">
+              <Image src={workPhotos.exfixTeam.src} alt="" fill className="object-cover" sizes="(min-width: 1024px) 40vw, 100vw" />
+            </div>
+          </ImageReveal>
           <TrustPanel locale={locale} className="lg:col-span-12" />
         </Container>
-      </section>
+      </Section>
     </>
   );
 }

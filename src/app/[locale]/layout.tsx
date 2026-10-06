@@ -7,7 +7,6 @@ import { routing } from "@/i18n/routing";
 import { siteConfig } from "@/lib/config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Link } from "@/i18n/navigation";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -60,14 +59,16 @@ export default async function LocaleLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <NextIntlClientProvider messages={messages}>
-        <Link
+        {/* A plain anchor: the target is on this page, so there is nothing
+            for the locale-aware Link to rewrite. */}
+        <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-100 focus:rounded-md focus:border focus:border-line-strong focus:bg-paper focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-100 focus:rounded-sm focus:bg-ink focus:px-4 focus:py-2.5 focus:text-[0.9375rem] focus:font-medium focus:text-on-dark"
         >
           {navT("skip")}
-        </Link>
+        </a>
         <Header />
-        <main id="main" className="flex-1">
+        <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}
         </main>
         <Footer locale={locale} />

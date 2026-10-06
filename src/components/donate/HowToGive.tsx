@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { donationConfig } from "@/lib/config";
 import { donationCurrencies, donationPresets, hasBankTransfer, payment } from "@/data/fundraising";
+import { FactList } from "@/components/ui/FactList";
 import { DonationForm } from "./DonationForm";
 
 /**
@@ -26,14 +27,13 @@ export async function HowToGive() {
       <DonationForm currencies={donationCurrencies} presets={donationPresets} checkoutUrl={checkoutUrl} />
 
       {hasBankTransfer() ? (
-        <dl className="mt-6 divide-y divide-line border-y border-line">
-          {bankRows.map(([label, value]) => (
-            <div key={label} className="grid grid-cols-[7rem_1fr] gap-4 py-3">
-              <dt className="text-[0.9rem] text-muted">{label}</dt>
-              <dd className="break-all font-mono text-[0.92rem] text-ink">{value}</dd>
-            </div>
-          ))}
-        </dl>
+        <FactList
+          className="mt-4"
+          facts={bankRows.map(([label, value]) => ({
+            label,
+            value: <span className="break-all font-mono text-[0.92rem]">{value}</span>,
+          }))}
+        />
       ) : null}
     </div>
   );

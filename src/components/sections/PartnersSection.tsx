@@ -17,17 +17,30 @@ export async function PartnersSection() {
 
   return (
     <Section space="compact">
-      <Container>
-        <SectionHeader title={t("title")} subtitle={t("subtitle")} />
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-6">
-          {partners.map((partner) => (
-            <li
-              key={partner.id}
-              className="flex min-h-24 items-center justify-center rounded-md border border-line bg-canvas px-4 text-center"
-            >
-              <span className="t-meta-sm text-ink">{partner.name}</span>
-            </li>
-          ))}
+      <Container width="wide">
+        <SectionHeader title={t("title")} intro={t("subtitle")} size="h3" />
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {partners.map((partner) => {
+            const tile = (
+              <span className="t-label text-ink">{partner.name}</span>
+            );
+            return (
+              <li key={partner.id}>
+                {partner.url ? (
+                  <a
+                    href={partner.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="card card-link flex min-h-24 items-center justify-center px-4 text-center"
+                  >
+                    {tile}
+                  </a>
+                ) : (
+                  <div className="card flex min-h-24 items-center justify-center px-4 text-center">{tile}</div>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </Container>
     </Section>

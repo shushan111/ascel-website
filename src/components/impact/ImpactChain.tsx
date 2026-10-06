@@ -5,17 +5,13 @@ import { FadeIn } from "@/components/motion/FadeIn";
 /**
  * Building → training → professionals → care. The line between the steps is
  * the argument: a donation to walls is a donation to patients. Used on the
- * home page, the center page and the donate page so the wording lives in one
- * place (Home.chain*). DRAFT — the wording needs client approval.
+ * home, project and donate pages so the wording lives in one place
+ * (Home.chain*). DRAFT — the wording needs client approval.
+ *
+ * A vertical timeline on a phone, a horizontal one from lg; the last step —
+ * the outcome — is the one marked in bronze.
  */
-export async function ImpactChain({
-  className,
-  surface = "paper",
-}: {
-  className?: string;
-  /** The ground the chain sits on, so the hollow markers cut the line. */
-  surface?: "paper" | "canvas";
-}) {
+export async function ImpactChain({ className }: { className?: string }) {
   const t = await getTranslations("Home");
 
   const chain = [
@@ -26,27 +22,36 @@ export async function ImpactChain({
   ];
 
   return (
-    <ol className={cn("grid md:grid-cols-2 md:gap-y-14 lg:grid-cols-4 lg:gap-y-0", className)}>
-      {chain.map((step, index) => (
-        <li key={step.title} className="relative">
-          <FadeIn delay={index * 0.1} className="h-full">
-            <div className="h-full border-l border-line pb-10 pl-6 md:border-l-0 md:border-t md:pb-0 md:pl-0 md:pr-8 md:pt-8">
+    <ol className={cn("grid gap-0 lg:grid-cols-4 lg:gap-6", className)}>
+      {chain.map((step, index) => {
+        const last = index === chain.length - 1;
+        return (
+          <li key={step.title} className="relative pb-8 last:pb-0 lg:pb-0">
+            {/* The connector: down to the next marker on a phone, across from lg. */}
+            {last ? null : (
+              <span
+                aria-hidden="true"
+                className="absolute left-[1.0625rem] top-10 bottom-0 w-px bg-line-strong lg:left-12 lg:right-[-1.5rem] lg:top-[1.125rem] lg:bottom-auto lg:h-px lg:w-auto"
+              />
+            )}
+            <FadeIn delay={index * 0.08} className="flex gap-5 lg:flex-col lg:gap-0">
               <span
                 aria-hidden="true"
                 className={cn(
-                  "absolute -left-[4px] top-0 h-[9px] w-[9px] rounded-full md:-top-[4px] md:left-0",
-                  index === chain.length - 1
-                    ? "bg-accent"
-                    : cn("border border-ink/40", surface === "paper" ? "bg-paper" : "bg-canvas"),
+                  "relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full border text-[0.875rem] font-medium tabular-nums",
+                  last ? "border-accent bg-accent text-ink" : "border-line-strong bg-paper text-ink",
                 )}
-              />
-              <p className="t-meta text-muted">{String(index + 1).padStart(2, "0")}</p>
-              <h3 className="t-h3 mt-2 text-ink">{step.title}</h3>
-              <p className="t-small mt-3 max-w-[16rem] text-muted">{step.body}</p>
-            </div>
-          </FadeIn>
-        </li>
-      ))}
+              >
+                {index + 1}
+              </span>
+              <div className="pt-1 lg:pt-5 lg:pr-4">
+                <h3 className="t-h4 text-ink">{step.title}</h3>
+                <p className="t-small mt-1.5 max-w-[18rem] text-muted">{step.body}</p>
+              </div>
+            </FadeIn>
+          </li>
+        );
+      })}
     </ol>
   );
 }

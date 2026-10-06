@@ -7,8 +7,12 @@ import { workPhotos } from "@/data/work";
 import { getPhotoCaption } from "@/lib/courseIndex";
 import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { WideFigure } from "@/components/ui/WideFigure";
 import { ArrowLink } from "@/components/ui/ArrowLink";
+import { NextPageCard } from "@/components/ui/NextPageCard";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { FoundersSection } from "@/components/sections/FoundersSection";
@@ -91,95 +95,110 @@ export default async function AboutPage({
 
   return (
     <>
-      <PageHeader eyebrow={t("eyebrow")} title={t("title")} intro={t("whoBody")} />
+      <PageHeader breadcrumbs={[{ label: nav("about") }]} title={t("title")} intro={t("whoBody")} />
 
-      <figure className="mx-auto max-w-[100rem] md:px-8">
-        <div className="relative aspect-[4/3] bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
-          <Image src={workPhotos.boneHall.src} alt={hallCaption ?? ""} fill priority className="object-cover" sizes="100vw" />
-        </div>
-        {hallCaption ? (
-          <figcaption className="mt-3 px-5 text-[0.82rem] text-muted sm:px-6 md:px-0">{hallCaption}</figcaption>
-        ) : null}
-      </figure>
+      <WideFigure src={workPhotos.boneHall.src} alt={hallCaption ?? ""} caption={hallCaption} priority />
 
-      {/* Mission and vision, set large: the two sentences the rest supports. */}
-      <section className="bg-canvas py-20 md:py-28">
-        <Container width="wide" className="grid gap-14 md:grid-cols-2 md:gap-10">
+      {/* Mission and vision: the two sentences the rest of the page supports. */}
+      <Section space="default">
+        <Container width="wide" className="grid gap-4 md:grid-cols-2 lg:gap-6">
           {(
             [
               ["missionTitle", "missionBody"],
               ["visionTitle", "visionBody"],
             ] as const
-          ).map(([title, body]) => (
-            <FadeIn key={title}>
-              <h2 className="border-t border-ink/70 pt-4 text-[0.95rem] text-muted">{t(title)}</h2>
-              <p className="t-h3 mt-6 max-w-xl text-balance text-ink">{t(body)}</p>
+          ).map(([title, body], index) => (
+            <FadeIn key={title} delay={index * 0.08} className="card flex h-full flex-col p-7 sm:p-10">
+              <h2 className="t-eyebrow text-accent-ink">{t(title)}</h2>
+              <p className="t-h3 mt-6 text-balance text-ink">{t(body)}</p>
             </FadeIn>
           ))}
         </Container>
-      </section>
+      </Section>
 
       {/* History: dated, from the programmes' own records. */}
-      <section className="bg-paper py-20 md:py-28">
+      <Section tone="paper">
         <Container width="wide" className="grid gap-10 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <h2 className="t-h1 text-ink lg:sticky lg:top-28">{t("historyTitle")}</h2>
+            <div className="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
+              <SectionHeader title={t("historyTitle")} size="h1" />
+            </div>
           </div>
-          <ol className="border-t border-line lg:col-span-7 lg:col-start-6">
+          <ol className="relative lg:col-span-7 lg:col-start-6">
+            <span aria-hidden="true" className="absolute bottom-3 left-[0.3125rem] top-3 w-px bg-line-strong" />
             {history.map((item, index) => (
-              <li key={index} className="grid gap-2 border-b border-line py-7 sm:grid-cols-[6rem_1fr] sm:gap-8">
-                <p className="font-display text-[1.6rem] font-normal leading-none text-ink tabular-nums">{item.year || ""}</p>
-                <div>
-                  {item.program ? <p className="text-[0.88rem] text-muted">{item.program}</p> : null}
-                  <h3 className="t-h4 mt-1 text-balance text-ink">{item.title}</h3>
-                  <p className="t-small mt-2 text-muted">{item.body}</p>
-                </div>
+              <li key={index} className="relative pb-10 pl-9 last:pb-0">
+                <span
+                  aria-hidden="true"
+                  className={
+                    index === history.length - 1
+                      ? "absolute left-0 top-2 h-[0.6875rem] w-[0.6875rem] rounded-full bg-accent ring-4 ring-paper"
+                      : "absolute left-0 top-2 h-[0.6875rem] w-[0.6875rem] rounded-full border border-ink/50 bg-paper ring-4 ring-paper"
+                  }
+                />
+                <FadeIn>
+                  <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="t-figure-sm text-ink">{item.year || ""}</span>
+                    {item.program ? <span className="t-label text-muted">{item.program}</span> : null}
+                  </p>
+                  <h3 className="t-h4 mt-3 text-balance text-ink">{item.title}</h3>
+                  <p className="t-small mt-2 max-w-xl text-muted">{item.body}</p>
+                </FadeIn>
               </li>
             ))}
           </ol>
         </Container>
-      </section>
+      </Section>
 
       {/* How the work is done. */}
-      <section className="bg-canvas py-20 md:py-28">
+      <Section>
         <Container width="wide">
-          <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
             <FadeIn className="lg:col-span-5">
               <h2 className="t-h1 text-balance text-ink">{t("whatTitle")}</h2>
-              <p className="t-lead mt-6 text-muted">{t("whatBody")}</p>
+              <p className="t-lead mt-5 text-muted">{t("whatBody")}</p>
             </FadeIn>
             <figure className="lg:col-span-6 lg:col-start-7">
-              <ImageReveal>
-                <div className="relative aspect-[3/2] bg-mist">
+              <ImageReveal className="media">
+                <div className="relative aspect-[3/2]">
                   <Image src={workPhotos.exfixPelvis.src} alt={handsOnCaption ?? ""} fill className="object-cover" sizes="(min-width: 1024px) 45vw, 100vw" />
                 </div>
               </ImageReveal>
-              {handsOnCaption ? <figcaption className="mt-3 text-[0.82rem] text-muted">{handsOnCaption}</figcaption> : null}
+              {handsOnCaption ? <figcaption className="t-caption mt-3 text-muted">{handsOnCaption}</figcaption> : null}
             </figure>
           </div>
-          <ul className="mt-16 grid gap-x-10 border-t border-line sm:grid-cols-2 lg:grid-cols-3">
-            {approach.map(([title, body]) => (
-              <li key={title} className="border-b border-line py-8">
-                <h3 className="t-h4 text-ink">{t(title)}</h3>
-                <p className="t-small mt-3 text-muted">{t(body)}</p>
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 md:mt-16 lg:grid-cols-6 lg:gap-6">
+            {approach.map(([title, body], index) => (
+              // Five cards as two over three, so the grid never ends on a gap.
+              <li key={title} className={index < 2 ? "lg:col-span-3" : "lg:col-span-2"}>
+                <FadeIn delay={(index % 3) * 0.06} className="card h-full p-6 sm:p-7">
+                  <span className="font-display text-[0.9375rem] tabular-nums text-accent-ink">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="t-h4 mt-4 text-ink">{t(title)}</h3>
+                  <p className="t-small mt-2.5 text-muted">{t(body)}</p>
+                </FadeIn>
               </li>
             ))}
           </ul>
         </Container>
-      </section>
+      </Section>
 
       {/* The people: the faculty and participants, shown as they are. */}
-      <section className="bg-paper py-20 md:py-28">
-        <Container width="wide" className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+      <Section tone="paper">
+        <Container width="wide" className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-10">
           <div className="lg:col-span-4">
             <h2 className="t-h1 text-balance text-ink">{t("peopleTitle")}</h2>
-            <dl className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-1">
-              {metrics.slice(0, 3).filter((metric) => metric.id !== "programs").map((metric) => (
-                <div key={metric.id} className="flex flex-col-reverse">
-                  <dt className="t-small mt-2 text-muted">{loc(metric.label, locale)}</dt>
-                  <dd className="font-display text-[2.6rem] font-normal leading-none text-ink">{metric.display}</dd>
-                </div>
-              ))}
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-1">
+              {metrics
+                .filter((metric) => metric.id !== "programs")
+                .slice(0, 3)
+                .map((metric) => (
+                  <div key={metric.id} className="flex flex-col-reverse border-l border-line-strong pl-4">
+                    <dt className="t-small mt-2 text-muted">{loc(metric.label, locale)}</dt>
+                    <dd className="t-figure-sm text-ink">{metric.display}</dd>
+                  </div>
+                ))}
             </dl>
             <div className="mt-8 flex flex-wrap gap-x-8">
               <ArrowLink href="/programs">{nav("programs")}</ArrowLink>
@@ -187,30 +206,24 @@ export default async function AboutPage({
             </div>
           </div>
           <figure className="lg:col-span-8">
-            <ImageReveal>
-              <div className="relative aspect-[3/2] bg-mist">
+            <ImageReveal className="media">
+              <div className="relative aspect-[3/2]">
                 <Image src={workPhotos.kneeGroup.src} alt={groupCaption ?? ""} fill className="object-cover" sizes="(min-width: 1024px) 64vw, 100vw" />
               </div>
             </ImageReveal>
-            {groupCaption ? <figcaption className="mt-3 text-[0.82rem] text-muted">{groupCaption}</figcaption> : null}
+            {groupCaption ? <figcaption className="t-caption mt-3 text-muted">{groupCaption}</figcaption> : null}
           </figure>
         </Container>
-      </section>
+      </Section>
 
       <FoundersSection locale={locale} />
 
       {/* Forward: what the work has led to. */}
-      <section className="bg-canvas py-20 md:py-24">
-        <Container width="wide" className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
-          <div className="lg:col-span-8">
-            <p className="text-[0.95rem] text-muted">{t("nextTitle")}</p>
-            <p className="t-h2 mt-4 text-balance text-ink">{home("nextLine")}</p>
-          </div>
-          <div className="lg:col-span-4 lg:text-right">
-            <ArrowLink href="/simulation-center">{nav("simulation")}</ArrowLink>
-          </div>
+      <Section space="compact">
+        <Container width="wide">
+          <NextPageCard href="/simulation-center" label={t("nextTitle")} title={home("nextLine")} />
         </Container>
-      </section>
+      </Section>
     </>
   );
 }

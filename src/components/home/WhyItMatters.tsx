@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { workPhotos } from "@/data/work";
 import { Container } from "@/components/ui/Container";
-import { FadeIn } from "@/components/motion/FadeIn";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ImpactChain } from "@/components/impact/ImpactChain";
 import { Reasons } from "@/components/impact/Reasons";
 
@@ -14,27 +13,12 @@ export async function WhyItMatters({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
 
   return (
-    <section className="bg-paper py-24 md:py-band">
+    <Section tone="canvas">
       <Container width="wide">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <FadeIn className="lg:col-span-5">
-            <p className="t-eyebrow text-muted">{t("mattersEyebrow")}</p>
-            <h2 className="t-h1 mt-5 text-balance text-ink">{t("mattersTitle")}</h2>
-          </FadeIn>
-          <div className="relative hidden aspect-[3/2] lg:col-span-6 lg:col-start-7 lg:block">
-            <Image
-              src={workPhotos.exfixFootModel.src}
-              alt=""
-              fill
-              sizes="45vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        <ImpactChain className="mt-16 md:mt-24" />
-        <Reasons locale={locale} className="mt-20 border-t border-line pt-14 md:mt-28" />
+        <SectionHeader eyebrow={t("mattersEyebrow")} title={t("mattersTitle")} size="h1" />
+        <ImpactChain className="mt-10 md:mt-14" />
+        <Reasons locale={locale} className="mt-12 md:mt-16" />
       </Container>
-    </section>
+    </Section>
   );
 }

@@ -1,7 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 import { HomeHero } from "@/components/home/HomeHero";
-import { ProofBand } from "@/components/home/ProofBand";
 import { WhatWeDo } from "@/components/home/WhatWeDo";
 import { OurWork } from "@/components/home/OurWork";
 import { NextStep } from "@/components/home/NextStep";
@@ -28,12 +27,11 @@ export async function generateMetadata({
 
 /**
  * The home page is one story, in the order a donor needs it:
- * who we are and what we already do (hero, proof, programmes, the archive of
- * courses held) → what that work has led to (the building) → why the building
- * matters (building → training → professionals → care) → the ask → proof that
- * the organisation is alive (news, next course) → partners. Founders live on
- * the About page until real names and portraits replace the placeholders.
- * The building takes the middle of the page, not the top or most of it.
+ * who we are and the proof (hero with its figures) → what we do (the
+ * programmes) → what has been done (photographs, the next course, the
+ * archive) → what that work has led to (the building) → why it matters → what
+ * a gift builds → proof the organisation is alive (news) → partners. The
+ * shared footer band closes with the ask. Each subject appears once.
  */
 export default async function HomePage({
   params,
@@ -46,7 +44,6 @@ export default async function HomePage({
   return (
     <>
       <HomeHero locale={locale} />
-      <ProofBand locale={locale} />
       <WhatWeDo locale={locale} />
       <OurWork locale={locale} />
       <NextStep locale={locale} />

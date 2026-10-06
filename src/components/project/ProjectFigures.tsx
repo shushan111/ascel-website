@@ -2,56 +2,26 @@ import { projectFigures } from "@/data/project";
 import { cn, loc } from "@/lib/utils";
 
 /**
- * The technical indicators from the drawing set. Unlike the old XX+ metric
- * grid these are real, so they carry no placeholder note.
+ * The technical indicators from the drawing set, on one panel. Unlike the
+ * course metrics these are exact, so they carry no placeholder note.
  */
 export function ProjectFigures({
   locale,
-  invert = false,
   className,
 }: {
   locale: string;
-  invert?: boolean;
   className?: string;
 }) {
   return (
-    <dl
-      className={cn(
-        "grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4",
-        className,
-      )}
-    >
+    <dl className={cn("card grid grid-cols-2 gap-x-6 gap-y-7 p-6 sm:p-8 lg:grid-cols-4", className)}>
       {projectFigures.map((figure) => (
-        <div
-          key={figure.id}
-          className={cn(
-            // dt first for screen readers; the figure still reads first.
-            "flex flex-col-reverse border-t pt-5",
-            invert ? "border-on-dark/25" : "border-line",
-          )}
-        >
-          <dt
-            className={cn(
-              "mt-3 text-sm leading-6",
-              invert ? "text-on-dark/75" : "text-muted",
-            )}
-          >
-            {loc(figure.label, locale)}
-          </dt>
-          <dd
-            className={cn(
-              "font-display text-[2.4rem] leading-none font-normal tracking-[-0.02em] tabular-nums",
-              invert ? "text-on-dark" : "text-ink",
-            )}
-          >
+        // dt first for screen readers; the figure still reads first.
+        <div key={figure.id} className="flex flex-col-reverse border-l border-line pl-4 sm:pl-5">
+          <dt className="t-small mt-2 text-muted">{loc(figure.label, locale)}</dt>
+          <dd className="t-figure-sm text-ink">
             {figure.value}
             {figure.unit ? (
-              <span
-                className={cn(
-                  "ml-1.5 text-base font-normal",
-                  invert ? "text-on-dark/65" : "text-muted",
-                )}
-              >
+              <span className="ml-1 text-[0.5em] text-muted">
                 {/* The drawings label areas in Armenian; other locales get m². */}
                 {locale === "hy" ? figure.unit : "m²"}
               </span>

@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/config";
 import { buildMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { GlobeIcon, MailIcon, MapPinIcon, PhoneIcon } from "@/components/ui/icons";
 import { ContactForm } from "./ContactForm";
 
 export async function generateMetadata({
@@ -21,6 +22,11 @@ export async function generateMetadata({
   });
 }
 
+/**
+ * The form on a panel, the direct ways to reach the center beside it. Rows
+ * render only once config holds a real value; "[Content to be provided]"
+ * never reaches the page.
+ */
 export default async function ContactPage({
   params,
 }: {
@@ -30,77 +36,83 @@ export default async function ContactPage({
   setRequestLocale(locale);
   const t = await getTranslations("ContactPage");
   const monument = await getTranslations("Monument");
+  const nav = await getTranslations("Nav");
+  const footer = await getTranslations("Footer");
   const social = Object.entries(siteConfig.social).filter(([, url]) => url);
 
-  // Rows render only once config holds a real value; "[Content to be
-  // provided]" never reaches the page.
   const isSet = (value: string) => Boolean(value) && !value.startsWith("[");
   const details = [
-    [t("emailLabel"), siteConfig.contact.email, `mailto:${siteConfig.contact.email}`],
-    [t("phoneLabel"), siteConfig.contact.phone, `tel:${siteConfig.contact.phone.replace(/\s/g, "")}`],
-  ].filter(([, value]) => isSet(value));
+    { icon: MailIcon, label: t("emailLabel"), value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+    { icon: PhoneIcon, label: t("phoneLabel"), value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone.replace(/\s/g, "")}` },
+  ].filter((detail) => isSet(detail.value));
   const address = [siteConfig.contact.addressLine, siteConfig.contact.addressDetail].filter(isSet);
 
   return (
     <>
-      {/* DRAFT — պատվիրատուի հաստատման կարիք ունի (intro) */}
-      <PageHeader eyebrow={t("eyebrow")} title={t("title")} intro={t("intro")} />
-      <section className="bg-canvas pb-20 md:pb-28">
-        <Container width="wide" className="grid gap-14 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-6">
+      <PageHeader breadcrumbs={[{ label: nav("contact") }]} title={t("title")} intro={t("intro")} />
+      <section className="bg-canvas pb-16 md:pb-band">
+        <Container width="wide" className="grid gap-6 lg:grid-cols-12 lg:gap-8">
+          <div className="card p-6 sm:p-8 md:p-10 lg:col-span-7">
             <ContactForm />
           </div>
-          <aside className="lg:col-span-5 lg:col-start-8">
-            <dl className="border-t border-ink/70">
-              {details.map(([label, value, href]) => (
-                <div key={label} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[9rem_1fr] sm:gap-4">
-                  <dt className="text-[0.92rem] text-muted">{label}</dt>
-                  <dd className="text-[1rem] text-ink">
-                    <a href={href} className="underline decoration-line-strong underline-offset-4 hover:decoration-ink">
-                      {value}
-                    </a>
-                  </dd>
-                </div>
+
+          <aside className="flex flex-col gap-4 lg:col-span-5">
+            <ul className="card divide-y divide-line">
+              {details.map(({ icon: Icon, label, value, href }) => (
+                <li key={label}>
+                  <a href={href} className="group flex items-start gap-4 p-5 transition-colors hover:bg-canvas sm:p-6">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-ink">
+                      <Icon />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="t-small block text-muted">{label}</span>
+                      <span className="mt-0.5 block break-words text-[1.03125rem] text-ink group-hover:underline group-hover:underline-offset-4">{value}</span>
+                    </span>
+                  </a>
+                </li>
               ))}
               {address.length ? (
-                <div className="grid gap-1 border-b border-line py-4 sm:grid-cols-[9rem_1fr] sm:gap-4">
-                  <dt className="text-[0.92rem] text-muted">{t("locationLabel")}</dt>
-                  <dd className="text-[1rem] leading-relaxed text-ink">
+                <li className="flex items-start gap-4 p-5 sm:p-6">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-ink">
+                    <MapPinIcon />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="t-small block text-muted">{t("locationLabel")}</span>
                     {address.map((line) => (
-                      <span key={line} className="block">{line}</span>
+                      <span key={line} className="mt-0.5 block text-[1.03125rem] leading-relaxed text-ink">{line}</span>
                     ))}
-                  </dd>
-                </div>
+                  </span>
+                </li>
               ) : null}
               {social.length > 0 ? (
-                <div className="grid gap-1 border-b border-line py-4 sm:grid-cols-[9rem_1fr] sm:gap-4">
-                  <dt className="text-[0.92rem] text-muted">Social</dt>
-                  <dd className="flex flex-wrap gap-x-4 gap-y-1 text-[1rem]">
-                    {social.map(([name, url]) => (
-                      <a
-                        key={name}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="capitalize text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
-                      >
-                        {name}
-                      </a>
-                    ))}
-                  </dd>
-                </div>
+                <li className="flex items-start gap-4 p-5 sm:p-6">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-ink">
+                    <GlobeIcon />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="t-small block text-muted">{footer("social")}</span>
+                    <span className="mt-0.5 flex flex-wrap gap-x-4 gap-y-1">
+                      {social.map(([name, url]) => (
+                        <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="text-[1.03125rem] capitalize text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">
+                          {name}
+                        </a>
+                      ))}
+                    </span>
+                  </span>
+                </li>
               ) : null}
-            </dl>
+            </ul>
+
             {siteConfig.contact.mapEmbedUrl ? (
               <iframe
                 src={siteConfig.contact.mapEmbedUrl}
                 title={t("mapTitle")}
                 loading="lazy"
-                className="mt-8 aspect-[4/3] w-full border-0 bg-mist"
+                className="aspect-[4/3] w-full rounded-md border-0 bg-mist"
               />
             ) : (
               // Until a map is configured: the building itself, as it is.
-              <figure className="mt-8">
+              <figure className="card overflow-hidden">
                 <div className="relative aspect-[3/2] bg-mist">
                   <Image
                     src="/images/project/facade-before.webp"
@@ -110,7 +122,7 @@ export default async function ContactPage({
                     sizes="(min-width: 1024px) 40vw, 100vw"
                   />
                 </div>
-                <figcaption className="mt-3 text-[0.82rem] text-muted">{siteConfig.contact.addressLine}</figcaption>
+                <figcaption className="t-small px-5 py-4 text-muted">{t("mapPending")}</figcaption>
               </figure>
             )}
           </aside>

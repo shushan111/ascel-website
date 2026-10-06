@@ -1,25 +1,23 @@
 import { cn } from "@/lib/utils";
 
 type SectionTone = "canvas" | "paper" | "mist" | "ink";
-type SectionSpace = "compact" | "default" | "spacious";
+type SectionSpace = "compact" | "default" | "spacious" | "none";
 
 const tones: Record<SectionTone, string> = {
-  // The page's own ground — no border, it simply continues.
+  // The page's own ground.
   canvas: "bg-canvas text-body",
-  // The tinted band: a warm-white panel ruled off from the page above and below.
-  // Tone changes alone separate bands; no hairline above and below.
+  // The tinted band: tone change alone separates it from its neighbours.
   paper: "bg-paper text-body",
   mist: "bg-mist text-body",
   ink: "bg-night text-on-dark",
 };
 
 // One vertical rhythm for the whole site, from the --spacing-band tokens.
-// The reference leaves roughly three times as much air between a section and
-// the next as this did; old values were py-12/16, py-16/[4.6rem], py-20/28.
 const spaces: Record<SectionSpace, string> = {
-  compact: "py-16 md:py-band-compact",
-  default: "py-20 md:py-band",
-  spacious: "py-24 md:py-band-wide",
+  compact: "py-14 md:py-band-compact",
+  default: "py-16 md:py-band",
+  spacious: "py-20 md:py-band-wide",
+  none: "",
 };
 
 export function Section({
@@ -28,15 +26,21 @@ export function Section({
   id,
   tone = "canvas",
   space = "default",
+  labelledBy,
 }: {
   children: React.ReactNode;
   className?: string;
   id?: string;
   tone?: SectionTone;
   space?: SectionSpace;
+  labelledBy?: string;
 }) {
   return (
-    <section id={id} className={cn(spaces[space], tones[tone], className)}>
+    <section
+      id={id}
+      aria-labelledby={labelledBy}
+      className={cn(spaces[space], tones[tone], id && "scroll-mt-(--header-h)", className)}
+    >
       {children}
     </section>
   );

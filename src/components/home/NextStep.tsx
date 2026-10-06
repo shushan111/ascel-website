@@ -4,105 +4,82 @@ import { Link } from "@/i18n/navigation";
 import { projectFigures, projectMeta } from "@/data/project";
 import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Badge } from "@/components/ui/Badge";
 import { buttonClassName } from "@/components/ui/buttonStyles";
-import { FadeIn } from "@/components/motion/FadeIn";
+import { ArrowRightIcon, MapPinIcon } from "@/components/ui/icons";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 
 /**
  * The turn of the page: only after the work has been shown does the building
- * appear, introduced as what the work has led to. Kept to one transition, one
- * comparison and one pair — the full story lives on the center page.
+ * appear, introduced as what the work has led to. One comparison — the same
+ * facade today and after — and the three figures that size it. The full story
+ * lives on the project page.
  */
 export async function NextStep({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
   const hero = await getTranslations("ProjectHero");
   const monument = await getTranslations("Monument");
-  const intro = await getTranslations("ProjectIntro");
   const unit = locale === "hy" ? "քմ" : "m²";
   const figures = projectFigures.slice(0, 3);
 
+  const pair = [
+    { src: "/images/project/facade-before.webp", badge: monument("nowLabel"), caption: monument("captionBefore"), alt: monument("altBefore") },
+    { src: "/images/project/facade-after.webp", badge: monument("afterLabel"), caption: monument("captionAfter"), alt: monument("altAfter") },
+  ];
+
   return (
-    <>
-      {/* The transition line, on its own, with room around it. */}
-      <section className="bg-night py-24 text-on-dark md:py-36">
-        <Container width="wide">
-          <FadeIn className="max-w-4xl">
-            <p className="t-eyebrow text-accent-light">{t("buildingEyebrow")}</p>
-            <p className="t-display mt-8 text-balance text-on-dark">{t("nextLine")}</p>
-          </FadeIn>
-        </Container>
-      </section>
+    <Section tone="paper" id="building">
+      <Container width="wide">
+        <SectionHeader
+          layout="split"
+          eyebrow={t("buildingEyebrow")}
+          title={hero("headline")}
+          intro={hero("supporting")}
+          size="h1"
+        />
 
-      <section className="bg-canvas pb-24 pt-20 md:pb-band md:pt-28">
-        <Container width="wide">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-            <FadeIn className="lg:col-span-6">
-              <p className="t-small text-muted">{loc(projectMeta.addressLine, locale)}</p>
-              <h2 className="t-h1 mt-4 text-balance text-ink">{hero("headline")}</h2>
-            </FadeIn>
-            <FadeIn className="lg:col-span-5 lg:col-start-8 lg:self-end">
-              <p className="t-body text-body">{hero("supporting")}</p>
-            </FadeIn>
-          </div>
-        </Container>
-
-        <Container width="wide" className="mt-14 md:mt-20">
-          <div className="grid gap-10 md:grid-cols-2 md:gap-8">
-            {[
-              { src: "/images/project/facade-before.webp", label: monument("captionBefore"), alt: monument("altBefore") },
-              { src: "/images/project/facade-after.webp", label: monument("captionAfter"), alt: monument("altAfter") },
-            ].map((image) => (
-              <figure key={image.src}>
-                <ImageReveal>
-                  <div className="relative aspect-[3/2] bg-mist">
-                    <Image src={image.src} alt={image.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
-                  </div>
-                </ImageReveal>
-                <figcaption className="t-small mt-4 max-w-md text-muted">{image.label}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </Container>
-
-        <figure className="mx-auto mt-16 max-w-[100rem] md:mt-24 md:px-8">
-          <ImageReveal>
-            <div className="relative aspect-[4/3] bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
-              <Image
-                src="/images/project/aerial-after.webp"
-                alt={intro("imageAlt")}
-                fill
-                sizes="100vw"
-                className="object-cover"
-              />
-            </div>
-          </ImageReveal>
-          <figcaption className="t-small mt-4 px-5 text-muted sm:px-6 md:px-0">
-            {intro("imageAlt")}
-          </figcaption>
-        </figure>
-
-        <Container width="wide">
-
-          <div className="mt-16 grid gap-10 border-t border-line pt-10 md:mt-20 lg:grid-cols-12 lg:items-end">
-            <dl className="grid gap-8 sm:grid-cols-3 sm:gap-6 lg:col-span-8">
-              {figures.map((figure) => (
-                <div key={figure.id} className="flex flex-col-reverse">
-                  <dt className="t-small mt-3 text-muted">{loc(figure.label, locale)}</dt>
-                  <dd className="font-display text-[clamp(1.6rem,3.2vw,2.6rem)] font-normal leading-none tracking-[-0.02em] text-ink">
-                    {figure.value}
-                    <span className="ml-1 text-[0.5em] text-muted">{figure.unit ? unit : null}</span>
-                  </dd>
+        <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-2 md:gap-4 lg:gap-6">
+          {pair.map((image, index) => (
+            <figure key={image.src}>
+              <ImageReveal className="media">
+                <div className="relative aspect-[3/2]">
+                  <Image src={image.src} alt={image.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
                 </div>
-              ))}
-            </dl>
-            <div className="lg:col-span-4 lg:text-right">
-              <Link href="/simulation-center" className={buttonClassName("secondary")}>
-                {hero("secondaryCta")}
-              </Link>
-            </div>
+                <Badge tone={index === 1 ? "accent" : "dark"} className="absolute left-3 top-3 sm:left-4 sm:top-4">
+                  {image.badge}
+                </Badge>
+              </ImageReveal>
+              <figcaption className="t-small mt-3 max-w-md text-muted">{image.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div className="card mt-8 grid gap-6 p-6 sm:p-8 md:mt-10 lg:grid-cols-12 lg:items-center lg:gap-10">
+          <dl className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:col-span-8">
+            {figures.map((figure) => (
+              <div key={figure.id} className="flex flex-col-reverse border-l border-line pl-4 sm:pl-5">
+                <dt className="t-small mt-2 text-muted">{loc(figure.label, locale)}</dt>
+                <dd className="t-figure-sm text-ink">
+                  {figure.value}
+                  {figure.unit ? <span className="ml-1 text-[0.5em] text-muted">{unit}</span> : null}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <div className="flex flex-col gap-4 lg:col-span-4 lg:items-end">
+            <p className="t-small flex items-center gap-2 text-muted">
+              <MapPinIcon className="text-accent-ink" />
+              {loc(projectMeta.addressLine, locale)}
+            </p>
+            <Link href="/simulation-center" className={buttonClassName("primary", "w-full sm:w-auto")}>
+              {hero("secondaryCta")}
+              <ArrowRightIcon className="btn-arrow" />
+            </Link>
           </div>
-        </Container>
-      </section>
-    </>
+        </div>
+      </Container>
+    </Section>
   );
 }

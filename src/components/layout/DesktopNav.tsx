@@ -10,42 +10,31 @@ export function DesktopNav() {
   const pathname = usePathname();
 
   return (
-    // Armenian and Russian labels fill the masthead almost exactly, so the
-    // nav absorbs the remaining space and clips rather than overlapping the logo
-    // if a font swap or page zoom pushes it past the available width.
-    <nav
-      aria-label={t("mainNav")}
-      className="hidden min-w-0 flex-1 overflow-hidden min-[1280px]:block"
-    >
-      <ul className="flex items-center justify-end">
+    // The row absorbs the space between logo and actions and clips rather
+    // than overlapping them if a font swap or zoom pushes it past its width.
+    <nav aria-label={t("mainNav")} className="hidden min-w-0 flex-1 overflow-hidden lg:block">
+      <ul className="flex items-center justify-center gap-0.5 xl:gap-1">
         {navItems.map((item) => {
           const active = isActiveNavPath(pathname, item.href);
+          const label = "shortKey" in item ? t(item.shortKey) : t(item.key);
           return (
-            // The donate link duplicates the adjacent Donate CTA, and dropping it
-            // is what buys the row enough headroom for the longer locales.
-            <li key={item.key} className={cn(item.key === "donate" && "hidden")}>
+            <li key={item.key}>
               <Link
                 href={item.href}
-                className={cn(
-                  // Sizing stays uniform across desktop widths: the container is
-                  // capped, so a larger step would only overflow.
-                  // Weight drops 600 -> 500: at this size semibold made the row
-                  // read as seven small buttons rather than as a line of links.
-                  // Size is held at 0.88rem — the Armenian labels already fill
-                  // the masthead, and a larger step would clip.
-                  "group relative inline-flex min-h-11 items-center whitespace-nowrap px-3 text-[0.9375rem] font-normal transition-colors",
-                  active ? "text-ink" : "text-muted hover:text-ink",
-                )}
                 aria-current={active ? "page" : undefined}
+                title={"shortKey" in item ? t(item.key) : undefined}
+                className={cn(
+                  "relative inline-flex min-h-10 items-center whitespace-nowrap rounded-sm px-2.5 text-[0.9375rem] transition-colors duration-200 xl:px-3.5",
+                  active ? "font-medium text-ink" : "text-muted hover:bg-mist/70 hover:text-ink",
+                )}
               >
-                {t(item.key)}
-                {/* A 1px ink rule under the label, as on the reference. No pill,
-                    no fill, no second colour. */}
+                {label}
+                {/* The current page: a short bronze bar under the label. */}
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "pointer-events-none absolute inset-x-3 bottom-2 h-px origin-left bg-ink transition-transform duration-200",
-                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                    "pointer-events-none absolute inset-x-2.5 -bottom-[calc((var(--header-h)-2.5rem)/2)] h-0.5 origin-center rounded-full bg-accent transition-transform duration-300 xl:inset-x-3.5",
+                    active ? "scale-x-100" : "scale-x-0",
                   )}
                 />
               </Link>

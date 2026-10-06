@@ -4,20 +4,26 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { mobileNavItems } from "@/lib/config";
+import { navItems } from "@/lib/config";
 import { cn, isActiveNavPath } from "@/lib/utils";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { Logo } from "@/components/logo/Logo";
+import { ChevronRightIcon, CloseIcon, MenuIcon } from "@/components/ui/icons";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const MENU_ID = "mobile-navigation";
-const EXIT_DURATION_MS = 240;
-// The desktop row only fits every locale's labels once the container is
-// fully available, so the full-screen menu covers everything below that.
-const DESKTOP_MEDIA_QUERY = "(min-width: 1280px)";
+const EXIT_DURATION_MS = 260;
+// The desktop row takes over from lg; the sheet covers everything below it.
+const DESKTOP_MEDIA_QUERY = "(min-width: 1024px)";
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+/**
+ * A sheet that slides in from the right: full width on a phone, a 26rem
+ * panel over a dimmed page on a tablet. Destinations first (with the current
+ * page marked), then language, then the support action pinned to the bottom
+ * where a thumb reaches it.
+ */
 export function MobileMenu() {
   const t = useTranslations("Nav");
   const pathname = usePathname();
@@ -66,8 +72,7 @@ export function MobileMenu() {
     const { body } = document;
     const previousOverflow = body.style.overflow;
     const previousPaddingRight = body.style.paddingRight;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
     body.style.overflow = "hidden";
     if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
@@ -127,130 +132,77 @@ export function MobileMenu() {
   );
 
   const overlay = (
-    <div
-      id={MENU_ID}
-      role="dialog"
-      aria-modal="true"
-      aria-label={t("mainNav")}
-      className={cn(
-        "fixed inset-0 z-100 h-[100vh] w-full bg-paper transition-opacity duration-300 ease-out supports-[height:100dvh]:h-[100dvh] min-[1280px]:hidden",
-        entered ? "opacity-100" : "opacity-0",
-      )}
-    >
+    <div className="fixed inset-0 z-100 lg:hidden">
       <div
-        ref={panelRef}
+        aria-hidden="true"
+        onClick={() => close({ restoreFocus: true })}
         className={cn(
-          "h-full w-full overflow-y-auto overscroll-contain transition-transform duration-300 ease-out",
-          entered ? "scale-100" : "scale-[0.98]",
+          "absolute inset-0 bg-night/45 backdrop-blur-[2px] transition-opacity duration-300 ease-out",
+          entered ? "opacity-100" : "opacity-0",
+        )}
+      />
+      <div
+        id={MENU_ID}
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("mainNav")}
+        className={cn(
+          "absolute inset-y-0 right-0 flex h-dvh w-full flex-col bg-paper shadow-panel transition-transform duration-300 ease-out sm:max-w-[26rem]",
+          entered ? "translate-x-0" : "translate-x-full",
         )}
       >
-        <div className="mx-auto flex min-h-full w-full max-w-[72rem] flex-col px-4 pb-10 pt-4 sm:px-6">
-          <div className="flex h-[76px] shrink-0 items-center justify-between gap-4">
-            <Link
-              href="/"
-              aria-label="ASCEL"
-              className="min-w-0"
-              onClick={() => close()}
-            >
-              <Logo compact />
-            </Link>
-            <button
-              ref={closeRef}
-              type="button"
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-sm border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper"
-              aria-label={t("closeMenu")}
-              onClick={() => close({ restoreFocus: true })}
-            >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M6.2 5.8 5.8 6.2 11.6 12l-5.8 5.8.4.4L12 12.4l5.8 5.8.4-.4L12.4 12l5.8-5.8-.4-.4L12 11.6 6.2 5.8Z"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div className="h-px w-full shrink-0 bg-line" />
-
-          <nav
-            aria-label={t("mainNav")}
-            className="flex flex-1 flex-col justify-center py-4 sm:py-6"
+        <div className="flex h-(--header-h) shrink-0 items-center justify-between gap-4 border-b border-line px-5 sm:px-6">
+          <Link href="/" aria-label="ASCEL" className="min-w-0 rounded-sm" onClick={() => close()}>
+            <Logo compact />
+          </Link>
+          <button
+            ref={closeRef}
+            type="button"
+            className="-mr-2 grid h-11 w-11 shrink-0 place-items-center rounded-sm text-ink transition-colors hover:bg-mist"
+            aria-label={t("closeMenu")}
+            onClick={() => close({ restoreFocus: true })}
           >
-            <ul className="flex flex-col">
-              {mobileNavItems.map((item, index) => {
-                const active = isActiveNavPath(pathname, item.href);
-                return (
-                  <li
-                    key={item.key}
-                    className={cn(
-                      "border-b border-line/70 transition duration-300 ease-out last:border-b-0",
-                      entered
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-1.5 opacity-0",
-                    )}
-                    style={{
-                      transitionDelay: entered ? `${70 + index * 35}ms` : "0ms",
-                    }}
-                  >
-                    <Link
-                      href={item.href}
-                      aria-current={active ? "page" : undefined}
-                      onClick={() => close()}
-                      className={cn(
-                        // The label stays ink in both states; the bronze moves
-                        // to the index mark beside it, so the accent appears
-                        // once per row instead of colouring a whole heading.
-                        "t-h2 flex min-h-12 items-center justify-between gap-4 py-3.5 transition-colors sm:min-h-14",
-                        "text-ink",
-                      )}
-                    >
-                      <span className="min-w-0">{t(item.key)}</span>
-                      <span
-                        aria-hidden="true"
-                        className={cn(
-                        "t-meta-sm shrink-0 transition-colors",
-                        active ? "text-accent-ink" : "text-line-strong",
-                      )}
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+            <CloseIcon className="h-5 w-5" />
+          </button>
+        </div>
 
-          <div className="h-px w-full shrink-0 bg-line" />
+        <nav aria-label={t("mainNav")} className="flex-1 overflow-y-auto overscroll-contain px-3 py-4 sm:px-4">
+          <ul className="flex flex-col">
+            <li>
+              <MenuLink href="/" active={pathname === "/"} entered={entered} index={0} onNavigate={() => close()}>
+                {t("home")}
+              </MenuLink>
+            </li>
+            {navItems.map((item, index) => (
+              <li key={item.key}>
+                <MenuLink
+                  href={item.href}
+                  active={isActiveNavPath(pathname, item.href)}
+                  entered={entered}
+                  index={index + 1}
+                  onNavigate={() => close()}
+                >
+                  {t(item.key)}
+                </MenuLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          <div
-            className={cn(
-              "shrink-0 pt-6 transition-opacity duration-300 ease-out sm:flex sm:items-end sm:justify-between sm:gap-6",
-              entered ? "opacity-100" : "opacity-0",
-            )}
-            style={{
-              transitionDelay: entered
-                ? `${70 + mobileNavItems.length * 35}ms`
-                : "0ms",
-            }}
-          >
-            <div>
-              <p className="t-meta-sm text-muted">{t("language")}</p>
-              <div className="mt-3">
-                <LanguageSwitcher compact />
-              </div>
-            </div>
-            <Link
-              href="/donate"
-              onClick={() => close()}
-              className={cn(
-                buttonClassName("support"),
-                "mt-6 w-full sm:mt-0 sm:w-auto sm:min-w-[13rem]",
-              )}
-            >
-              {t("donate")}
-            </Link>
+        <div
+          className={cn(
+            "shrink-0 space-y-5 border-t border-line bg-canvas px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 transition-opacity duration-300 sm:px-6",
+            entered ? "opacity-100 delay-150" : "opacity-0",
+          )}
+        >
+          <div>
+            <p className="t-label mb-2.5 text-muted">{t("language")}</p>
+            <LanguageSwitcher variant="segmented" />
           </div>
+          <Link href="/donate" onClick={() => close()} className={buttonClassName("support", "w-full", "lg")}>
+            {t("donate")}
+          </Link>
         </div>
       </div>
     </div>
@@ -261,23 +213,54 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-line-strong text-ink transition-colors hover:border-ink hover:bg-paper min-[1280px]:hidden"
+        className="-mr-1.5 grid h-11 w-11 place-items-center rounded-sm text-ink transition-colors hover:bg-mist lg:hidden"
         aria-label={t("openMenu")}
         aria-expanded={mounted}
         aria-controls={MENU_ID}
         onClick={open}
       >
-        <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-          <path
-            fill="currentColor"
-            d="M4 7h16v1.5H4V7Zm0 4.25h16v1.5H4v-1.5ZM4 15.5h16V17H4v-1.5Z"
-          />
-        </svg>
+        <MenuIcon className="h-5 w-5" />
       </button>
 
       {/* Portaled to the body: the header's backdrop-filter would otherwise
           become the containing block and clamp the overlay to the header. */}
       {mounted ? createPortal(overlay, document.body) : null}
     </>
+  );
+}
+
+function MenuLink({
+  href,
+  active,
+  entered,
+  index,
+  onNavigate,
+  children,
+}: {
+  href: string;
+  active: boolean;
+  entered: boolean;
+  index: number;
+  onNavigate: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "page" : undefined}
+      onClick={onNavigate}
+      style={{ transitionDelay: entered ? `${60 + index * 30}ms` : "0ms" }}
+      className={cn(
+        "group relative flex min-h-13 items-center justify-between gap-4 rounded-sm px-3 py-2.5 font-display text-[1.1875rem] leading-snug transition-[opacity,transform,background-color,color] duration-300 ease-out",
+        active ? "bg-mist/80 text-ink" : "text-ink hover:bg-mist/60",
+        entered ? "translate-x-0 opacity-100" : "translate-x-3 opacity-0",
+      )}
+    >
+      {active ? (
+        <span aria-hidden="true" className="absolute inset-y-2.5 left-0 w-0.5 rounded-full bg-accent" />
+      ) : null}
+      <span className="min-w-0">{children}</span>
+      <ChevronRightIcon className="text-line-strong transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:text-muted" />
+    </Link>
   );
 }

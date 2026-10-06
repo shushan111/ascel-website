@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getTrustFacts } from "@/data/trust";
 import { loc } from "@/lib/utils";
+import { FactList } from "@/components/ui/FactList";
 
 /**
  * Legal entity, governance, reporting. Only confirmed rows render, and the
@@ -14,14 +15,13 @@ export async function TrustPanel({ locale, className }: { locale: string; classN
   return (
     <div className={className}>
       <h3 className="t-h3 text-ink">{t("trustTitle")}</h3>
-      <dl className="mt-6 border-t border-line">
-        {facts.map((fact) => (
-          <div key={fact.id} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[14rem_1fr] sm:gap-6">
-            <dt className="text-[0.95rem] text-muted">{loc(fact.label, locale)}</dt>
-            <dd className="text-[1rem] text-ink">{fact.value ? loc(fact.value, locale) : null}</dd>
-          </div>
-        ))}
-      </dl>
+      <FactList
+        className="mt-5"
+        facts={facts.map((fact) => ({
+          label: loc(fact.label, locale),
+          value: fact.value ? loc(fact.value, locale) : null,
+        }))}
+      />
     </div>
   );
 }

@@ -34,7 +34,10 @@
     "closeMenu": "Close menu",
     "mainNav": "Main",
     "skip": "Skip to content",
-    "language": "Language"
+    "language": "Language",
+    "breadcrumb": "Breadcrumb",
+    "onThisPage": "On this page",
+    "simulationShort": "The project"
   },
   "Header": {
     "donate": "Donate"
@@ -65,7 +68,22 @@
     "viewEvent": "View Event",
     "placeholderMetricsNote": "The figures are counted from the published course programmes of Gyumri Orthopedic School and from the 2024–2025 results of the Damage Control Surgery (ACDCS) programme. A “+” means only published data is included in the count.",
     "backToCourses": "Back to courses",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "openImage": "Open photo ({index}/{total})",
+    "photoViewer": "Photo viewer",
+    "all": "All",
+    "filterByYear": "Filter by year",
+    "moreNews": "More news",
+    "emptyNewsTitle": "No news has been published yet",
+    "emptyNewsBody": "Updates on the project and the courses will appear here.",
+    "emptyCoursesTitle": "No courses to show yet",
+    "errorTitle": "Something went wrong",
+    "errorBody": "This page could not be loaded. Please try again in a moment.",
+    "retry": "Try again",
+    "loading": "Loading…"
   },
   "Intro": {
     "title": "Building the Future of Medical Education",

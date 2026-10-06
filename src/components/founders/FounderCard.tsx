@@ -22,7 +22,7 @@ export function FounderCard({
 
   return (
     <FadeIn delay={Math.min(index, 4) * 0.07}>
-      <article className="group relative aspect-[3/4] overflow-hidden bg-mist">
+      <article className="group relative aspect-[3/4] overflow-hidden rounded-md bg-mist">
         <Image
           src={founder.photo}
           alt={name}
@@ -32,7 +32,7 @@ export function FounderCard({
         />
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/90 via-ink/55 to-transparent transition-[height] duration-500 ease-out group-hover:h-4/5"
+          className="absolute inset-x-0 bottom-0 h-3/5 bg-linear-to-t from-night/90 via-night/55 to-transparent transition-[height] duration-500 ease-out group-hover:h-4/5"
         />
         <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
           {founder.role ? (

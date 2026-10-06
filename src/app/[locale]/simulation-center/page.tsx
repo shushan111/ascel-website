@@ -1,15 +1,18 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
-import { Link } from "@/i18n/navigation";
 import { projectLevels, projectMeta } from "@/data/project";
 import { workPhotos } from "@/data/work";
 import { loc } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { WideFigure } from "@/components/ui/WideFigure";
+import { FactList } from "@/components/ui/FactList";
+import { SectionNav } from "@/components/ui/SectionNav";
 import { Chapter } from "@/components/ui/Chapter";
 import { ArrowLink } from "@/components/ui/ArrowLink";
-import { buttonClassName } from "@/components/ui/buttonStyles";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ImageReveal } from "@/components/motion/ImageReveal";
 import { ProjectFigures } from "@/components/project/ProjectFigures";
@@ -41,8 +44,8 @@ export async function generateMetadata({
 /**
  * The project in three chapters: the building as it is, the design for it,
  * and — so the page never ends as an architecture portfolio — what will
- * happen inside and why that matters for medical education. One support
- * action at the close, not after every section.
+ * happen inside and why that matters for medical education. A sticky bar
+ * moves between the chapters; the shared footer band closes with the ask.
  */
 export default async function MedicalTrainingCenterPage({
   params,
@@ -54,7 +57,8 @@ export default async function MedicalTrainingCenterPage({
   const t = await getTranslations("CenterPage");
   const hero = await getTranslations("ProjectHero");
   const intro = await getTranslations("ProjectIntro");
-  const programs = await getTranslations("ProgramsHome");
+  const nav = await getTranslations("Nav");
+  const home = await getTranslations("Home");
 
   const facts = [
     { label: t("factAddress"), value: loc(projectMeta.addressLine, locale) },
@@ -69,113 +73,94 @@ export default async function MedicalTrainingCenterPage({
     getPhotoCaption(workPhotos.boneLecture.course, locale),
   ]);
 
+  const chapters = [
+    { id: "now", label: `01 · ${t("chapterNow")}` },
+    { id: "vision", label: `02 · ${t("chapterVision")}` },
+    { id: "inside", label: `03 · ${t("chapterInside")}` },
+  ];
+
   return (
     <>
-      <PageHeader eyebrow={t("eyebrow")} title={t("title")} intro={t("intro")} />
+      <PageHeader
+        breadcrumbs={[{ label: nav("simulationShort") }]}
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        intro={t("intro")}
+        aside={<FactList facts={facts} />}
+      />
 
       {/* The vision first, at full width: the reason to read the rest. */}
-      <figure className="mx-auto max-w-[100rem] md:px-8">
-        <div className="relative aspect-[4/3] bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
-          <Image
-            src="/images/project/facade-after.webp"
-            alt={t("imageAlt")}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
-        <figcaption className="t-small mt-4 px-5 text-muted sm:px-6 md:px-0">
-          {hero("credit", { architects: loc(projectMeta.architects, locale) })}
-        </figcaption>
-      </figure>
+      <WideFigure
+        src="/images/project/facade-after.webp"
+        alt={t("imageAlt")}
+        caption={hero("credit", { architects: loc(projectMeta.architects, locale) })}
+        priority
+      />
 
-      <section className="bg-canvas pb-6 pt-16 md:pt-20">
+      <Section space="none" className="pb-12 pt-10 md:pb-16 md:pt-14">
         <Container width="wide">
           <ProjectFigures locale={locale} />
-          <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
-            {facts.map((fact) => (
-              <div key={fact.label}>
-                <dt className="text-[0.85rem] text-muted">{fact.label}</dt>
-                <dd className="mt-1.5 text-[1rem] leading-6 text-ink">{fact.value}</dd>
-              </div>
-            ))}
-          </dl>
         </Container>
-      </section>
+      </Section>
+
+      <SectionNav items={chapters} />
 
       <MonumentSection locale={locale} />
 
       {/* Chapter two: the design. */}
-      <section className="bg-paper py-20 md:py-band">
+      <Section id="vision" tone="paper">
         <Container width="wide">
           <Chapter no="02" label={t("chapterVision")} />
-          <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-10">
             <FadeIn className="lg:col-span-6">
               <h2 className="t-h1 text-balance text-ink">{intro("title")}</h2>
             </FadeIn>
             <FadeIn className="lg:col-span-5 lg:col-start-8">
               <p className="t-body text-body">{intro("body")}</p>
-              <p className="t-body mt-5 text-muted">{intro("bodySecond")}</p>
+              <p className="t-body mt-4 text-muted">{intro("bodySecond")}</p>
             </FadeIn>
           </div>
         </Container>
 
-        <figure className="mx-auto mt-14 max-w-[100rem] md:mt-20 md:px-8">
-          <ImageReveal>
-            <div className="relative aspect-[4/3] bg-mist sm:aspect-[2/1] lg:aspect-[21/9]">
-              <Image
-                src="/images/project/aerial-after.webp"
-                alt={intro("imageAlt")}
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
-            </div>
-          </ImageReveal>
-          <figcaption className="t-small mt-4 px-5 text-muted sm:px-6 md:px-0">
-            {intro("imageAlt")}
-          </figcaption>
-        </figure>
+        <WideFigure
+          src="/images/project/aerial-after.webp"
+          alt={intro("imageAlt")}
+          caption={intro("imageAlt")}
+          reveal
+          className="mt-12 md:mt-16"
+        />
 
-        <Container width="wide" className="mt-20 md:mt-28">
+        <Container width="wide" className="mt-16 space-y-16 md:mt-24 md:space-y-24">
           <ProjectSteps locale={locale} />
-        </Container>
-        <div className="mt-20 md:mt-28">
           <ProjectLevels locale={locale} />
-        </div>
-        <Container width="wide" className="mt-20 md:mt-28">
-          <ProjectGallery
-            locale={locale}
-            exclude={["/images/project/aerial-after.webp", ...levelImages]}
-          />
+          <ProjectGallery locale={locale} exclude={["/images/project/aerial-after.webp", ...levelImages]} />
         </Container>
-      </section>
+      </Section>
 
       {/* Chapter three: what the building is for. */}
-      <section className="bg-canvas py-20 md:py-band">
+      <Section id="inside">
         <Container width="wide">
           <Chapter no="03" label={t("chapterInside")} />
-          <div className="mt-12 md:mt-16">
+          <div className="mt-10 md:mt-14">
             <CadaverLab />
           </div>
 
-          <div className="mt-24 grid gap-10 md:mt-32 lg:grid-cols-12 lg:gap-10">
+          <div className="mt-20 grid gap-10 md:mt-28 lg:grid-cols-12 lg:items-center lg:gap-10">
             <FadeIn className="lg:col-span-5">
               <h2 className="t-h1 text-balance text-ink">{t("impactTitle")}</h2>
-              <p className="t-lead mt-6 text-muted">{t("impactBody")}</p>
-              <ArrowLink href="/courses" className="mt-6">
+              <p className="t-lead mt-5 text-muted">{t("impactBody")}</p>
+              <ArrowLink href="/courses" className="mt-5">
                 {t("seeCourses")}
               </ArrowLink>
             </FadeIn>
-            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7">
+            <div className="grid gap-3 sm:grid-cols-2 lg:col-span-7 lg:gap-4">
               {[
                 { photo: workPhotos.kneeHandsOn, caption: handsOnCaption },
                 { photo: workPhotos.boneLecture, caption: hallCaption },
               ].map(({ photo, caption }) => (
                 <figure key={photo.src}>
-                  <ImageReveal>
-                    <div className="relative aspect-[4/5] bg-mist">
+                  <ImageReveal className="media">
+                    <div className="relative aspect-[4/5]">
                       <Image
                         src={photo.src}
                         alt={caption ?? ""}
@@ -185,33 +170,19 @@ export default async function MedicalTrainingCenterPage({
                       />
                     </div>
                   </ImageReveal>
-                  {caption ? (
-                    <figcaption className="mt-3 text-[0.82rem] leading-5 text-muted">{caption}</figcaption>
-                  ) : null}
+                  {caption ? <figcaption className="t-caption mt-2.5 text-muted">{caption}</figcaption> : null}
                 </figure>
               ))}
             </div>
           </div>
 
-          <ImpactChain surface="canvas" className="mt-20 md:mt-28" />
-          <Reasons locale={locale} className="mt-20 border-t border-line pt-14" />
-        </Container>
-      </section>
-
-      {/* One close, one ask. Light, not another dark band. */}
-      <section className="bg-paper py-20 md:py-28">
-        <Container width="wide" className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
-          <p className="t-h3 max-w-2xl text-balance text-ink lg:col-span-7">{t("closing")}</p>
-          <div className="flex flex-wrap gap-3 lg:col-span-4 lg:col-start-9 lg:justify-end">
-            <Link href="/donate" className={buttonClassName("support")}>
-              {t("donateCta")}
-            </Link>
-            <Link href="/programs" className={buttonClassName("secondary")}>
-              {programs("title")}
-            </Link>
+          <div className="mt-20 md:mt-28">
+            <SectionHeader eyebrow={home("mattersEyebrow")} title={home("mattersTitle")} />
+            <ImpactChain className="mt-10 md:mt-12" />
+            <Reasons locale={locale} className="mt-12 md:mt-16" />
           </div>
         </Container>
-      </section>
+      </Section>
     </>
   );
 }

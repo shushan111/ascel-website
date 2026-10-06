@@ -32,26 +32,24 @@ export const donationConfig = {
   providerName: process.env.NEXT_PUBLIC_DONATION_PROVIDER ?? "",
 };
 
-// The path a visitor is offered: who we are → the work → the project →
-// support. Home is the logo; donate is the separate CTA.
+// The path a visitor is offered: who we are → the work (programmes, courses)
+// → what the work has led to (the project) → news → contact. Home is the
+// logo; Donate is the separate bronze CTA beside the nav, never a nav link.
+// `shortKey` is the label the desktop row uses where the full one is long.
 export const navItems = [
   { href: "/about", key: "about" },
   { href: "/programs", key: "programs" },
   { href: "/courses", key: "courses" },
+  { href: "/simulation-center", key: "simulation", shortKey: "simulationShort" },
   { href: "/news", key: "news" },
-  { href: "/simulation-center", key: "simulation" },
   { href: "/contact", key: "contact" },
-  { href: "/donate", key: "donate" },
 ] as const;
-
-// Donate is surfaced as a dedicated CTA in the mobile menu, so it is dropped
-// from the link list to avoid showing it twice.
-export const mobileNavItems = navItems.filter((item) => item.href !== "/donate");
 
 export const footerNav = [
   { href: "/about", key: "about" },
   { href: "/programs", key: "programs" },
   { href: "/courses", key: "courses" },
+  { href: "/simulation-center", key: "simulation" },
   { href: "/news", key: "news" },
   { href: "/donate", key: "donate" },
   { href: "/contact", key: "contact" },
