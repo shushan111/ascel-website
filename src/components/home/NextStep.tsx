@@ -36,7 +36,7 @@ export async function NextStep({ locale }: { locale: string }) {
           layout="split"
           eyebrow={t("buildingEyebrow")}
           title={hero("headline")}
-          intro={hero("supporting")}
+          action={<p className="t-body font-semibold text-ink">{hero("supportingEmphasis")}</p>}
           size="h1"
         />
 

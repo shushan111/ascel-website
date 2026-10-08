@@ -17,7 +17,6 @@ import { getPhotoCaption } from "@/lib/courseIndex";
  */
 export async function HomeHero({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
-  const common = await getTranslations("Common");
   const photo = workPhotos.heroHandsOn;
   const caption = await getPhotoCaption(photo.course, locale);
   const metrics = getIntroMetrics();
@@ -58,11 +57,6 @@ export async function HomeHero({ locale }: { locale: string }) {
               </Link>
             </div>
           </div>
-          {caption ? (
-            <p className="t-caption absolute right-5 top-5 hidden max-w-xs rounded-full bg-night/45 px-3 py-1.5 text-on-dark/75 backdrop-blur-sm md:block lg:right-8 lg:top-8">
-              {caption}
-            </p>
-          ) : null}
         </Container>
       </section>
 
@@ -85,9 +79,6 @@ export async function HomeHero({ locale }: { locale: string }) {
                 ))}
               </dl>
             </div>
-            <p className="t-caption mx-auto mt-4 max-w-4xl text-center text-muted lg:mt-5">
-              {common("placeholderMetricsNote")}
-            </p>
           </Container>
         </section>
       ) : null}

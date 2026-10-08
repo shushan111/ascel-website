@@ -66,7 +66,6 @@
     "register": "Register",
     "registrationPending": "Registration details to be provided",
     "viewEvent": "View Event",
-    "placeholderMetricsNote": "The figures are counted from the published course programmes of Gyumri Orthopedic School and from the 2024–2025 results of the Damage Control Surgery (ACDCS) programme. A “+” means only published data is included in the count.",
     "backToCourses": "Back to courses",
     "gallery": "Gallery",
     "close": "Close",
@@ -113,13 +112,13 @@
     "viewAll": "All news"
   },
   "DonateHome": {
-    "title": "This building is being built on donations",
-    "body": "Your support goes to one specific project: restoring the monument at 20-22 Myasnikyan Street and creating a medical training center inside it.",
+    "title": "Your support is creating a new medical training center",
+    "body": "Your support goes toward one clear goal: restoring the monument at 20–22 Myasnikyan Street and creating a modern medical training center there.",
     "bodySecond": "Each of the directions below is a real part of the building, taken from the sketch design.",
     "donateNow": "Donate now",
     "supportPrograms": "See the project",
     "providerPending": "A donation provider has not been connected yet. This page describes where support will go; no payment is processed on this website.",
-    "categoriesTitle": "Where support goes"
+    "categoriesTitle": "What your support goes toward"
   },
   "PartnersHome": {
     "title": "Our Partners & Collaborators",
@@ -244,7 +243,7 @@
   "ProjectHero": {
     "eyebrowStage": "Sketch design · 2026",
     "headline": "An abandoned monument in Gyumri becomes a medical training center",
-    "supporting": "The 19th-century monument at 20-22 Myasnikyan Street is being restored into 713.92 m² of teaching space, with an operating room and a cadaver lab. The building is being built with donations.",
+    "supportingEmphasis": "With your support, we can bring this project to life and create new opportunities for medical education.",
     "primaryCta": "Support the construction",
     "secondaryCta": "See the project",
     "imageAlt": "The restored monument facade seen from Myasnikyan Street, under its new wave roof",
@@ -341,7 +340,7 @@
     "viewProject": "See the full project"
   },
   "Funding": {
-    "eyebrow": "Where support goes",
+    "eyebrow": "What your support goes toward",
     "title": "Six directions, in build order",
     "subtitle": "Each one is a real part of the building, taken from the sketch design. The roof comes first, because without it the rest is pointless.",
     "amountPending": "Cost being confirmed",
@@ -372,14 +371,14 @@
   },
   "Home": {
     "heroEyebrow": "Gyumri, Armenia · since 2019",
-    "heroHeadline": "Hands-on medical training, taught in Gyumri",
-    "heroSupporting": "Since 2019 our courses have trained surgeons and operating-room nurses alongside international faculty. Now we are building them a permanent home: a medical training center inside a restored 19th-century monument.",
+    "heroHeadline": "Medical Training Center",
+    "heroSupporting": "Since 2019 we have worked with leading international specialists to develop the professional skills of surgeons and operating-room nurses, helping raise the quality of medical education in Armenia. Today we are creating a new center for medical education: restoring a 19th-century historical monument and turning it into a permanent environment for knowledge, shared experience and professional growth.",
     "heroCtaWork": "Discover our work",
     "heroCtaSupport": "Support the center",
     "proofEyebrow": "Our work in numbers",
     "proofTitle": "The training is already happening",
     "whatEyebrow": "What we do",
-    "whatTitle": "Programmes that teach by doing",
+    "whatTitle": "Active programmes",
     "workEyebrow": "Proven experience",
     "workTitle": "What we have already done",
     "workIntro": "Every photograph here was taken at a course held in Gyumri.",
@@ -395,7 +394,7 @@
     "chainProfessionals": "Medical professionals",
     "chainProfessionalsBody": "Doctors and nurses who train where they work.",
     "chainCare": "Better care",
-    "chainCareBody": "Patients treated by better-prepared teams.",
+    "chainCareBody": "Patients who receive higher-quality care thanks to highly trained medical teams.",
     "supportEyebrow": "Support",
     "activityEyebrow": "Activity",
     "nextCourse": "Next course",

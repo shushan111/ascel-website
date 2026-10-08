@@ -31,9 +31,9 @@ export const reasons: Reason[] = [
       ru: "Тяжёлая травма не ждёт",
     },
     body: {
-      hy: "Damage Control վիրաբուժության ծրագրով 2024–2025 թթ. վերապատրաստվել է 153 վիրաբույժ։ Այս հմտությանը տիրապետում են նախապես, ոչ թե այն օրը, երբ այն անհրաժեշտ է դառնում։",
-      en: "The Damage Control Surgery programme trained 153 surgeons in 2024–2025. This is a skill you learn beforehand, not on the day it is needed.",
-      ru: "По программе Damage Control Surgery в 2024–2025 годах подготовлены 153 хирурга. Этому учатся заранее, а не в тот день, когда это понадобится.",
+      hy: "2024–2025 թթ. Damage Control վիրաբուժության ծրագրով վերապատրաստվել է 153 վիրաբույժ։ Կրիտիկական իրավիճակներում յուրաքանչյուր որոշում կարող է կյանք փրկել, իսկ անհրաժեշտ գիտելիքն ու պատրաստվածությունը պետք է ունենալ նախապես։",
+      en: "In 2024–2025, 153 surgeons were trained through the Damage Control Surgery programme. In critical situations, every decision can save a life, and the knowledge and preparation it takes must be in place beforehand.",
+      ru: "В 2024–2025 годах по программе Damage Control Surgery подготовлены 153 хирурга. В критических ситуациях каждое решение может спасти жизнь, а необходимые знания и подготовку нужно иметь заранее.",
     },
     figure: "153",
     figureLabel: {
@@ -45,14 +45,14 @@ export const reasons: Reason[] = [
   {
     id: "regional",
     title: {
-      hy: "Մարզի բժիշկը սովորում է տեղում",
-      en: "Regional doctors train where they work",
-      ru: "Врач региона учится на месте",
+      hy: "Մասնագիտական կրթություն՝ հենց մարզում",
+      en: "Professional training, right in the region",
+      ru: "Профессиональное обучение прямо в регионе",
     },
     body: {
-      hy: "2019 թվականից ի վեր դասընթացներն անցկացվում են Գյումրիում, ոչ թե Երևանում։ Բժիշկը վերապատրաստվում է՝ առանց երկար ժամանակով հեռանալու իր հիվանդանոցից, և մնում է այնտեղ, որտեղ իրեն սպասում են։",
-      en: "Since 2019 the courses have been held in Gyumri, not in Yerevan. A doctor trains without leaving their hospital, and stays where they are needed.",
-      ru: "С 2019 года курсы проходят в Гюмри, а не в Ереване. Врач учится, не покидая свою больницу, и остаётся там, где он нужен.",
+      hy: "2019 թվականից դասընթացներն անցկացվում են Գյումրիում՝ մասնագիտական վերապատրաստումը հասանելի դարձնելով մարզի բժիշկներին հենց տեղում։ Այս ձևաչափը հնարավորություն է տալիս զարգացնել մասնագիտական հմտությունները՝ առանց աշխատանքից երկարատև կտրվելու կամ Երևան մեկնելու անհրաժեշտության։",
+      en: "Since 2019, the courses have been held in Gyumri, bringing professional training to doctors in the region right where they work. This format lets them build their professional skills without long breaks from work or the need to travel to Yerevan.",
+      ru: "С 2019 года курсы проходят в Гюмри, делая профессиональную подготовку доступной для врачей региона прямо на месте. Такой формат позволяет развивать профессиональные навыки без длительного отрыва от работы и без необходимости ехать в Ереван.",
     },
     figure: "2019",
     figureLabel: {
@@ -64,14 +64,14 @@ export const reasons: Reason[] = [
   {
     id: "whole-team",
     title: {
-      hy: "Վիրահատությունը թիմային աշխատանք է",
-      en: "Surgery is teamwork",
-      ru: "Операция — командная работа",
+      hy: "Ուժեղ վիրաբուժությունը սկսվում է պատրաստված թիմից",
+      en: "Strong surgery starts with a trained team",
+      ru: "Сильная хирургия начинается с подготовленной команды",
     },
     body: {
-      hy: "Վիրահատարանի բուժքույրերի դպրոցն անցկացվել է վեց անգամ՝ 2019-ից 2026 թթ.։ Վիրաբույժը մենակ չի վիրահատում, և կենտրոնը պատրաստում է ամբողջ թիմը՝ ոչ միայն բժշկին։",
-      en: "The operating room nurses school has run six times between 2019 and 2026. A surgeon does not operate alone, and the center trains the whole team, not only the doctor.",
-      ru: "Школа операционных сестёр проведена шесть раз с 2019 по 2026 год. Хирург не оперирует один, и центр готовит всю команду, а не только врача.",
+      hy: "2019–2026 թթ. Վիրահատարանի բուժքույրերի դպրոցն անցկացվել է վեց անգամ։ Ծրագիրը զարգացնում է ոչ միայն առանձին մասնագետների, այլև ամբողջ վիրաբուժական թիմի գիտելիքներն ու գործնական հմտությունները։",
+      en: "In 2019–2026, the Operating Room Nurses School was held six times. The programme builds the knowledge and practical skills not only of individual specialists but of the whole surgical team.",
+      ru: "В 2019–2026 годах Школа операционных медсестёр была проведена шесть раз. Программа развивает знания и практические навыки не только отдельных специалистов, но и всей хирургической команды.",
     },
     figure: "6",
     figureLabel: {
