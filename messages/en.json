@@ -442,11 +442,36 @@
     "required": "Required",
     "invalidAmount": "Enter an amount greater than zero",
     "invalidEmail": "Enter a valid email address",
-    "cardNote": "Card details are entered on the bank's secure payment page, not on this site.",
     "pendingTitle": "Online payment is not connected yet",
     "pendingBody": "Thank you. Your details have not been sent and no payment was made. Until online donations are connected, please contact us and we will arrange your support.",
     "intro": "Your support goes to building the medical training center at 20-22 Myasnikyan Street.",
     "amountPlaceholder": "Amount",
-    "presetsLabel": "Suggested amounts"
+    "presetsLabel": "Suggested amounts",
+    "minAmount": "The minimum amount is {min} AMD",
+    "showName": "I agree to have my first and last name shown on the website in the list of donors.",
+    "testModeTitle": "Test mode",
+    "testModeBody": "Payments are in test mode: whatever amount you enter, the bank will charge 10 AMD.",
+    "failedTitle": "The payment could not be started",
+    "failedBody": "We could not reach the bank, and nothing was charged to your card. Please try again a little later.",
+    "rateLimitedBody": "There were too many attempts in a short time. Please try again in a few minutes."
+  },
+  "DonateResult": {
+    "metaTitle": "Donation result",
+    "paidTitle": "Thank you, {name}",
+    "paidTitleAnonymous": "Thank you",
+    "paidBody": "Your donation of {amount} AMD has been received. It goes to building the medical training center at 20-22 Myasnikyan St.",
+    "pendingTitle": "The payment is being processed",
+    "pendingBody": "The bank has not confirmed the payment yet. This usually takes a few minutes; you can refresh this page a little later.",
+    "failedTitle": "The payment did not go through",
+    "failedBody": "Nothing was charged to your card. You can try again or get in touch with us.",
+    "cancelledTitle": "The payment was cancelled",
+    "cancelledBody": "This donation was cancelled and the amount returned to the card.",
+    "refundedTitle": "The amount was refunded",
+    "refundedBody": "The amount of this donation was returned to the card, in full or in part.",
+    "notFoundTitle": "Donation not found",
+    "notFoundBody": "We could not find this payment. If your card was charged, please get in touch with us.",
+    "tryAgain": "Try again",
+    "contact": "Contact us",
+    "home": "Home"
   }
 }

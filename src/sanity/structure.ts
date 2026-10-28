@@ -1,5 +1,6 @@
 import {
   CalendarIcon,
+  CreditCardIcon,
   DocumentTextIcon,
   PresentationIcon,
   UsersIcon,
@@ -76,7 +77,24 @@ export const structure: StructureResolver = (S) => {
         ]),
     )
 
-  const handled = ['program', 'course', 'event', 'news', 'founder']
+  // Donation IDs contain a dot (see src/lib/donations/types.ts), so the list
+  // is an explicit filter rather than a plain document-type list.
+  const donations: ListItemBuilder = S.listItem()
+    .title('Նվիրատվություններ')
+    .id('donation')
+    .icon(CreditCardIcon)
+    .schemaType('donation')
+    .child(
+      S.documentList()
+        .id('donations')
+        .title('Նվիրատվություններ')
+        .schemaType('donation')
+        .apiVersion('2025-01-01')
+        .filter('_type == "donation"')
+        .defaultOrdering([{field: '_createdAt', direction: 'desc'}]),
+    )
+
+  const handled = ['program', 'course', 'event', 'news', 'founder', 'donation']
 
   return (
     S.list()
@@ -92,6 +110,8 @@ export const structure: StructureResolver = (S) => {
         news,
         divider('group-about', 'Մեր մասին'),
         founders,
+        divider('group-donations', 'Նվիրատվություններ'),
+        donations,
         // Anything added to the schema later still shows up, so a new document
         // type is never invisible just because this file was not updated.
         ...S.documentTypeListItems().filter((item) => !handled.includes(item.getId() ?? '')),

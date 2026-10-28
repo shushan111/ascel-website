@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { Notice } from "@/components/ui/Notice";
 import { AlertIcon, ArrowRightIcon, CheckIcon } from "@/components/ui/icons";
+import { startDonation } from "@/app/[locale]/donate/actions";
 
 type Errors = Partial<Record<"amount" | "firstName" | "lastName" | "email", string>>;
 
@@ -28,22 +29,34 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   ) : null;
 }
 
+/** The smallest amount the server accepts, in AMD (see donate/actions.ts). */
+const MIN_AMOUNT = 100;
+
+/**
+ * The "show my name on the site" consent. Hidden until the site has a list of
+ * donors to show it in; while hidden, every donation is stored as not
+ * consenting (the server reads a missing box as "no").
+ */
+const SHOW_NAME_CONSENT = false;
+
 /**
  * One donation panel: amount (the main element), the donor's name and email,
- * the bronze action. It never asks for card details — those belong on the
- * payment provider's own page. With a checkout URL configured, a valid form is
- * handed to that page as query parameters (rename them to match the provider
- * once it is chosen). Without one, the panel says plainly that nothing was
+ * the bronze action. It never asks for card details — those are entered on
+ * the bank's own payment page. With online payment on, a valid form goes to
+ * the `startDonation` server action, which checks it again and returns the
+ * bank's page to go to. Without it, the panel says plainly that nothing was
  * sent and points to the contact page.
  */
 export function DonationForm({
   currencies,
   presets,
-  checkoutUrl,
+  online,
+  testMode,
 }: {
   currencies: readonly string[];
   presets: Partial<Record<string, number[]>>;
-  checkoutUrl: string | null;
+  online: boolean;
+  testMode: boolean;
 }) {
   const t = useTranslations("DonateForm");
   const page = useTranslations("DonatePage");
@@ -52,6 +65,7 @@ export function DonationForm({
   const [errors, setErrors] = useState<Errors>({});
   const [pending, setPending] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
+  const [failure, setFailure] = useState<"rateLimited" | "unavailable" | "failed" | null>(null);
   const [currency, setCurrency] = useState(currencies[0]);
   const [amount, setAmount] = useState("");
 
@@ -63,13 +77,18 @@ export function DonationForm({
   const amountNumber = Number(amount.replace(/[\s, ]/g, ""));
   const quick = presets[currency] ?? [];
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    if (redirecting) return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const value = (key: string) => String(data.get(key) ?? "").trim();
 
     const next: Errors = {};
     if (!Number.isFinite(amountNumber) || amountNumber <= 0) next.amount = t("invalidAmount");
+    else if (online && (!Number.isInteger(amountNumber) || amountNumber < MIN_AMOUNT)) {
+      next.amount = t("minAmount", { min: format(MIN_AMOUNT) });
+    }
     if (!value("firstName")) next.firstName = t("required");
     if (!value("lastName")) next.lastName = t("required");
     if (!value("email")) next.email = t("required");
@@ -78,23 +97,42 @@ export function DonationForm({
     if (Object.keys(next).length) {
       // Take the visitor to the first problem rather than leaving them to find it.
       const first = Object.keys(next)[0];
-      const field = event.currentTarget.querySelector<HTMLElement>(
+      const field = form.querySelector<HTMLElement>(
         first === "amount" ? `#${CSS.escape(`${id}-amount`)}` : `[name="${first}"]`,
       );
       field?.focus();
       return;
     }
 
-    if (!checkoutUrl) {
+    if (!online) {
       setPending(true);
       return;
     }
     setRedirecting(true);
-    const url = new URL(checkoutUrl);
-    url.searchParams.set("amount", String(amountNumber));
-    url.searchParams.set("currency", currency);
-    for (const key of ["firstName", "lastName", "email"]) url.searchParams.set(key, value(key));
-    window.location.assign(url.toString());
+    setFailure(null);
+    data.set("amount", String(amountNumber));
+    data.set("locale", locale);
+    try {
+      const result = await startDonation(data);
+      if (result.ok) {
+        // Stay in the busy state: the browser is leaving for the bank's page.
+        window.location.assign(result.url);
+        return;
+      }
+      if (result.error === "invalid" && result.fields) {
+        const fieldErrors: Errors = {};
+        for (const [key, code] of Object.entries(result.fields)) {
+          fieldErrors[key as keyof Errors] =
+            code === "invalidAmount" ? t("minAmount", { min: format(MIN_AMOUNT) }) : t(code);
+        }
+        setErrors(fieldErrors);
+      } else {
+        setFailure(result.error === "invalid" ? "failed" : result.error);
+      }
+    } catch {
+      setFailure("failed");
+    }
+    setRedirecting(false);
   }
 
   const describe = (key: keyof Errors) => (errors[key] ? `${id}-${key}-error` : undefined);
@@ -105,7 +143,7 @@ export function DonationForm({
     <form
       onSubmit={onSubmit}
       noValidate
-      className="card min-w-0 p-6 shadow-panel sm:p-8"
+      className="card relative min-w-0 p-6 shadow-panel sm:p-8"
     >
       <h2 className="t-h3 text-ink">{page("howTitle")}</h2>
       <p className="t-small mt-1.5 text-muted">{t("intro")}</p>
@@ -202,6 +240,19 @@ export function DonationForm({
         </div>
       </fieldset>
 
+      {SHOW_NAME_CONSENT ? (
+        <label className="mt-6 flex cursor-pointer items-start gap-3 text-[0.9375rem] text-body">
+          <input type="checkbox" name="showName" className="mt-1 h-4 w-4 shrink-0 accent-[var(--color-accent)]" />
+          <span>{t("showName")}</span>
+        </label>
+      ) : null}
+
+      {/* Left empty by people; filled in by bots that fill every field. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor={`${id}-website`}>Website</label>
+        <input id={`${id}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <button
         type="submit"
         aria-busy={redirecting || undefined}
@@ -212,7 +263,18 @@ export function DonationForm({
         {redirecting ? null : <ArrowRightIcon className="btn-arrow" />}
       </button>
 
-      {checkoutUrl ? <p className="t-caption mt-3 text-center text-muted">{t("cardNote")}</p> : null}
+
+      {online && testMode ? (
+        <Notice tone="warn" title={t("testModeTitle")} className="mt-5">
+          {t("testModeBody")}
+        </Notice>
+      ) : null}
+
+      {failure ? (
+        <Notice tone="warn" title={t("failedTitle")} className="mt-5">
+          {t(failure === "rateLimited" ? "rateLimitedBody" : failure === "unavailable" ? "pendingBody" : "failedBody")}
+        </Notice>
+      ) : null}
 
       {pending ? (
         <Notice tone="warn" title={t("pendingTitle")} className="mt-5">

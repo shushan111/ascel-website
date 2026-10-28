@@ -1,19 +1,21 @@
 import { getTranslations } from "next-intl/server";
-import { donationConfig } from "@/lib/config";
+import { isVposConfigured, vposTestMode } from "@/lib/vpos";
+import { isDonationStoreConfigured } from "@/lib/donations/store";
 import { donationCurrencies, donationPresets, hasBankTransfer, payment } from "@/data/fundraising";
 import { FactList } from "@/components/ui/FactList";
 import { DonationForm } from "./DonationForm";
 
 /**
- * The giving panel beside the donate page's opening. What happens on submit
- * depends on whether a checkout URL is configured (see DonationForm). Bank
+ * The giving panel beside the donate page's opening. Online payment is on
+ * once the Ameriabank vPOS and the donation store are configured on the
+ * server; it takes AMD only for now (see DonationForm). Bank
  * transfer details appear under the panel once IBAN and beneficiary are filled
  * in src/data/fundraising.ts.
  */
 export async function HowToGive() {
   const t = await getTranslations("DonatePage");
 
-  const checkoutUrl = payment.checkoutUrl || donationConfig.providerUrl || null;
+  const online = isVposConfigured() && isDonationStoreConfigured();
   const bank = payment.bankTransfer;
   const bankRows = [
     [t("beneficiary"), bank.beneficiary],
@@ -24,7 +26,12 @@ export async function HowToGive() {
 
   return (
     <div className="min-w-0">
-      <DonationForm currencies={donationCurrencies} presets={donationPresets} checkoutUrl={checkoutUrl} />
+      <DonationForm
+        currencies={online ? ["AMD"] : donationCurrencies}
+        presets={donationPresets}
+        online={online}
+        testMode={online && vposTestMode()}
+      />
 
       {hasBankTransfer() ? (
         <FactList

@@ -1,6 +1,7 @@
 import {type SchemaTypeDefinition} from 'sanity'
 import {blockContent, contentTable, contentTableRow} from './blockContent'
 import {course} from './course'
+import {donation} from './donation'
 import {event} from './event'
 import {founder} from './founder'
 import {localizedString, localizedText} from './localizedString'
@@ -31,5 +32,6 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     programNarrative,
     programProfile,
     program,
+    donation,
   ],
 }
