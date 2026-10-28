@@ -1,4 +1,4 @@
-import type { GalleryImage } from "@/types";
+import type { GalleryImage, LocalizedString } from "@/types";
 import { cn, loc } from "@/lib/utils";
 import { imageSize } from "@/lib/media";
 import { Lightbox } from "@/components/ui/Lightbox";
@@ -12,16 +12,22 @@ export function Gallery({
   images,
   locale,
   title,
+  credit,
+  lead: leadOverride,
   className,
 }: {
-  images: GalleryImage[];
+  images: Array<GalleryImage & { caption?: LocalizedString; width?: number }>;
   locale: string;
   title: string;
+  /** One source line under the grid, e.g. "Photographs: AnklePro". */
+  credit?: string;
+  /** Force the double-size first tile on or off; by default it depends on size and count. */
+  lead?: boolean;
   className?: string;
 }) {
   if (!images.length) return null;
-  const leadSize = imageSize(images[0].url);
-  const lead = images.length > 4 && (!leadSize || leadSize.width >= 1000);
+  const leadSize = images[0].width ? { width: images[0].width } : imageSize(images[0].url);
+  const lead = leadOverride ?? (images.length > 4 && (!leadSize || leadSize.width >= 1000));
 
   return (
     <section className={cn(className)}>
@@ -32,9 +38,14 @@ export function Gallery({
       <div className="mt-6">
         <Lightbox
           lead={lead}
-          images={images.map((image) => ({ src: image.url, alt: loc(image.alt, locale) }))}
+          images={images.map((image) => ({
+            src: image.url,
+            alt: loc(image.alt, locale),
+            caption: image.caption ? loc(image.caption, locale) : undefined,
+          }))}
         />
       </div>
+      {credit ? <p className="t-caption mt-4 text-muted">{credit}</p> : null}
     </section>
   );
 }

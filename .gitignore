@@ -48,3 +48,7 @@ next-env.d.ts
 /data/
 backups/
 presentation/
+
+# Local-only preview files (e.g. event photos awaiting publication rights).
+# Kept outside public/ so a local `next build` can never package them.
+/.preview/

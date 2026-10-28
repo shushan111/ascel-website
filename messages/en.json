@@ -5,6 +5,8 @@
     "homeDescription": "A 19th-century monument house at 20-22 Myasnikyan Street, Gyumri is being restored and turned into a medical training center with an operating room, a cadaver lab, study rooms and a library. The project is built on donations.",
     "aboutTitle": "About | Gyumri Medical Training Center",
     "aboutDescription": "Learn about the mission of the medical training center being created in Gyumri, Armenia, for the practical education of doctors.",
+    "foundersTitle": "Our Founders | Gyumri Medical Training Center",
+    "foundersDescription": "The five founders of ASCEL: professionals committed to advancing medical education, surgical training and international collaboration in Armenia.",
     "programsTitle": "Programs | ASCEL",
     "programsDescription": "Active programs of the center: Gyumri Orthopedic School, Damage Control Courses, and a partnership presentation of Eternal Nation Foundation.",
     "coursesTitle": "Courses & Training | ASCEL",
@@ -24,6 +26,7 @@
   "Nav": {
     "home": "Home",
     "about": "About",
+    "founders": "Founders",
     "programs": "Programs",
     "courses": "Courses",
     "simulation": "Medical Training Center",
@@ -93,6 +96,20 @@
     "title": "Active Programs",
     "subtitle": "Education, training, collaboration, and impact through specialized medical initiatives."
   },
+  "FoundersPage": {
+    "eyebrow": "About us",
+    "title": "Our Founders",
+    "intro": "ASCEL was founded on a shared vision: to advance medical education, practical surgical training and international collaboration in Armenia.",
+    "indexLabel": "List of founders",
+    "readMore": "Read more",
+    "readLess": "Show less",
+    "photoBy": "Photo: {credit}",
+    "empty": "Information about the founders will be published soon.",
+    "nextLabel": "About us",
+    "nextTitle": "The center's mission, history and work",
+    "teaserBody": "The center was founded on the initiative of five professionals. Their biographies are on a page of their own.",
+    "teaserLink": "Meet the founders"
+  },
   "FoundersSection": {
     "title": "Founders"
   },
@@ -119,6 +136,11 @@
     "supportPrograms": "See the project",
     "providerPending": "A donation provider has not been connected yet. This page describes where support will go; no payment is processed on this website.",
     "categoriesTitle": "What your support goes toward"
+  },
+  "EducationalPartners": {
+    "title": "Educational Partners",
+    "amadea": { "name": "AMADeA — Asociación Médica Amigos De Armenia" },
+    "nih": { "name": "National Institute of Health of Armenia" }
   },
   "PartnersHome": {
     "title": "Our Partners & Collaborators",
@@ -170,6 +192,7 @@
   },
   "CoursesPage": {
     "eyebrow": "Education",
+    "fallbackAlt": "Illustration for an ASCEL course",
     "title": "Courses & Training",
     "intro": "Hands-on courses held in Gyumri for physicians and operating room nurses.",
     "date": "Date",
@@ -182,7 +205,11 @@
     "completed": "Completed courses",
     "completedIntro": "Every course below has already been held in Gyumri. Open one to see its programme and photographs.",
     "photos": "{count} photos",
-    "faculty": "Faculty"
+    "faculty": "Faculty",
+    "recap": "How the course went",
+    "highlights": "Key topics",
+    "photoBy": "Photo: {credit}",
+    "photosBy": "Photographs: {credit}"
   },
   "NewsPage": {
     "eyebrow": "News",
@@ -371,6 +398,7 @@
   },
   "Home": {
     "heroEyebrow": "Gyumri, Armenia · since 2019",
+    "heroImageAlt": "Course participants and faculty with their certificates",
     "heroHeadline": "Medical Training Center",
     "heroSupporting": "Since 2019 we have worked with leading international specialists to develop the professional skills of surgeons and operating-room nurses, helping raise the quality of medical education in Armenia. Today we are creating a new center for medical education: restoring a 19th-century historical monument and turning it into a permanent environment for knowledge, shared experience and professional growth.",
     "heroCtaWork": "Discover our work",

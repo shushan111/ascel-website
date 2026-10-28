@@ -20,6 +20,22 @@ export interface GalleryImage {
   alt: LocalizedString;
 }
 
+/** A photograph from the event itself, uncropped, with its own caption and credit. */
+export interface CoursePhoto extends GalleryImage {
+  width?: number;
+  height?: number;
+  caption: LocalizedString;
+  credit: string;
+}
+
+export interface FacultyMember {
+  name: LocalizedString;
+  credentials: LocalizedString;
+  bio: LocalizedString;
+  /** Empty when the CMS has no headshot; the page shows initials. */
+  photo: string;
+}
+
 /** A short label/value pair shown in a program's summary strip. */
 export interface ProgramFact {
   label: LocalizedString;
@@ -78,7 +94,11 @@ export interface Founder {
   lastName: LocalizedString;
   role?: LocalizedString;
   bio?: LocalizedString;
+  bioExtended?: LocalizedString;
+  /** Empty when there is no approved portrait; the page shows initials. */
   photo: string;
+  photoAlt?: LocalizedString;
+  photoCredit?: string;
 }
 
 export interface Program {
@@ -115,6 +135,12 @@ export interface Course {
   imageAlt: LocalizedString;
   gallery: GalleryImage[];
   body: LocalizedPortableText;
+  /** "How the course went": present only for a completed course with a write-up. */
+  recap: LocalizedPortableText;
+  highlights: LocalizedString[];
+  faculty: FacultyMember[];
+  /** The first is the featured photograph. */
+  eventPhotos: CoursePhoto[];
   sourceUrl: string;
   registrationUrl: string;
   isPlaceholder: boolean;

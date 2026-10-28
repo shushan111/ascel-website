@@ -14,7 +14,9 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { ExternalIcon } from "@/components/ui/icons";
 import { FacultyStrip } from "@/components/courses/FacultyStrip";
+import { FacultyGrid } from "@/components/courses/FacultyGrid";
 import { courseCover, splitGallery } from "@/lib/media";
+import { withoutRegistration } from "@/lib/courseBody";
 
 export async function generateStaticParams() {
   const courses = await getCourses();
@@ -34,7 +36,7 @@ export async function generateMetadata({
     description: loc(course.description, locale),
     path: `/courses/${course.slug}`,
     locale,
-    image: course.image,
+    image: courseCover(course) || course.image,
   });
 }
 
@@ -43,6 +45,11 @@ export async function generateMetadata({
  * programme as it scrolls, so "when, where, how do I sign up" is never more
  * than a glance away. A completed course leads with its photographs — the
  * record of what happened; an upcoming one leads with its programme.
+ *
+ * A completed course with a write-up in the CMS (`recap`) reads as a record:
+ * featured photograph, how it went beside the facts, the photographs, the key
+ * topics, the programme, the faculty. Registration — the button and the
+ * payment terms in the body — is shown only while a course is upcoming.
  */
 export default async function CourseDetailPage({
   params,
@@ -60,8 +67,11 @@ export default async function CourseDetailPage({
 
   // The body is Portable Text per locale; fall back the same way `loc` does so
   // an untranslated course still shows its Russian original.
-  const body =
-    course.body[locale as "ru" | "hy" | "en"] ?? course.body.ru ?? course.body.en;
+  const pick = (value: typeof course.body) =>
+    value[locale as "ru" | "hy" | "en"] ?? value.ru ?? value.en;
+  const upcoming = course.status === "upcoming";
+  const body = upcoming ? pick(course.body) : withoutRegistration(pick(course.body));
+  const recap = pick(course.recap);
 
   const facts = [
     [t("date"), loc(course.date, locale)],
@@ -71,15 +81,52 @@ export default async function CourseDetailPage({
     .filter(([, value]) => Boolean(value))
     .map(([label, value]) => ({ label, value }));
 
-  const upcoming = course.status === "upcoming";
   const title = loc(course.title, locale);
   const { events, faculty } = splitGallery(course.gallery);
   const cover = courseCover(course);
+  const featured = course.eventPhotos.find((photo) => photo.url === cover);
   // The cover already shows one frame; the gallery need not repeat it.
-  const galleryImages = events.filter((image) => image.url !== cover);
-  const gallery = <Gallery images={galleryImages} locale={locale} title={common("gallery")} />;
+  const galleryImages = course.eventPhotos.length
+    ? course.eventPhotos.filter((photo) => photo !== featured)
+    : events.filter((image) => image.url !== cover);
+  const credits = [...new Set(course.eventPhotos.map((photo) => photo.credit).filter(Boolean))];
+  const gallery = (
+    <Gallery
+      images={galleryImages}
+      // A double-size first tile leaves gaps in the grid unless the count fits it.
+      lead={course.eventPhotos.length ? galleryImages.length > 4 && galleryImages.length % 4 === 1 : undefined}
+      locale={locale}
+      title={common("gallery")}
+      credit={credits.length ? t("photosBy", { credit: credits.join(", ") }) : undefined}
+    />
+  );
+  const coverCaption = featured
+    ? [loc(featured.caption, locale), featured.credit ? t("photoBy", { credit: featured.credit }) : ""]
+        .filter(Boolean)
+        .join(" · ")
+    : null;
+  const highlights = course.highlights.map((item) => loc(item, locale)).filter(Boolean);
+  const sectionHeading = (text: string) => (
+    <div className="border-b border-line pb-4">
+      <h2 className="t-h3 text-ink">{text}</h2>
+    </div>
+  );
 
-  const register = course.registrationUrl ? (
+  const highlightsSection = highlights.length ? (
+    <section className="mt-14 md:mt-20">
+      {sectionHeading(t("highlights"))}
+      <ul className="mt-6 grid gap-x-10 gap-y-4 md:grid-cols-2">
+        {highlights.map((item) => (
+          <li key={item} className="t-body flex gap-3 text-body">
+            <span aria-hidden="true" className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : null;
+
+  const register = upcoming && course.registrationUrl ? (
     <a
       href={course.registrationUrl}
       target="_blank"
@@ -113,32 +160,81 @@ export default async function CourseDetailPage({
       />
 
       {cover ? (
-        <WideFigure src={cover} alt={loc(course.imageAlt, locale) || title} priority />
+        <WideFigure
+          src={cover}
+          alt={(featured ? loc(featured.alt, locale) : loc(course.imageAlt, locale)) || title}
+          caption={coverCaption}
+          priority
+          // An event photograph is a 4:3 phone frame, not a wide banner: shown
+          // less wide and less cropped than an archival cover.
+          aspect={featured ? "aspect-[4/3] sm:aspect-[16/9]" : undefined}
+          className={featured ? "max-w-[80rem]" : undefined}
+        />
       ) : null}
 
-      <Container width="wide" className="pb-16 pt-12 md:pb-band md:pt-16">
-        {!upcoming && galleryImages.length ? <div className="mb-14 md:mb-20">{gallery}</div> : null}
-
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-          {/* Facts first on a phone, beside the text from lg. */}
-          {facts.length || register ? (
+      {recap?.length ? (
+        <Container width="wide" className="pb-16 pt-12 md:pb-band md:pt-16">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
             <aside className="lg:order-2 lg:col-span-4 lg:col-start-9">
-              <div className="lg:sticky lg:top-[calc(var(--header-h)+1.5rem)]">
-                <FactList facts={facts} footer={register} />
-                <ArrowLink href="/courses" className="mt-4">
-                  {common("backToCourses")}
-                </ArrowLink>
-              </div>
+              <FactList facts={facts} footer={register} />
+              <ArrowLink href="/courses" className="mt-4">
+                {common("backToCourses")}
+              </ArrowLink>
             </aside>
-          ) : null}
-          <div className="min-w-0 lg:col-span-8 xl:col-span-7">
-            <RichText value={body} />
+            <section className="min-w-0 lg:col-span-8 xl:col-span-7">
+              {sectionHeading(t("recap"))}
+              <RichText value={recap} className="mt-6" />
+            </section>
           </div>
-        </div>
 
-        {upcoming && galleryImages.length ? <div className="mt-14 md:mt-20">{gallery}</div> : null}
-        <FacultyStrip images={faculty} locale={locale} className="mt-14 md:mt-20" />
-      </Container>
+          {galleryImages.length ? <div className="mt-14 md:mt-20">{gallery}</div> : null}
+
+          {highlightsSection}
+
+          {body?.length ? (
+            <section className="mt-14 md:mt-20">
+              {sectionHeading(t("programme"))}
+              {/* The schedule tables need more room than a reading column. */}
+              <RichText value={body} className="max-w-[60rem]" />
+            </section>
+          ) : null}
+
+          {course.faculty.length ? (
+            <FacultyGrid faculty={course.faculty} locale={locale} className="mt-14 md:mt-20" />
+          ) : (
+            <FacultyStrip images={faculty} locale={locale} className="mt-14 md:mt-20" />
+          )}
+        </Container>
+      ) : (
+        <Container width="wide" className="pb-16 pt-12 md:pb-band md:pt-16">
+          {!upcoming && galleryImages.length ? <div className="mb-14 md:mb-20">{gallery}</div> : null}
+
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+            {/* Facts first on a phone, beside the text from lg. */}
+            {facts.length || register ? (
+              <aside className="lg:order-2 lg:col-span-4 lg:col-start-9">
+                <div className="lg:sticky lg:top-[calc(var(--header-h)+1.5rem)]">
+                  <FactList facts={facts} footer={register} />
+                  <ArrowLink href="/courses" className="mt-4">
+                    {common("backToCourses")}
+                  </ArrowLink>
+                </div>
+              </aside>
+            ) : null}
+            <div className="min-w-0 lg:col-span-8 xl:col-span-7">
+              <RichText value={body} />
+            </div>
+          </div>
+
+          {highlightsSection}
+          {upcoming && galleryImages.length ? <div className="mt-14 md:mt-20">{gallery}</div> : null}
+          {course.faculty.length ? (
+            <FacultyGrid faculty={course.faculty} locale={locale} className="mt-14 md:mt-20" />
+          ) : (
+            <FacultyStrip images={faculty} locale={locale} className="mt-14 md:mt-20" />
+          )}
+        </Container>
+      )}
     </article>
   );
 }

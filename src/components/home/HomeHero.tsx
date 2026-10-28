@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { workPhotos } from "@/data/work";
 import { getIntroMetrics } from "@/data/metrics";
 import { loc } from "@/lib/utils";
 import { buttonClassName } from "@/components/ui/buttonStyles";
 import { Container } from "@/components/ui/Container";
 import { ArrowRightIcon } from "@/components/ui/icons";
-import { getPhotoCaption } from "@/lib/courseIndex";
 
 /**
  * The first screen is the organisation at work: a real course, real doctors,
@@ -17,20 +15,19 @@ import { getPhotoCaption } from "@/lib/courseIndex";
  */
 export async function HomeHero({ locale }: { locale: string }) {
   const t = await getTranslations("Home");
-  const photo = workPhotos.heroHandsOn;
-  const caption = await getPhotoCaption(photo.course, locale);
   const metrics = getIntroMetrics();
 
   return (
     <>
       <section className="relative isolate overflow-hidden bg-night">
         <Image
-          src={photo.src}
-          alt={caption ?? ""}
+          src="/images/hero-group-hall.jpg"
+          alt={t("heroImageAlt")}
           fill
           priority
+          quality={90}
           sizes="100vw"
-          className="-z-10 object-cover object-[60%_center]"
+          className="-z-10 object-cover object-[center_65%]"
         />
         {/* Legibility, not decoration: dark where the text sits, clear where
             the people are. */}

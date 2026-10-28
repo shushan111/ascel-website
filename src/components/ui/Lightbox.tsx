@@ -6,7 +6,12 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon, CloseIcon, ExpandIcon } from "@/components/ui/icons";
 
-export type LightboxImage = { src: string; alt: string };
+export type LightboxImage = {
+  src: string;
+  alt: string;
+  /** Shown under the photograph in the viewer; the alt text is used when absent. */
+  caption?: string;
+};
 
 /**
  * A photo grid whose tiles open a full-screen viewer. Built on the native
@@ -185,7 +190,7 @@ export function Lightbox({
             </div>
 
             <div className="flex min-h-16 items-center justify-between gap-4 px-4 py-3 sm:px-6">
-              <p className="t-caption line-clamp-2 max-w-2xl text-on-dark/75">{current.alt}</p>
+              <p className="t-caption line-clamp-2 max-w-2xl text-on-dark/75">{current.caption || current.alt}</p>
               {total > 1 ? (
                 <div className="flex shrink-0 gap-2 sm:hidden">
                   <button type="button" onClick={() => step(-1)} aria-label={t("previous")} className="grid h-11 w-11 place-items-center rounded-full bg-on-dark/10">

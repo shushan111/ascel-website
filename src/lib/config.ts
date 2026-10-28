@@ -32,12 +32,13 @@ export const donationConfig = {
   providerName: process.env.NEXT_PUBLIC_DONATION_PROVIDER ?? "",
 };
 
-// The path a visitor is offered: who we are → the work (programmes, courses)
+// The path a visitor is offered: who we are (and who founded the center) → the work (programmes, courses)
 // → what the work has led to (the project) → news → contact. Home is the
 // logo; Donate is the separate bronze CTA beside the nav, never a nav link.
 // `shortKey` is the label the desktop row uses where the full one is long.
 export const navItems = [
   { href: "/about", key: "about" },
+  { href: "/founders", key: "founders" },
   { href: "/programs", key: "programs" },
   { href: "/courses", key: "courses" },
   { href: "/simulation-center", key: "simulation", shortKey: "simulationShort" },
@@ -47,6 +48,7 @@ export const navItems = [
 
 export const footerNav = [
   { href: "/about", key: "about" },
+  { href: "/founders", key: "founders" },
   { href: "/programs", key: "programs" },
   { href: "/courses", key: "courses" },
   { href: "/simulation-center", key: "simulation" },

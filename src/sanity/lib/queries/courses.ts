@@ -20,8 +20,25 @@ const courseFields = `
     crop
   },
   gallery[] {
+    _key,
     asset->{ _id, url },
     alt,
+    hotspot,
+    crop
+  },
+  recap,
+  highlights,
+  faculty[] {
+    name,
+    credentials,
+    bio,
+    photo { asset->{ _id, url }, hotspot, crop }
+  },
+  eventPhotos[] {
+    asset->{ _id, url, metadata { dimensions { width, height } } },
+    alt,
+    caption,
+    credit,
     hotspot,
     crop
   }

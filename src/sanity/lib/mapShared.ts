@@ -8,7 +8,13 @@ export type SanityLocalizedValue = {
 };
 
 export type SanityImage = {
-  asset?: { _id?: string; url?: string } | null;
+  asset?: {
+    _id?: string;
+    /** An unexpanded reference, as written by the migration scripts. */
+    _ref?: string;
+    url?: string;
+    metadata?: { dimensions?: { width?: number; height?: number } | null } | null;
+  } | null;
   alt?: SanityLocalizedValue | null;
   hotspot?: unknown;
   crop?: unknown;
@@ -24,8 +30,12 @@ export function toLocalizedString(
   };
 }
 
+export function hasAsset(image: SanityImage): image is NonNullable<SanityImage> {
+  return Boolean(image?.asset?._id || image?.asset?._ref);
+}
+
 export function imageUrl(image: SanityImage, fallback: string, width = 1600, height = 1000): string {
-  if (!image?.asset?._id) return fallback;
+  if (!hasAsset(image)) return fallback;
   return urlFor(image).width(width).height(height).fit("crop").url();
 }
 

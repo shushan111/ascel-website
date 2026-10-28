@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f0e8"/><stop offset="1" stop-color="#e9e3d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <!-- plate grid -->
+  <g stroke="#e2dbcf" stroke-width="1">
+    <path d="M0 200h1200M0 400h1200M0 600h1200M300 0v800M600 0v800M900 0v800"/>
+  </g>
+  <g fill="none" stroke="#c9c2b5" stroke-width="1.2" stroke-dasharray="3 7">
+    <circle cx="600" cy="400" r="300"/>
+  </g>
+  <!-- knee joint, front view: femur, patella, tibia, fibula -->
+  <g transform="translate(600 400) scale(1.45 1.2) translate(-600 -400)" fill="none" vector-effect="non-scaling-stroke" stroke="#a98252" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- femur shaft and condyles -->
+    <path d="M556 -10 C 552 120 548 200 530 262 C 508 300 496 330 506 358 C 516 384 552 388 576 372 C 590 362 596 352 600 352 C 604 352 610 362 624 372 C 648 388 684 384 694 358 C 704 330 692 300 670 262 C 652 200 648 120 644 -10"/>
+    <path d="M560 350 C 574 340 586 344 592 354" stroke="#cfae80" stroke-width="1.6"/>
+    <path d="M640 350 C 626 340 614 344 608 354" stroke="#cfae80" stroke-width="1.6"/>
+    <!-- patella -->
+    <path d="M600 248 C 628 248 640 276 634 304 C 628 330 612 344 600 346 C 588 344 572 330 566 304 C 560 276 572 248 600 248 Z" stroke="#bfae90" stroke-width="1.8"/>
+    <!-- tibia plateau and shaft -->
+    <path d="M498 412 C 520 402 560 400 600 404 C 640 400 680 402 702 412 C 708 432 696 448 676 456 C 664 470 660 520 656 600 C 654 680 652 760 650 810"/>
+    <path d="M498 412 C 494 430 504 448 524 456 C 536 470 540 520 544 600 C 546 680 548 760 550 810"/>
+    <path d="M576 404 C 590 396 610 396 624 404" stroke="#cfae80" stroke-width="1.6"/>
+    <!-- fibula -->
+    <path d="M712 470 C 730 466 742 478 738 494 C 734 506 728 512 726 530 C 724 620 722 720 720 810" stroke="#9c9486" stroke-width="2"/>
+    <path d="M712 470 C 700 478 702 498 712 510 C 712 620 710 720 708 810" stroke="#9c9486" stroke-width="2"/>
+  </g>
+  <!-- joint line markers -->
+  <g stroke="#a98252" stroke-width="1.6" stroke-linecap="round">
+    <path d="M330 406h50M820 406h50"/>
+  </g>
+  <circle cx="330" cy="406" r="3.5" fill="#a98252"/>
+  <circle cx="870" cy="406" r="3.5" fill="#a98252"/>
+</svg>

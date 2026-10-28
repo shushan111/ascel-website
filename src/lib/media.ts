@@ -27,7 +27,8 @@ export function splitGallery(gallery: GalleryImage[]) {
 
 /**
  * The picture that represents a course: the hand-picked photograph in
- * src/data/work.ts when there is one; else its first event photograph; else its
+ * src/data/work.ts when there is one; else the featured photograph from the
+ * CMS (the first of `eventPhotos`); else its first event photograph; else its
  * CMS cover when that is a full-size image (the school's archival covers are
  * 750px and up, the headshots used as covers are ~300px); else nothing, and
  * the card shows its typographic tile.
@@ -35,6 +36,7 @@ export function splitGallery(gallery: GalleryImage[]) {
 export function courseCover(course: Course): string {
   const curated = Object.values(workPhotos).find((photo) => photo.course === course.slug);
   if (curated) return curated.src;
+  if (course.eventPhotos.length) return course.eventPhotos[0].url;
   const event = course.gallery.find((image) => isEventPhoto(image.url));
   if (event) return event.url;
   const size = course.image ? imageSize(course.image) : null;

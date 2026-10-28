@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import type { Course } from "@/types";
 import { cn, loc } from "@/lib/utils";
 import { courseCover } from "@/lib/media";
+import { COURSE_FALLBACK_IMAGE } from "@/lib/courseFallback";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonClassName } from "@/components/ui/buttonStyles";
@@ -31,18 +32,17 @@ export async function UpcomingCourseCard({
 
   return (
     <article className={cn("card grid overflow-hidden md:grid-cols-12", className)}>
-      {cover ? (
-        <div className="relative aspect-[16/9] bg-mist md:col-span-5 md:aspect-auto md:min-h-[17rem]">
-          <CoverImage src={cover} alt="" label={title} sizes="(min-width: 768px) 40vw, 100vw" />
-        </div>
-      ) : (
-        // No photograph yet: the date is the most useful thing to show large.
-        <div className="flex flex-col justify-between gap-6 bg-night p-6 text-on-dark sm:p-8 md:col-span-4 lg:col-span-3">
-          <CalendarIcon className="h-6 w-6 text-accent-light" />
-          <p className="t-h2 text-balance text-on-dark">{loc(course.date, locale)}</p>
-        </div>
-      )}
-      <div className={cn("flex flex-col p-6 sm:p-8", cover ? "md:col-span-7" : "md:col-span-8 lg:col-span-9")}>
+      {/* Every course shows a picture: its photograph, or the shared illustration. */}
+      <div className="relative aspect-[16/9] bg-mist md:col-span-5 md:aspect-auto md:min-h-[17rem]">
+        <CoverImage
+          src={cover}
+          alt=""
+          fallbackSrc={COURSE_FALLBACK_IMAGE}
+          fallbackAlt={t("fallbackAlt")}
+          sizes="(min-width: 768px) 40vw, 100vw"
+        />
+      </div>
+      <div className="flex flex-col p-6 sm:p-8 md:col-span-7">
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="accent" dot>
             {t("upcoming")}

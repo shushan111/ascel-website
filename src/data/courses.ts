@@ -2,10 +2,11 @@ import type { Course } from "@/types";
 import { client } from "@/sanity/lib/client";
 import { mapSanityCourse } from "@/sanity/lib/mapCourse";
 import { coursesQuery } from "@/sanity/lib/queries/courses";
+import { applyCoursePreview } from "@/data/coursePreview";
 
 export async function getCourses(): Promise<Course[]> {
   const documents = await client.fetch(coursesQuery);
-  return documents.map(mapSanityCourse);
+  return documents.map(applyCoursePreview).map(mapSanityCourse);
 }
 
 export async function getCourseBySlug(slug: string): Promise<Course | undefined> {

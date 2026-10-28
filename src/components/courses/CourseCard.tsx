@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import type { Course } from "@/types";
 import { loc } from "@/lib/utils";
 import { courseCover, splitGallery } from "@/lib/media";
+import { COURSE_FALLBACK_IMAGE } from "@/lib/courseFallback";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { CalendarIcon, ImageIcon } from "@/components/ui/icons";
 
@@ -27,6 +28,8 @@ export async function CourseCard({
         <CoverImage
           src={courseCover(course)}
           alt=""
+          fallbackSrc={COURSE_FALLBACK_IMAGE}
+          fallbackAlt={t("fallbackAlt")}
           sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
         />
         {photos ? (

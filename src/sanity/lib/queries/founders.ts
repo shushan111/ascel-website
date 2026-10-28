@@ -7,26 +7,29 @@ const localizedFields = `{
 }`;
 
 /**
- * Active founders that actually carry a photo, in the order the Studio shows
- * them: the Order field first, creation date as the tie-breaker.
+ * Active founders in the order the Studio shows them: the Order field first,
+ * creation date as the tie-breaker. A founder without an approved portrait is
+ * still listed; the page shows their initials.
  */
 export const foundersQuery = defineQuery(`*[
   _type == "founder" &&
   !(_id in path("drafts.**")) &&
-  isActive != false &&
-  defined(photo.asset)
+  isActive != false
 ] | order(order asc, _createdAt asc) {
   _id,
   firstName ${localizedFields},
   lastName ${localizedFields},
   role ${localizedFields},
   bio ${localizedFields},
+  bioExtended ${localizedFields},
   photo {
     asset->{
       _id,
       url
     },
     hotspot,
-    crop
+    crop,
+    alt ${localizedFields},
+    credit
   }
 }`);

@@ -8,6 +8,7 @@ import { alternateLanguageUrls } from "@/lib/seo";
 const staticPaths = [
   "/",
   "/about",
+  "/founders",
   "/programs",
   "/courses",
   "/simulation-center",

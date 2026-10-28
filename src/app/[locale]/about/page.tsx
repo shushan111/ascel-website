@@ -15,7 +15,7 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { NextPageCard } from "@/components/ui/NextPageCard";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { ImageReveal } from "@/components/motion/ImageReveal";
-import { FoundersSection } from "@/components/sections/FoundersSection";
+import { FoundersTeaser } from "@/components/founders/FoundersTeaser";
 
 export async function generateMetadata({
   params,
@@ -51,7 +51,8 @@ const historyPicks: Record<string, string[]> = {
  * About is the trust page: who we are, what the work has been and since when,
  * how it is done and by whom. Every image is a photograph from a course; the
  * history is assembled from the programmes' own published milestones. The
- * founders appear only once their real names and portraits are in the Studio.
+ * founders appear as faces and names with a link to /founders, once real
+ * entries exist in the Studio.
  */
 export default async function AboutPage({
   params,
@@ -216,7 +217,7 @@ export default async function AboutPage({
         </Container>
       </Section>
 
-      <FoundersSection locale={locale} />
+      <FoundersTeaser locale={locale} />
 
       {/* Forward: what the work has led to. */}
       <Section space="compact">

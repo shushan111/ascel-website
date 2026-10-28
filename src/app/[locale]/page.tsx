@@ -8,6 +8,7 @@ import { WhyItMatters } from "@/components/home/WhyItMatters";
 import { HomeSupport } from "@/components/home/HomeSupport";
 import { Activity } from "@/components/home/Activity";
 import { PartnersSection } from "@/components/sections/PartnersSection";
+import { EducationalPartners } from "@/components/sections/EducationalPartners";
 
 export async function generateMetadata({
   params,
@@ -51,6 +52,7 @@ export default async function HomePage({
       <HomeSupport locale={locale} />
       <Activity locale={locale} />
       <PartnersSection />
+      <EducationalPartners />
     </>
   );
 }

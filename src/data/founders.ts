@@ -6,9 +6,10 @@ import {
   type SanityFounderDocument,
 } from "@/sanity/lib/mapFounder";
 import { foundersQuery } from "@/sanity/lib/queries/founders";
+import { applyFoundersPreview } from "@/data/foundersPreview";
 
 /** Active founders, in Studio order. Empty when nothing has been added yet. */
 export const getFounders = cache(async (): Promise<Founder[]> => {
   const documents: SanityFounderDocument[] = await client.fetch(foundersQuery);
-  return documents.map(mapSanityFounder);
+  return applyFoundersPreview(documents).map(mapSanityFounder);
 });

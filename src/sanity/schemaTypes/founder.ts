@@ -31,7 +31,7 @@ export const founder = defineType({
   title: 'Հիմնադիր',
   type: 'document',
   description:
-    'Գլխավոր էջի և «Մեր մասին» էջի «Հիմնադիրներ» բաժնի քարտերը։ Ոչ ակտիվ հիմնադիրները մնում են այստեղ, բայց կայքում չեն երևում։',
+    '«Հիմնադիրներ» էջի (/founders) պրոֆիլները և «Մեր մասին» էջի կարճ ներկայացումը։ Ոչ ակտիվ հիմնադիրները մնում են այստեղ, բայց կայքում չեն երևում։ Կայքում ցուցադրվում են միայն անունն ու ազգանունը՝ առանց հայրանվան։',
   groups: [
     {name: 'main', title: 'Հիմնական', default: true},
     {name: 'photo', title: 'Լուսանկար'},
@@ -63,11 +63,11 @@ export const founder = defineType({
     }),
     defineField({
       name: 'role',
-      title: 'Պաշտոն',
+      title: 'Մասնագիտություն կամ պաշտոն',
       type: 'localizedString',
       group: 'main',
       description:
-        'Ոչ պարտադիր։ Ցուցադրվում է անվան վերևում՝ մանր տառերով (օր.՝ «Հիմնադիր», «Գիտական ղեկավար»)։ Լրացնելու դեպքում՝ երեք լեզվով։',
+        'Ոչ պարտադիր։ Միայն ստուգված տեղեկություն (օր.՝ «Վնասվածքաբան-օրթոպեդ»)։ Ցուցադրվում է անվան տակ։ Լրացնելու դեպքում՝ երեք լեզվով։',
       validation: (rule) =>
         rule.custom((value: LocalizedValue) => requireAllLocales(value, {optional: true})),
     }),
@@ -76,8 +76,37 @@ export const founder = defineType({
       title: 'Կարճ նկարագրություն',
       type: 'localizedText',
       group: 'main',
-      description:
-        'Ոչ պարտադիր։ Մեկ-երկու նախադասություն, որը քարտի վրա բացվում է մկնիկը վրայով տանելիս (հեռախոսում՝ միշտ երևում է)։',
+      description: 'Ոչ պարտադիր։ 2–4 նախադասություն՝ միայն ստուգված փաստեր։ Ցուցադրվում է պրոֆիլում։',
+    }),
+    defineField({
+      name: 'bioExtended',
+      title: 'Ընդլայնված կենսագրություն',
+      type: 'localizedText',
+      group: 'main',
+      description: 'Ոչ պարտադիր։ Լրացնելու դեպքում պրոֆիլում հայտնվում է «Կարդալ ավելին» կոճակը։',
+    }),
+    defineField({
+      name: 'sources',
+      title: 'Աղբյուրներ',
+      type: 'array',
+      group: 'settings',
+      description: 'Կենսագրության փաստերի աղբյուրները (ներքին օգտագործման համար, կայքում չեն ցուցադրվում)։',
+      of: [
+        {
+          type: 'object',
+          name: 'founderSource',
+          fields: [
+            defineField({name: 'label', title: 'Անվանում', type: 'string'}),
+            defineField({
+              name: 'url',
+              title: 'Հղում',
+              type: 'url',
+              validation: (rule) => rule.required().error('Նշիր աղբյուրի հղումը'),
+            }),
+          ],
+          preview: {select: {title: 'label', subtitle: 'url'}},
+        },
+      ],
     }),
     defineField({
       name: 'photo',
@@ -85,36 +114,47 @@ export const founder = defineType({
       type: 'image',
       group: 'photo',
       description:
-        'Ուղղաձիգ դիմանկար՝ JPG, PNG կամ WebP, առավելագույնը 5 ՄԲ։ Բոլոր քարտերը կտրվում են նույն 3:4 շրջանակով, ուստի hotspot-ը դիր դեմքի վրա։',
+        'Ոչ պարտադիր։ Դիմանկար՝ JPG, PNG կամ WebP, առավելագույնը 5 ՄԲ, միայն օգտագործման թույլտվությամբ։ Բոլոր պրոֆիլները կտրվում են նույն 4:5 շրջանակով, ուստի hotspot-ը դիր դեմքի վրա։ Առանց լուսանկարի ցուցադրվում են անվան սկզբնատառերը։',
       options: {
         hotspot: true,
         accept: ACCEPTED_IMAGE_TYPES.join(','),
       },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Այլընտրանքային տեքստ',
+          type: 'localizedString',
+          description: 'Ոչ պարտադիր։ Դատարկ թողնելու դեպքում օգտագործվում է հիմնադրի անունը։',
+        }),
+        defineField({
+          name: 'credit',
+          title: 'Լուսանկարի հեղինակ / աղբյուր',
+          type: 'string',
+          description: 'Ոչ պարտադիր։ Ինչպես պահանջում է օգտագործման թույլտվությունը։',
+        }),
+      ],
       validation: (rule) =>
-        rule
-          .required()
-          .error('Ավելացրու հիմնադրի լուսանկարը')
-          .custom(async (value: ImageValue, context) => {
-            const assetId = value?.asset?._ref
-            if (!assetId) return true
+        rule.custom(async (value: ImageValue, context) => {
+          const assetId = value?.asset?._ref
+          if (!assetId) return true
 
-            const asset = await context
-              .getClient({apiVersion})
-              .fetch<{mimeType?: string; size?: number} | null>(
-                '*[_id == $id][0]{mimeType, size}',
-                {id: assetId},
-              )
-            if (!asset) return true
+          const asset = await context
+            .getClient({apiVersion})
+            .fetch<{mimeType?: string; size?: number} | null>(
+              '*[_id == $id][0]{mimeType, size}',
+              {id: assetId},
+            )
+          if (!asset) return true
 
-            if (asset.mimeType && !ACCEPTED_IMAGE_TYPES.includes(asset.mimeType)) {
-              return 'Լուսանկարը պետք է լինի JPG, PNG կամ WebP ձևաչափով'
-            }
-            if (asset.size && asset.size > MAX_PHOTO_BYTES) {
-              const mb = (asset.size / (1024 * 1024)).toFixed(1)
-              return `Լուսանկարը ${mb} ՄԲ է։ Վերբեռնիր առավելագույնը 5 ՄԲ ֆայլ`
-            }
-            return true
-          }),
+          if (asset.mimeType && !ACCEPTED_IMAGE_TYPES.includes(asset.mimeType)) {
+            return 'Լուսանկարը պետք է լինի JPG, PNG կամ WebP ձևաչափով'
+          }
+          if (asset.size && asset.size > MAX_PHOTO_BYTES) {
+            const mb = (asset.size / (1024 * 1024)).toFixed(1)
+            return `Լուսանկարը ${mb} ՄԲ է։ Վերբեռնիր առավելագույնը 5 ՄԲ ֆայլ`
+          }
+          return true
+        }),
     }),
     defineField({
       name: 'order',

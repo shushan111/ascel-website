@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const course = defineType({
   name: 'course',
@@ -89,6 +89,68 @@ export const course = defineType({
       ],
     }),
     defineField({
+      name: 'recap',
+      title: 'Ինչպես անցավ դասընթացը',
+      type: 'object',
+      group: 'body',
+      description:
+        'Ոչ պարտադիր։ Անցած դասընթացի կարճ ամփոփումը (1–2 պարբերություն)։ Լրացնելու դեպքում էջը ցույց է տալիս ամփոփումը, պատկերասրահը, գլխավոր թեմաները, ապա ծրագիրը։',
+      fields: [
+        defineField({name: 'hy', title: 'Հայերեն', type: 'blockContent'}),
+        defineField({name: 'ru', title: 'Ռուսերեն', type: 'blockContent'}),
+        defineField({name: 'en', title: 'Անգլերեն', type: 'blockContent'}),
+      ],
+    }),
+    defineField({
+      name: 'highlights',
+      title: 'Գլխավոր թեմաներ',
+      type: 'array',
+      group: 'body',
+      description: 'Ոչ պարտադիր։ Կարճ կետեր ծրագրից՝ յուրաքանչյուրը մեկ տող։',
+      of: [defineArrayMember({type: 'localizedString'})],
+    }),
+    defineField({
+      name: 'faculty',
+      title: 'Դասախոսներ',
+      type: 'array',
+      group: 'body',
+      description:
+        'Ոչ պարտադիր։ Լրացնելու դեպքում դասախոսները ցուցադրվում են անունով, լուսանկարով և կարճ կենսագրությամբ, ուստի դասախոսների ցանկը պետք է հանել «Դասընթացի ամբողջական տեքստ»-ից, որ չկրկնվի։ Դատարկ թողնելու դեպքում էջը ցույց է տալիս պատկերասրահի դիմանկարները, ինչպես նախկինում։',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'facultyMember',
+          title: 'Դասախոս',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'Անուն',
+              type: 'localizedString',
+              validation: (rule) => rule.required().error('Լրացրու դասախոսի անունը'),
+            }),
+            defineField({
+              name: 'credentials',
+              title: 'Գիտական աստիճան',
+              type: 'localizedString',
+              description: 'Ոչ պարտադիր։ Օրինակ՝ «բժշկական գիտությունների թեկնածու»։',
+            }),
+            defineField({name: 'bio', title: 'Պաշտոն և աշխատավայր', type: 'localizedText'}),
+            defineField({
+              name: 'photo',
+              title: 'Լուսանկար',
+              type: 'image',
+              options: {hotspot: true},
+              description: 'Ոչ պարտադիր։ Առանց լուսանկարի ցուցադրվում են անվան սկզբնատառերը։',
+            }),
+          ],
+          preview: {
+            select: {title: 'name.hy', titleRu: 'name.ru', media: 'photo'},
+            prepare: ({title, titleRu, media}) => ({title: title || titleRu, media}),
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'image',
       title: 'Գլխավոր լուսանկար',
       type: 'image',
@@ -125,6 +187,42 @@ export const course = defineType({
             }),
           ],
         },
+      ],
+      options: {layout: 'grid'},
+    }),
+    defineField({
+      name: 'eventPhotos',
+      title: 'Միջոցառման լուսանկարներ',
+      type: 'array',
+      group: 'media',
+      description:
+        'Ոչ պարտադիր։ Միայն այս դասընթացից իրական լուսանկարներ՝ հրապարակման թույլտվությամբ։ Առաջինը գլխավորն է՝ երևում է էջի վերևում և դասընթացի քարտի վրա, մնացածը՝ պատկերասրահում։ Հերթականությունը փոխվում է քաշելով։',
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Այլընտրանքային տեքստ',
+              type: 'localizedString',
+              description: 'Ինչ է երևում նկարում՝ տեսողության խնդիր ունեցողների համար։',
+              validation: (rule) => rule.required().error('Լրացրու այլընտրանքային տեքստը'),
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Մակագրություն',
+              type: 'localizedString',
+              description: 'Ոչ պարտադիր։ Կարճ մակագրություն, որ երևում է լուսանկարի տակ։',
+            }),
+            defineField({
+              name: 'credit',
+              title: 'Հեղինակ',
+              type: 'string',
+              description: 'Լուսանկարչի կամ աղբյուրի անունը, ինչպես պահանջում է թույլտվությունը։',
+            }),
+          ],
+        }),
       ],
       options: {layout: 'grid'},
     }),

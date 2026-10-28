@@ -36,7 +36,7 @@ export function Header() {
           : "border-line/70 bg-canvas/90",
       )}
     >
-      <Container width="wide" className="flex h-(--header-h) items-center gap-3 sm:gap-4 lg:gap-6">
+      <Container width="wide" className="flex h-(--header-h) items-center gap-3 sm:gap-4 xl:gap-6">
         <Link href="/" className="shrink-0 rounded-sm" aria-label="ASCEL">
           <Logo />
         </Link>

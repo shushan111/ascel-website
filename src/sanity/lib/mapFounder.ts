@@ -12,12 +12,24 @@ export type SanityFounderDocument = {
   lastName?: SanityLocalizedValue | null;
   role?: SanityLocalizedValue | null;
   bio?: SanityLocalizedValue | null;
-  photo?: SanityImage;
+  bioExtended?: SanityLocalizedValue | null;
+  photo?: (NonNullable<SanityImage> & { alt?: SanityLocalizedValue | null; credit?: string | null }) | null;
 };
 
 /** True when the localized value carries text in at least one language. */
 function hasText(value: SanityLocalizedValue | null | undefined): boolean {
   return Boolean(value?.ru || value?.hy || value?.en);
+}
+
+/**
+ * Sanity resizes and re-encodes on delivery, so every profile gets the same
+ * 4:5 frame at a sensible weight whatever was uploaded. A root-relative URL is
+ * a local preview file (src/data/foundersPreview.ts).
+ */
+function founderPhotoUrl(photo: SanityFounderDocument["photo"]): string {
+  const asset = photo?.asset as { _id?: string; _ref?: string; url?: string } | null | undefined;
+  if (asset?._id || asset?._ref) return urlFor(photo!).width(800).height(1000).fit("crop").auto("format").url();
+  return asset?.url?.startsWith("/") ? asset.url : "";
 }
 
 export function mapSanityFounder(doc: SanityFounderDocument): Founder {
@@ -27,8 +39,9 @@ export function mapSanityFounder(doc: SanityFounderDocument): Founder {
     lastName: toLocalizedString(doc.lastName),
     role: hasText(doc.role) ? toLocalizedString(doc.role) : undefined,
     bio: hasText(doc.bio) ? toLocalizedString(doc.bio) : undefined,
-    // Sanity resizes and re-encodes on delivery, so every card gets the same
-    // 4:5 frame at a sensible weight whatever was uploaded.
-    photo: urlFor(doc.photo!).width(800).height(1000).fit("crop").auto("format").url(),
+    bioExtended: hasText(doc.bioExtended) ? toLocalizedString(doc.bioExtended) : undefined,
+    photo: founderPhotoUrl(doc.photo),
+    photoAlt: hasText(doc.photo?.alt) ? toLocalizedString(doc.photo?.alt) : undefined,
+    photoCredit: doc.photo?.credit || undefined,
   };
 }
